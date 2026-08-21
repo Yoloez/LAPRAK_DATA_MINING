@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex template"] 1779351108.47253 "template.aux" "template.bbl" "template" 1779351112.55217 0
-  "./ref.bib" 1779269261.01845 0 d41d8cd98f00b204e9800998ecf8427e ""
+["bibtex template"] 1787316362.26639 "template.aux" "template.bbl" "template" 1787316366.35825 0
+  "./ref.bib" 1787316272.3974 0 d41d8cd98f00b204e9800998ecf8427e ""
   "D:/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "template.aux" 1779351111.05427 850 6c838e9316044a90b88b60c1e9db239f "pdflatex"
+  "template.aux" 1787316364.87241 850 6c838e9316044a90b88b60c1e9db239f "pdflatex"
   (generated)
   "template.bbl"
   "template.blg"
   (rewritten before read)
-["pdflatex"] 1779351109.08442 "d:/TRPL/SEM 4/PSAIT/Laprak/Template/template.tex" "template.pdf" "template" 1779351112.5543 0
-  "../images/ugm.png" 1767958562.62108 2028757 04c6fdad5deebfe4be1d85c1de5bd48d ""
+["pdflatex"] 1787316362.87935 "d:/TRPL/SEM 5/PENAMBANGAN DATA/LAPRAK/Template/template.tex" "template.pdf" "template" 1787316366.36086 0
+  "../images/ugm.png" 1787316272.42611 2028757 04c6fdad5deebfe4be1d85c1de5bd48d ""
   "C:/Users/ASUS/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1763343021.46995 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/ASUS/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1767958122.25231 24224573 5f82ad2ae3ac2ed63391480a509c0180 ""
   "C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -80,10 +80,10 @@
   "D:/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1751104012 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
   "D:/MiKTeX/tex/latex/setspace/setspace.sty" 1670403145 22490 8cac309b79a4c53a4ffce4b1b07aead0 ""
   "D:/MiKTeX/tex/latex/titling/titling.sty" 1252048308 7358 95ac619994bd30d405a74f3eca431c84 ""
-  "d:/TRPL/SEM 4/PSAIT/Laprak/Template/template.tex" 1779351102.82248 4151 d760e5c57bf76e25df9404cfb53f87e3 ""
-  "template.aux" 1779351111.05427 850 6c838e9316044a90b88b60c1e9db239f "pdflatex"
-  "template.bbl" 1779351108.96947 901 1275951483efd19a714db164ecc0791b "bibtex template"
-  "template.out" 1779351111.05716 586 fb3a50c7a7ab37abc1cfd13c0f93e702 "pdflatex"
+  "d:/TRPL/SEM 5/PENAMBANGAN DATA/LAPRAK/Template/template.tex" 1787316272.4141 4191 d4fc981ef7ee35f8fd025da19e5fe594 ""
+  "template.aux" 1787316364.87241 850 6c838e9316044a90b88b60c1e9db239f "pdflatex"
+  "template.bbl" 1787316362.76415 901 1275951483efd19a714db164ecc0791b "bibtex template"
+  "template.out" 1787316364.87507 586 fb3a50c7a7ab37abc1cfd13c0f93e702 "pdflatex"
   (generated)
   "template.aux"
   "template.log"
