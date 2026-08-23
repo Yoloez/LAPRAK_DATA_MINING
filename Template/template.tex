@@ -20,18 +20,17 @@
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
 
-\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codebg}{RGB}{255,255,255}   % background putih seperti sel Jupyter
 \definecolor{codetext}{RGB}{0,0,0}
 \definecolor{linenumcol}{RGB}{128,128,128}
-\definecolor{phpkw}{RGB}{180,0,120}    % Pink/Magenta
-\definecolor{phpstr}{RGB}{255,100,0}   % Orange
-\definecolor{commentcol}{RGB}{0,128,0} % Hijau
-\definecolor{phpfunc}{RGB}{128,128,0}  % Gold/Yellow
-\definecolor{phpvar}{RGB}{150,0,150}
-\definecolor{htmltagcol}{RGB}{0,25,10}
+\definecolor{pykw}{RGB}{0,128,0}         % keyword (def, if, for, import, dll) - hijau
+\definecolor{pystr}{RGB}{186,33,33}      % string - merah kecoklatan
+\definecolor{commentcol}{RGB}{64,128,128}% comment - abu kebiruan
+\definecolor{pyfunc}{RGB}{0,0,255}       % fungsi/built-in - biru
+\definecolor{pyconst}{RGB}{0,128,0}      % True/False/None - hijau (sama seperti keyword)
+\definecolor{pyvar}{RGB}{150,0,150}      % variabel khusus (opsional)
 
-
-\lstdefinestyle{phphtml}{
+\lstdefinestyle{pythonnb}{
     backgroundcolor=\color{codebg},
     basicstyle=\ttfamily\small\color{codetext},
     breaklines=true,
@@ -45,23 +44,20 @@
     rulecolor=\color{gray!40},
     framesep=5pt,
     xleftmargin=18pt,
-    % PHP language & keywords (pink/magenta)
-    language=PHP,
-    morekeywords={include, echo, while, if, else},
-    keywordstyle=\color{phpkw}\bfseries,
-    % Strings (orange)
-    stringstyle=\color{phpstr},
-    % Comments (green)
+    % Bahasa Python
+    language=Python,
+    morekeywords={self, as, with, lambda, yield, async, await},
+    keywordstyle=\color{pykw}\bfseries,
+    % String (merah kecoklatan)
+    stringstyle=\color{pystr},
+    % Comment (abu kebiruan, italic)
     commentstyle=\color{commentcol}\itshape,
-    % Functions (yellow/gold)
-    emph={mysqli_num_rows, mysqli_fetch_assoc, mysqli_close},
-    emphstyle=\color{phpfunc},
-    % Variables $... (pink)
-    alsoletter={\$},
-    emph={[2]\$result,\$row,\$koneksi},
-    emphstyle={[2]\color{phpvar}},
-    % HTML tags (cyan)
-    moredelim=[s][\color{htmltagcol}\bfseries]{<}{>},
+    % Fungsi / built-in umum (biru)
+    emph={print, len, range, int, str, float, type, open, input, list, dict, set, tuple, sum, min, max, sorted, enumerate, zip, map, filter, isinstance},
+    emphstyle=\color{pyfunc},
+    % Konstanta True/False/None (hijau, bold)
+    emph={[2]True, False, None},
+    emphstyle={[2]\color{pyconst}\bfseries},
 }
 \usepackage{chngcntr}
 
@@ -114,16 +110,668 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa mampu memahami konsep dasar Numpy dan penggunaan array n-dimensi
+serta berbagai operasi manipulasi array
+    \item Mahasiswa mampu memahami konsep dasar Pandas dan penggunaan DataFrame serta berbagai operasi manipulasi DataFrame
+    \item Mahasiswa dapat menerapkan Numpy dan pandas untuk mengolah dan menganalisis data
 \end{enumerate}
 \section{Dasar Teori}
-\section{Hasil dan Pemabahasan}
+\subsection{Python}
+Python merupakan bahasa pemrograman komputer yang biasa dipakai untuk membangun situs, software/aplikasi, mengotomatiskan tugas dan melakukan analisis data. Bahasa pemrograman ini termasuk bahasa tujuan umum. Artinya, ia bisa digunakan untuk membuat berbagai program berbeda, bukan khusus untuk masalah tertentu saja.
 
-\subsection{}
+Berdasarkan survei pengembang Stack Overflow tahun 2022, Python menjadi bahasa pemrograman terpopuler keempat. Sebanyak hampir 50\% dari responden mengatakan bahwa mereka menggunakan hampir setengah dari waktu kerja mereka dengan menggunakan bahasa pemrograman ini \cite{dicodingPythonPengertian}. 
+
+\subsection{Numpy}
+NumPy (Numerical Python) adalah library di Python yang dirancang khusus untuk urusan perhitungan ilmiah. Numpy berisi seperti toolbox yang berisi alat-alat canggih untuk mengolah data, matriks, statistik, hingga aljabar linear \cite{codepolitanNumPyDalam}.
+
+\subsection{Pandas}
+Pandas adalah library Python open-source yang menyediakan struktur data (DataFrame) dan alat analisis data yang berkinerja tinggi dan mudah digunakan \cite{ruangguruPandasDefinisi}. Libraries Pandas memiliki format data yang disebut DataFrame, jadi Pandas DataFrame adalah struktur data dua dimensi seperti tabel yang berisi baris dan kolom. Pandas DataFrame berfungsi untuk menyimpan data dalam format grid yang bisa diubah-ubah dengan fleksibilitas yang sangat besar.
+
+Gambaran sederhananya, Pandas DataFrame mirip dengan tabel yang ada di Microsoft Excel. Setiap baris dan kolom akan memiliki label yang bisa digunakan untuk mengakses dan memanipulasi data \cite{digitalskolaPanduanLengkap}.
+\section{Hasil dan Pembahasan}
+\subsection{Numpy}
+\subsubsection{Install Numpy}
+Pada praktikum ini, praktikan menggunakan jupyter notebook yang ada di visual studio code. Buat notebook baru dan jalankan perintah berikut untuk menginstall library Numpy.
+\begin{lstlisting}[style=pythonnb]
+!pip install numpy
+\end{lstlisting}
+
+\subsubsection{Impor pustaka Numpy}
+Import pustaka Numpy diperlukan untuk menggunakan fungsi-fungsi yang ada di dalam library Numpy. Alias np digunakan untuk mempersingkat penulisan kode. Jika dijalankan, maka akan muncul output berupa versi Numpy yang digunakan. Berikut adalah contoh kode untuk mengimpor pustaka Numpy.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../images/2-impor-numpy.png}
+    \caption{Impor pustaka Numpy}
+    \label{import}
+\end{figure}
+
+\subsubsection{Membuat array 1 dimensi}
+Untuk membuat array 1 dimensi, dapat menggunakan fungsi \texttt{np.array()} dengan memasukkan list sebagai argumen. Gambar \ref{array1d} adalah contoh kode untuk membuat array 1 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/3-buat-array.png}
+    \caption{Membuat array 1 dimensi}
+    \label{array1d}
+\end{figure}
+
+\subsubsection{Melihat shape atau bentuk array}
+Untuk melihat bentuk array atau shape array, dapat menggunakan atribut \texttt{.shape}. Gambar \ref{shape} adalah contoh kode untuk melihat shape array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{../images/4-shape.png}
+    \caption{Melihat shape array}
+    \label{shape}
+\end{figure}
+Dapat dilihat pada gambar \ref{shape}, shape array adalah (5,). Artinya, array tersebut memiliki 5 elemen dan hanya memiliki 1 dimensi.
+
+\subsubsection{Membuat array 2 dimensi}
+Membuat array 2 dimensi dapat dilakukan dengan fungsi yang sama. Namun, argumen yang dimasukkan adalah list yang berisi list-list lain (Nested List). Gambar \ref{array2d} adalah contoh kode untuk membuat array 2 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/5-array-2d.png}
+    \caption{Membuat array 2 dimensi}
+    \label{array2d}
+\end{figure}
+Berdasarkan gambar \ref{array2d}, shape array 2 dimensi yaitu (2, 3). Artinya angka pertama (2) menunjukkan jumlah baris, sedangkan angka kedua (3) menunjukkan jumlah kolom.
+
+\subsubsection{Membuat array 3 dimensi}
+Membuat array 3 dimensi dapat dilakukan dengan fungsi yang sama. Namun, argumen yang dimasukkan adalah list yang berisi list-list lain yang berisi list-list lain (Nested List). Gambar \ref{array3d} adalah contoh kode untuk membuat array 3 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/6-array-3d.png}
+    \caption{Membuat array 3 dimensi}
+    \label{array3d}
+\end{figure}
+
+\subsubsection{Membuat array dengan string sebagai member}
+Array juga dapat dibuat dengan string sebagai member. Gambar \ref{arraystring} adalah contoh kode untuk membuat array dengan string sebagai member.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/7-array-string.png}
+    \caption{Membuat array dengan string sebagai member}
+    \label{arraystring}
+\end{figure}
+
+\subsubsection{Melakukan indexing di array 1 dimensi}
+Indexing adalah proses untuk mengakses elemen tertentu dari array. Untuk melakukan indexing di array 1 dimensi, dapat menggunakan tanda kurung siku \texttt{[]} dengan memasukkan indeks elemen yang ingin diakses. Gambar \ref{indexing1d} adalah contoh kode untuk melakukan indexing di array 1 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/8-array-indexing.png}
+    \caption{Melakukan indexing di array 1 dimensi}
+    \label{indexing1d}
+\end{figure}
+
+\subsubsection{Melakukan indexing di array 2 dimensi}
+Indexing di array 2 dimensi dilakukan dengan menggunakan dua indeks, satu untuk baris dan satu untuk kolom. Gambar \ref{indexing2d} adalah contoh kode untuk melakukan indexing di array 2 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/9-array-indexing-2d.png}
+    \caption{Melakukan indexing di array 2 dimensi}
+    \label{indexing2d}  
+\end{figure}
+
+\subsubsection{Melakukan indexing di array 3 dimensi}
+Indexing di array 3 dimensi dilakukan dengan menggunakan tiga indeks, satu untuk baris, satu untuk kolom, dan satu untuk kedalaman. Gambar \ref{indexing3d} adalah contoh kode untuk melakukan indexing di array 3 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/10-array-indexing-3d.png}
+    \caption{Melakukan indexing di array 3 dimensi}
+    \label{indexing3d}
+\end{figure}
+
+\subsubsection{Membuat array dari contoh}
+Diberikan array dengan bentuk seperti pada gambar \ref{arraycontoh}. 
+\begin{figure}[H]  
+    \centering
+    \includegraphics[width=0.4\textwidth]{../images/11-array-contoh.png}
+    \caption{Membuat array dari contoh}
+    \label{arraycontoh}
+\end{figure}
+Kode yang digunakan untuk membuat array tersebut adalah sebagai berikut.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/12-array-implementasi.png}
+    \caption{Kode untuk membuat array dari contoh}
+    \label{arraycontohkode}
+\end{figure}
+Berdasarkan gambar \ref{arraycontohkode}, array tersebut dibuat dengan menggunakan fungsi \texttt{np.array()} dengan memasukkan list yang berisi list-list lain sebagai argumen. Sumbu 0 (axis 0) berisi 4 elemen, sumbu 1 berisi 3 elemen, dan sumbu 2 berisi 2 elemen. Sehingga shape array tersebut adalah (4, 3, 2).
+
+\subsubsection{Array slicing}
+Numpy menerapkan cara yang sama dengan Python untuk melakukan slicing pada array. Slicing adalah proses untuk mengambil sebagian elemen dari array. Gambar \ref{contoh-2} adalah contoh gambar yang diberi tanda merah yang akan ditentukan indeks lokasinya seperti pada gambar \ref{slicing}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{../images/13-array-contoh-2.png}
+    \caption{Contoh target slicing}
+    \label{contoh-2}
+\end{figure}
+Berdasarkan gambar \ref{contoh-2}, target slicing berada di sumbu 0 indeks 2, sumbu 1 indeks 1 sampai 2, dan sumbu 2 indeks 0. Sehingga kode untuk melakukan slicing adalah sebagai berikut.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/14-array-slicing.png}
+    \caption{Kode untuk melakukan slicing}
+    \label{slicing}
+\end{figure}
+
+\subsubsection{Mengonversi tipe data}
+Untuk melakukan konversi tipe data pada array, dapat menggunakan fungsi \texttt{astype()}. Gambar \ref{konversi} adalah contoh kode untuk mengonversi tipe data array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/15-array-konversi.png}
+    \caption{Kode untuk mengonversi tipe data array}
+    \label{konversi}
+\end{figure}
+
+\subsubsection{Reshape ke dimensi lebih tinggi}
+Untuk mengubah bentuk array menjadi dimensi yang lebih tinggi, dapat menggunakan fungsi \texttt{reshape()}. Gambar \ref{reshape} adalah contoh kode untuk melakukan reshape ke dimensi lebih tinggi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/16-array-reshape.png}
+    \caption{Kode untuk melakukan reshape ke dimensi lebih tinggi}
+    \label{reshape}
+\end{figure}
+Berdasarkan gambar \ref{reshape}, array yang awalnya memiliki dimesnsi 1 (shape 12,) diubah menjadi array dengan dimensi 2 (shape 3, 4) dan dimensi 3 (shape 3, 2, 2). Namun, jumlah elemen pada array tetap sama yaitu 12 elemen.
+
+\subsubsection{Reshape ke dimensi 1}
+Untuk mengubah bentuk array menjadi dimensi 1, dapat menggunakan fungsi \texttt{reshape()} dengan memasukkan argumen -1. Gambar \ref{reshape1d} adalah contoh kode untuk melakukan reshape ke dimensi 1.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/17-array-reshape-1d.png}
+    \caption{Kode untuk melakukan reshape ke dimensi 1}
+    \label{reshape1d}
+\end{figure}
+
+\subsubsection{Perbedaan fungsi len dan atribut shape}
+Len hanya dapat digunakan untuk melihat jumlah elemen pada sumbu 0 (axis 0) array, sedangkan shape dapat digunakan untuk melihat jumlah elemen pada semua sumbu array. Gambar \ref{lenshape} adalah contoh kode untuk melihat perbedaan fungsi len dan atribut shape.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/18-array-len.png}
+    \caption{Kode untuk melihat perbedaan fungsi len dan atribut shape}
+    \label{lenshape}
+\end{figure}
+
+\subsubsection{Iterasi array}
+Iterasi array adalah proses untuk mengakses setiap elemen pada array. Gambar \ref{iterasi} adalah contoh kode untuk melakukan iterasi array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/19-iterasi-ndarray-1.png}
+    \caption{Kode untuk melakukan iterasi array}
+    \label{iterasi}
+\end{figure}
+
+Iterasi array juga dapat dilakukan dengan indeks. Gambar \ref{iterasiindeks} adalah contoh kode untuk melakukan iterasi array dengan indeks.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/20-iterasi-array-2.png}
+    \caption{Kode untuk melakukan iterasi array dengan indeks}
+    \label{iterasiindeks}
+\end{figure}
+
+\subsubsection{Join pada array dimensi 1}
+Menggabungkan dua array 1 dimensi dapat dilakukan dengan fungsi \texttt{np.concatenate()}. Gambar \ref{join1d} adalah contoh kode untuk melakukan join pada array dimensi 1.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/21-array-join-1d.png}
+    \caption{Kode untuk melakukan join pada array dimensi 1}
+    \label{join1d}
+\end{figure}
+
+\subsubsection{Join pada array dimensi 2}
+Untuk menggabungkan dua array 2 dimensi, dapat menggunakan fungsi \texttt{np.concatenate()} dengan memasukkan argumen axis (yaitu 1). Gambar \ref{join2d} adalah contoh kode untuk melakukan join pada array dimensi 2.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/22-array-join-2d.png}
+    \caption{Kode untuk melakukan join pada array dimensi 2}
+    \label{join2d}
+\end{figure}
+
+Jika akan menambahkan baris pada array 2 dimensi, maka argumen axis diisi dengan 0. Gambar \ref{join2dbaris} adalah contoh kode untuk menambahkan baris pada array 2 dimensi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/23-array-join-axis0.png}
+    \caption{Kode untuk menambahkan baris pada array 2 dimensi}
+    \label{join2dbaris}
+\end{figure}
+
+\subsubsection{Array Split}
+Split pada array dapat dilakukan dengan fungsi \texttt{np.array\_split()}. Gambar \ref{split} adalah contoh kode untuk melakukan split pada array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/24-array-split.png}
+    \caption{Kode untuk melakukan split pada array}
+    \label{split}
+\end{figure}
+
+\subsubsection{Array Search}
+Array search dapat dilakukan dengan fungsi \texttt{np.where()}. Gambar \ref{search} adalah contoh kode untuk melakukan array search.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/25-array-search.png}
+    \caption{Kode untuk melakukan array search}
+    \label{search}
+\end{figure}
+Berdasarkan gambar \ref{search}, elemen dengan nilai 3 dicari dan ditemukan dengan indeks 2 pada array. Sehingga output yang dihasilkan adalah (array([2]),).
+
+\subsubsection{Sorting pada array}
+Sorting pada array dapat dilakukan dengan fungsi \texttt{np.sort()}. Gambar \ref{sorting} adalah contoh kode untuk melakukan sorting pada array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/26-array-sorting.png}
+    \caption{Kode untuk melakukan sorting pada array}
+    \label{sorting}
+\end{figure}
+
+\subsubsection{NumPy Random}
+Numpy Random adalah modul di Numpy yang digunakan untuk menghasilkan bilangan acak. Gambar \ref{random} adalah contoh kode untuk menggunakan Numpy Random.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/27-numpy-random.png}
+    \caption{Kode untuk menggunakan Numpy Random}
+    \label{random}
+\end{figure}
+Berdasarkan kode tersebut, nilai random akan dihasilkan dengan shape dimensi 1 yang berisi 2 elemen.
+
+\subsubsection{Operasi Penjumlahan}
+Numpy memiliki fungsi untuk melakukan operasi penjumlahan pada array. Gambar \ref{penjumlahan} adalah contoh kode untuk melakukan operasi penjumlahan pada array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/28-operasi-penjumlahan.png}
+    \caption{Kode untuk melakukan operasi penjumlahan pada array}
+    \label{penjumlahan}
+\end{figure}
 
 
+\subsubsection{Operasi Summation}
+Numpy memiliki fungsi untuk melakukan operasi penjumlahan pada array. Gambar \ref{summation} adalah contoh kode untuk melakukan operasi penjumlahan pada array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/29-operasi-summation.png}
+    \caption{Kode untuk melakukan operasi summation pada array}
+    \label{summation}
+\end{figure}
 
+\subsubsection{Product of Elements}
+Untuk menghitung semua perkalian elemen pada array, dapat menggunakan fungsi \texttt{np.prod()}. Gambar \ref{product} adalah contoh kode untuk menghitung semua perkalian elemen pada array.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/30-product-of-elements.png}
+    \caption{Kode untuk menghitung semua perkalian elemen pada array}
+    \label{product}
+\end{figure}
+
+\subsection{Dataframe Pandas}
+\subsubsection{Install Pandas}
+Pandas digunakan untuk mengolah data dalam bentuk tabel. Untuk menginstall library Pandas, dapat menggunakan perintah berikut.
+\begin{lstlisting}[language=python, style=pythonnb]
+!pip install pandas
+\end{lstlisting}
+
+\subsubsection{Import Library Pandas}
+Untuk menggunakan library Pandas, perlu dilakukan import library terlebih dahulu. Berikut perintah untuk mengimpor library Pandas.  
+\begin{lstlisting}[language=python, style=pythonnb]
+import pandas as pd
+import numpy as np
+\end{lstlisting}
+
+\subsubsection{Membuat Dataframe}
+DataFrame dibuat dengan memberikan sebuah list python sebagai input dari fungsi \texttt{pd.DataFrame()}. Gambar \ref{dataframe} adalah contoh kode untuk membuat DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/31-membuat-dataframe.png}
+    \caption{Kode untuk membuat DataFrame}
+    \label{dataframe}
+\end{figure}
+Dapat juga menambahkan parameter \texttt{columns} untuk memberikan nama kolom pada DataFrame dan parameter indeks untuk memberikan label indeks custom. Gambar \ref{dataframekolom} adalah contoh kode untuk membuat DataFrame dengan nama kolom.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/32-custom-nama-coliumn.png}
+    \caption{Kode untuk membuat DataFrame dengan nama kolom}
+    \label{dataframekolom}
+\end{figure}
+
+
+\subsubsection{Menambahkan kolom}
+Untuk menambahkan kolom pada DataFrame, dapat menggunakan operator \texttt{df['namakolom]} dengan memasukkan nama kolom baru dan memberikan nilai pada kolom tersebut. Gambar \ref{tambahkolom} adalah contoh kode untuk menambahkan kolom pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/33-tambah-kolom.png}
+    \caption{Kode untuk menambahkan kolom pada DataFrame}
+    \label{tambahkolom}
+\end{figure}
+Selain menggunakan operator \texttt{df['namakolom']}, dapat juga menggunakan fungsi \texttt{df.insert()} untuk menambahkan kolom baru. Kolom juga dapat ditambahkan pada posisi tertentu dengan menambahakan parameter loc, column, value.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/34-tambah-kolom-insert.png}
+    \caption{Kode untuk menambahkan kolom pada DataFrame dengan fungsi insert()}
+    \label{tambahkolominsert}
+\end{figure}
+
+\subsubsection{Menambahkan multikolom}
+Untuk menambahkan multi kolom dapat menggunakan fungsi \texttt{df.assign()} dengan memasukkan nama kolom baru dan nilai pada kolom tersebut. Gambar \ref{tambahmultikolom} adalah contoh kode untuk menambahkan multi kolom pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/35-tambah-multi-kolom.png}
+    \caption{Kode untuk menambahkan multi kolom pada DataFrame}
+    \label{tambahmultikolom}
+\end{figure}
+Selain itu, dapat juga menggunakan sebuah dictionary untuk menambahkan multi kolom pada DataFrame. Gambar \ref{tambahmultikolomdict} adalah contoh kode untuk menambahkan multi kolom pada DataFrame dengan menggunakan dictionary.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/36-tambah-multi-kolom-dict.png}
+    \caption{Kode untuk menambahkan multi kolom pada DataFrame dengan menggunakan dictionary}
+    \label{tambahmultikolomdict}
+\end{figure}
+
+\subsubsection{Menghapus kolom}
+Untuk menghapus kolom pada DataFrame, dapat menggunakan fungsi \texttt{df.drop()} dengan memasukkan nama kolom yang ingin dihapus. Gambar \ref{hapuskolom} adalah contoh kode untuk menghapus kolom pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/37-hapus-kolom.png}
+    \caption{Kode untuk menghapus kolom pada DataFrame}
+    \label{hapuskolom}
+\end{figure}
+Selain itu, dapat juga menggunakan fungsi \texttt{df.pop()} dan fungsi \texttt{del df['nama kolom]} menghapus kolom pada DataFrame. Gambar \ref{hapuskolompop} adalah contoh kodenya.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/38-hapus-kolom-2.png}
+    \caption{Kode untuk menghapus kolom pada DataFrame dengan fungsi pop()}
+    \label{hapuskolompop}
+\end{figure}    
+
+
+\subsubsection{Menghapus Multi Kolom}
+Untuk menghapus multi kolom pada DataFrame, dapat menggunakan fungsi \texttt{df.drop()} dengan memasukkan list nama kolom yang ingin dihapus. Gambar \ref{hapusmultikolom} adalah contoh kode untuk menghapus multi kolom pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/39-hapus-multikolom.png}
+    \caption{Kode untuk menghapus multi kolom pada DataFrame}
+    \label{hapusmultikolom}
+\end{figure}
+
+\subsubsection{Sorting DataFrame}
+Mengurutkan data berdasarkan indeks dapat dilakukan dengan fungsi \texttt{df.sort\_index()}. Gambar \ref{sortingindex} adalah contoh kode untuk mengurutkan data berdasarkan indeks.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/40-sorting.png}
+    \caption{Kode untuk mengurutkan data berdasarkan indeks}
+    \label{sortingindex}
+\end{figure}
+Dapat juga menggunakan fungsi \texttt{df.sort\_index()} untuk mengurutkan data berdasarkan kolom tertentu. Serta parameter axis=1 untuk mengurutkan kolom berdasarkan indeks axis. Gambar \ref{sortingkolom} adalah contoh kode untuk mengurutkan data berdasarkan kolom tertentu.
+\begin{figure}[H]   
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/41-sorting-index.png}
+    \caption{Kode untuk mengurutkan data berdasarkan kolom tertentu}
+    \label{sortingkolom}
+\end{figure}
+
+\subsubsection{Sorting Value}
+Untuk melakukan sorting berdasarkan nilai pada kolom tertentu, dapat menggunakan fungsi \texttt{df.sort\_values()}. Gambar \ref{sortingvalue} adalah contoh kode untuk melakukan sorting berdasarkan nilai pada kolom tertentu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/42-sorting-value.png}
+    \caption{Kode untuk melakukan sorting berdasarkan nilai pada kolom tertentu}
+    \label{sortingvalue}
+\end{figure}
+
+\subsubsection{Filtering DataFrame}
+Filtering dataset dilakukan dengan memberikan kondisi logika pada DataFrame. Gambar \ref{filtering} adalah contoh kode untuk melakukan filtering DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/43-filtering.png}
+    \caption{Kode untuk melakukan filtering DataFrame}
+    \label{filtering}
+\end{figure}
+Selain itu, dapat juga melakukan filter data dengan logika lebih dari satu kondisi. Gambar \ref{filtering2} adalah contoh kode untuk melakukan filtering DataFrame dengan logika lebih dari satu kondisi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/44-filtering-2.png}
+    \caption{Kode untuk melakukan filtering DataFrame dengan logika lebih dari satu kondisi}
+    \label{filtering2}
+\end{figure}
+Bisa juga menggunakan fungsi \texttt{df.query()} untuk melakukan filtering DataFrame. Gambar \ref{filteringquery} adalah contoh kode untuk melakukan filtering DataFrame dengan fungsi query().
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/45-filtering-3.png}
+    \caption{Kode untuk melakukan filtering DataFrame dengan fungsi query()}
+    \label{filteringquery}
+\end{figure}
+
+\subsubsection{Grouping DataFrame}
+Grouping DataFrame dilakukan dengan fungsi \texttt{df.groupby()}. Gambar \ref{grouping} adalah contoh kode untuk melakukan grouping DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/46-grouping.png}
+    \caption{Kode untuk melakukan grouping DataFrame}
+    \label{grouping}
+\end{figure}
+Objek hasil grouping diiterasi untuk menampilkan setiap kelompok data secara terpisah. Fungsi \texttt{get\_group()} digunakan untuk menampilkan data pada kelompok tertentu. Gambar \ref{grouping2} adalah contoh kode untuk menampilkan data pada kelompok tertentu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/47-grouping-2.png}
+    \caption{Kode untuk menampilkan data pada kelompok tertentu}
+    \label{grouping2}
+\end{figure}
+
+\subsubsection{Aggregation DataFrame}
+Operasi agregate dilakukan dengan menerapkan fungsi seperti mean, sum, count, min, max pada setiap kelompok data. Gambar \ref{aggregation} adalah contoh kode untuk melakukan agregasi DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/48-aggregation.png}
+    \caption{Kode untuk melakukan agregasi DataFrame}
+    \label{aggregation}
+\end{figure}
+
+Agregasi juga dapat dilakukan dengan menerapkan lebih dari satu fungsi pada setiap kelompok data. Gambar \ref{aggregation2} adalah contoh kode untuk melakukan agregasi DataFrame dengan lebih dari satu fungsi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/49-aggregation-2.png}
+    \caption{Kode untuk melakukan agregasi DataFrame dengan lebih dari satu fungsi}
+    \label{aggregation2}
+\end{figure}
+
+\subsubsection{Merge}
+Penggabungan dua DataFrame dapat dilakukan dengan fungsi \texttt{pd.merge()}. Gambar \ref{merge} adalah contoh kode untuk melakukan merge pada dua DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/50-merge.png}
+    \caption{Kode untuk melakukan merge pada dua DataFrame}
+    \label{merge}
+\end{figure}
+
+Selain itu, merge juga dapat dilakukan dengan fungsi merge() yang diberi parameter how='left', 'right', 'outer', atau 'inner' untuk menentukan jenis penggabungan. Gambar \ref{merge2} adalah contoh kode untuk melakukan merge dengan parameter how.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/51-merge-2.png}
+    \caption{Kode untuk melakukan merge dengan parameter how='left'}
+    \label{merge2}
+\end{figure}    
+
+\subsubsection{Join}
+Join dapat dilakukan dengan menggunakan merge() pada key column yang sama, di mana parameter how='left' memastikan seluruh data dari tabel kiri ditampilkan, sedangkan suffixes digunakan untuk membedakan nama kolom yang berasal dari kedua DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/52-join.png}
+    \caption{Kode untuk melakukan join pada dua DataFrame}
+    \label{join}
+\end{figure}
+Join juga dapat dilakukan dengan fungsi join() yang menggabungkan DataFrame berdasarkan indeks. Gambar \ref{join2} adalah contoh kode untuk melakukan join dengan fungsi join().
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/53-join-2.png}
+    \caption{Kode untuk melakukan join dengan fungsi join()}
+    \label{join2}
+\end{figure}
+
+\subsubsection{Concatenate}
+Concatenate dapat dilakukan dengan fungsi \texttt{pd.concat()} pada axis=0, sehingga DataFrame kedua ditambahkan sebagai baris baru di bawah DataFrame pertama. Parameter ignore\_index=True digunakan agar indeks diurutkan ulang secara otomatis.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/54-concat.png}
+    \caption{Kode untuk melakukan concatenate pada dua DataFrame}
+    \label{concat}
+\end{figure}
+Dengan menambahkan parameter axis=0 dan parameter join='outer' dapat menggabungkan semua kolom dari kedua dataframe. Kolom yang tidak dimiliki oleh salah satu DataFrame akan berisi nilai NaN, sementara parameter ignore\_index=True mengatur ulang indeks agar berurutan.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/55-concat-2.png}
+    \caption{Kode untuk melakukan concatenate pada dua DataFrame dengan join='outer'}
+    \label{concat2}
+\end{figure}
+
+Jika menggunakan axis=1, penggabungan dilakukan secara horizontal sehingga kolom baru ditambahkan di samping DataFrame awal.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/56-concat-3.png}
+    \caption{Kode untuk melakukan concatenate pada dua DataFrame dengan axis=1}
+    \label{concat3}
+\end{figure}
+
+\subsubsection{Reset Indeks}
+Reset indeks dapat dilakukan dengan menggunakan pd.concat() dan menetapkan ignore\_index=True. Gambar \ref{resetindeks} adalah contoh kode untuk melakukan reset indeks pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/57-reset-indeks.png}
+    \caption{Kode untuk melakukan reset indeks pada DataFrame}
+    \label{resetindeks}
+\end{figure}
+Reset indeks juga dapat dilakukan dengan fungsi reset\_index(drop=True), yang
+menghapus indeks lama dan menggantinya dengan indeks baru yang berurutan.
+Parameter drop=True memastikan indeks sebelumnya tidak ikut disimpan sebagai
+kolom baru. Gambar \ref{resetindeks2} adalah contoh kode untuk melakukan reset indeks dengan fungsi reset\_index().
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/58-reset-indeks-2.png}
+    \caption{Kode untuk melakukan reset indeks pada DataFrame dengan fungsi reset\_index()}
+    \label{resetindeks2}
+\end{figure}
+
+\subsubsection{Set Indeks}
+Set indeks dapat dilakukan dengan memilih baris tertentu sebagai referensi indeks baru. Pada Gambar 1.4.73, nilai pada baris ke-2 ditampilkan karena DataFrame sebelumnya telah atau akan diubah indeksnya menggunakan nilai kolom tertentu melalui set\_index(), sehingga baris tersebut ditampilkan sesuai indeks barunya.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/59-set-indeks.png}
+    \caption{Kode untuk melakukan set indeks pada DataFrame}
+    \label{setindeks}
+\end{figure}
+
+Set indeks juga dapat dilakukan dengan fungsi set\_index() yang menetapkan kolom ID sebagai indeks baru DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/60-set-indeks-2.png}
+    \caption{Kode untuk melakukan set indeks pada DataFrame dengan fungsi set\_index()}
+    \label{setindeks2}
+\end{figure}
+
+
+\subsubsection{Pivot Table}
+Pivot tabel dibuat menggunakan pd.pivot\_table() dengan menetapkan kolom
+Gender dan Pekerjaan sebagai pembentuk kolom baru. Agregasi dilakukan melalui
+parameter aggfunc, untuk menjumlahkan nilai Gaji dan menghitung jumlah data
+berdasarkan Pekerjaan seperti pada Gambar \ref{pivottable}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/61-pivot-table.png}
+    \caption{Kode untuk membuat pivot table pada DataFrame}
+    \label{pivottable}
+\end{figure}
+Untuk menghitung sum, mean, dll dapat menggunakan parameter aggfunc dengan np.sum. Gambar \ref{pivottable2} adalah contoh kode untuk membuat pivot table dengan parameter aggfunc.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/62-pivot-table-2.png}
+    \caption{Kode untuk membuat pivot table pada DataFrame dengan parameter aggfunc}
+    \label{pivottable2}
+\end{figure}
+
+\subsubsection{Melt}
+Melt digunakan untuk mengubah format DataFrame dari lebar menjadi panjang. Gambar \ref{melt} adalah contoh kode untuk melakukan melt pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/63-melt.png}
+    \caption{Kode untuk melakukan melt pada DataFrame}
+    \label{melt}
+\end{figure}
+Berdasarkan gambar \ref{melt}, kolom yang ditentukan pada id\_vars tetap dipertahankan, sedangkan kolom pada
+value\_vars diubah menjadi dua kolom baru, yaitu variable dan value sehingga tiap nilai mata pelajaran ditampilkan sebagai baris terpisah.
+
+
+\subsubsection{Lambda Function}
+Penggunaan fungsi lambda dengan 2 parameter dapat diterapkan pada DataFrame untuk melakukan operasi tertentu. Gambar \ref{lambda} adalah contoh kode untuk menggunakan fungsi lambda dengan 2 parameter pada DataFrame untuk melakukan operasi penjumlahan dan perkalian.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/64-lambda.png}
+    \caption{Kode untuk menggunakan fungsi lambda dengan 2 parameter pada DataFrame}
+    \label{lambda}
+\end{figure}
+Berikut penggunaan fungsi lambda dengan kondisi bertingkat untuk menentukan nilai berdasarkan skor Matematika pada DataFrame.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/65-lambda-2.png}
+    \caption{Kode untuk menggunakan fungsi lambda dengan kondisi bertingkat pada DataFrame}
+    \label{lambda2}
+\end{figure}
+
+\subsubsection{Membaca file}
+Untuk membaca file txt dapat menggunakan fungsi \texttt{pd.read\_csv()} dengan memasukkan nama file sebagai argumen. Gambar \ref{membaca} adalah contoh kode untuk membaca file txt.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/66-membaca-file.png}
+    \caption{Kode untuk membaca file txt}
+    \label{membaca}
+\end{figure}
+Berdasarkan gambar \ref{membaca}, praktikan mengunduh file dataset dari kaggle dengan link \url{https://www.kaggle.com/datasets/robmarkcole/occupancy-detection-data-set-uci?resource=download} lalu disimpan di dalam folder data. Kemudian, dataset dibaca dengan fungsi \texttt{pd.read\_csv()}.
+
+\subsection{Tugas dan Analisis}
+\subsubsection{Tugas 1}
+Buatlah array NumPy 2D berukuran 4×4 berisi angka acak (0–50), kemudian ubah bentuknya menjadi array 2×8 dan tampilkan hanya elemen-elemen yang bernilai lebih dari 25.
+Berikut penjelasannya:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/67-tugas-1.png}
+    \caption{Ubah bentuk array NumPy 2D berukuran 4×4 menjadi 2×8}
+    \label{tugas1}
+\end{figure}
+Array NumPy berukuran \(4 \times 4\) dibuat menggunakan fungsi \(\texttt{np.random.randint(0, 51, size=(4,4))}\), yang menghasilkan bilangan acak dari \(0\) hingga \(50\). Selanjutnya, fungsi \(\texttt{reshape(2,8)}\) digunakan untuk mengubah bentuk array menjadi \(2 \times 8\) tanpa mengubah jumlah elemennya. Terakhir, operasi penyaringan \(\texttt{array\_2x8[array\_2x8 > 25]}\) digunakan untuk menampilkan hanya elemen yang memiliki nilai lebih dari \(25\).
+
+\subsubsection{Tugas 2}
+Buatlah dataframe untuk data karyawan yang berisi kolom Nama, Pekerjaan, dan Gaji. Lalu lakukan operasi groupby() pada kolom Pekerjaan dan hitung nilai maksimum, minimum, serta standar deviasi untuk kolom ‘Gaji’ menggunakan agg().
+Berikut penjelasannya:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/68-tugas-2.png}
+    \caption{Operasi groupby() pada kolom Pekerjaan dan hitung nilai maksimum, minimum, serta standar deviasi untuk kolom ‘Gaji’ menggunakan agg()}
+    \label{tugas2}
+\end{figure}
+Data karyawan disimpan dalam sebuah \textit{DataFrame} yang memiliki tiga kolom, yaitu \texttt{Nama}, \texttt{Pekerjaan}, dan \texttt{Gaji}. Selanjutnya, fungsi \texttt{groupby()} digunakan untuk mengelompokkan data berdasarkan kolom \texttt{Pekerjaan}. Fungsi \texttt{agg()} kemudian digunakan pada kolom \texttt{Gaji} untuk menghitung nilai maksimum (\texttt{max}), minimum (\texttt{min}), dan standar deviasi (\texttt{std}) dari setiap kelompok pekerjaan. Dengan demikian, dapat diketahui statistik gaji untuk masing-masing jenis pekerjaan.\newpage
+
+\subsubsection{Tugas 3}
+Buat dua DataFrame untuk data karyawan dengan kolom Emp\_id, Nama, dan Divisi, serta DataFrame gaji dengan kolom ID, Gaji, dan Status (masing-masing minimal tiga baris). Setelah itu, gabungkan kedua DataFrame tersebut menggunakan merge() dengan left\_on='Emp\_id' dan right\_on='ID', terapkan left join, dan gunakan suffixes untuk membedakan kolom yang sama. 
+Berikut penjelasannya:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/69-tugas-3.png}
+    \caption{Gabungkan dua DataFrame menggunakan merge() dengan left join dan suffixes untuk membedakan kolom yang sama}
+    \label{tugas3}  
+\end{figure}
+Dua \textit{DataFrame} dibuat untuk menyimpan data karyawan dan data gaji. 
+DataFrame karyawan memiliki kolom \texttt{Emp\_id}, \texttt{Nama}, dan 
+\texttt{Divisi}, sedangkan DataFrame gaji memiliki kolom \texttt{ID}, 
+\texttt{Gaji}, dan \texttt{Status}. Kedua DataFrame kemudian digabungkan 
+menggunakan fungsi \texttt{merge()} dengan \texttt{left\_on='Emp\_id'} dan 
+\texttt{right\_on='ID'}. Parameter \texttt{how='left'} digunakan untuk 
+mempertahankan seluruh data dari DataFrame karyawan, sedangkan data gaji 
+yang tidak memiliki pasangan akan memiliki nilai \texttt{NaN}. Parameter 
+\texttt{suffixes} digunakan untuk membedakan nama kolom yang sama apabila 
+terdapat kolom dengan nama identik pada kedua DataFrame.
+
+
+\newpage
 \section{Kesimpulan}
+Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa NumPy dan Pandas adalah library Python yang sangat berguna untuk analisis data. NumPy menyediakan struktur data array yang efisien dan berbagai fungsi untuk manipulasi array, seperti slicing, reshaping, dan operasi matematika. Sementara itu, Pandas menawarkan struktur data DataFrame yang memudahkan pengolahan data tabular, termasuk operasi filtering, grouping, merging, dan pivoting. Dengan memahami kedua library ini, praktikan dapat melakukan analisis data dengan lebih cepat dan efektif.
+
+Berdasarkan tugas yang telah dikerjakan, praktikan dapat membuat array NumPy 2D, mengubah bentuknya, dan melakukan filtering elemen berdasarkan kondisi tertentu. Selain itu, praktikan juga dapat membuat DataFrame untuk data karyawan, melakukan operasi groupby untuk menghitung statistik gaji, serta menggabungkan dua DataFrame menggunakan merge dengan berbagai parameter. Praktikum ini memberikan pemahaman yang lebih baik tentang manipulasi data menggunakan NumPy dan Pandas, yang merupakan keterampilan penting dalam analisis data.
+
+\newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
