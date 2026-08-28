@@ -20,18 +20,17 @@
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
 
-\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codebg}{RGB}{255,255,255}   % background putih seperti sel Jupyter
 \definecolor{codetext}{RGB}{0,0,0}
 \definecolor{linenumcol}{RGB}{128,128,128}
-\definecolor{phpkw}{RGB}{180,0,120}    % Pink/Magenta
-\definecolor{phpstr}{RGB}{255,100,0}   % Orange
-\definecolor{commentcol}{RGB}{0,128,0} % Hijau
-\definecolor{phpfunc}{RGB}{128,128,0}  % Gold/Yellow
-\definecolor{phpvar}{RGB}{150,0,150}
-\definecolor{htmltagcol}{RGB}{0,25,10}
+\definecolor{pykw}{RGB}{0,128,0}         % keyword (def, if, for, import, dll) - hijau
+\definecolor{pystr}{RGB}{186,33,33}      % string - merah kecoklatan
+\definecolor{commentcol}{RGB}{64,128,128}% comment - abu kebiruan
+\definecolor{pyfunc}{RGB}{0,0,255}       % fungsi/built-in - biru
+\definecolor{pyconst}{RGB}{0,128,0}      % True/False/None - hijau (sama seperti keyword)
+\definecolor{pyvar}{RGB}{150,0,150}      % variabel khusus (opsional)
 
-
-\lstdefinestyle{phphtml}{
+\lstdefinestyle{pythonnb}{
     backgroundcolor=\color{codebg},
     basicstyle=\ttfamily\small\color{codetext},
     breaklines=true,
@@ -45,23 +44,20 @@
     rulecolor=\color{gray!40},
     framesep=5pt,
     xleftmargin=18pt,
-    % PHP language & keywords (pink/magenta)
-    language=PHP,
-    morekeywords={include, echo, while, if, else},
-    keywordstyle=\color{phpkw}\bfseries,
-    % Strings (orange)
-    stringstyle=\color{phpstr},
-    % Comments (green)
+    % Bahasa Python
+    language=Python,
+    morekeywords={self, as, with, lambda, yield, async, await},
+    keywordstyle=\color{pykw}\bfseries,
+    % String (merah kecoklatan)
+    stringstyle=\color{pystr},
+    % Comment (abu kebiruan, italic)
     commentstyle=\color{commentcol}\itshape,
-    % Functions (yellow/gold)
-    emph={mysqli_num_rows, mysqli_fetch_assoc, mysqli_close},
-    emphstyle=\color{phpfunc},
-    % Variables $... (pink)
-    alsoletter={\$},
-    emph={[2]\$result,\$row,\$koneksi},
-    emphstyle={[2]\color{phpvar}},
-    % HTML tags (cyan)
-    moredelim=[s][\color{htmltagcol}\bfseries]{<}{>},
+    % Fungsi / built-in umum (biru)
+    emph={print, len, range, int, str, float, type, open, input, list, dict, set, tuple, sum, min, max, sorted, enumerate, zip, map, filter, isinstance},
+    emphstyle=\color{pyfunc},
+    % Konstanta True/False/None (hijau, bold)
+    emph={[2]True, False, None},
+    emphstyle={[2]\color{pyconst}\bfseries},
 }
 \usepackage{chngcntr}
 
@@ -76,8 +72,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 2}}\\[0.3cm]
+    { \textbf{EXPLORATORY DATA ANALYSIS DAN DATA PREPROCESSING}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -114,12 +110,183 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa diharapkan mampu memahami konsep dasar Artificial Intelligence (AI) dan Machine Learning (ML).
+    \item Mahasiswa diharapkan mampu mengetahui dasar-dasar Machine Learning (ML)
+    \item Mahasiswa diharapkan mampu memahami konsep dasar Data Mining dan Data Preprocessing.
 \end{enumerate}
-\section{Dasar Teori}
-\section{Hasil dan Pemabahasan}
 
-\subsection{}
+\section{Dasar Teori}
+\subsection{Artificial Intelligence (AI)}
+Artificial Intelligence adalah teknologi yang memungkinkan mesin atau komputer untuk meniru kemampuan kognitif manusia. AI atau kecerdasan buatan adalah sistem yang dapat memahami, belajar, dan berpikir layaknya manusia dalam beberapa aspek, seperti mengenali pola, membuat prediksi, dan menyelesaikan masalah kompleks. Penggunaan AI sudah sangat luas dalam berbagai bidang, termasuk bisnis, kesehatan, dan hiburan.
+
+AI juga mencakup berbagai teknologi, seperti machine learning, deep learning, dan natural language processing (NLP). Machine learning memungkinkan komputer belajar dari data dan pengalaman tanpa perlu diprogram secara eksplisit. Sementara itu, NLP digunakan untuk memungkinkan mesin memahami bahasa manusia, seperti yang kita temui pada asisten virtual seperti Siri dan Google Assistant \cite{ruangguruArtificialIntelligence}.
+
+\subsection{Machine Learning (ML)}
+Teknologi machine learning (ML) adalah mesin yang dikembangkan untuk bisa belajar dengan sendirinya tanpa arahan dari penggunanya. Pembelajaran mesin dikembangkan berdasarkan disiplin ilmu lainnya seperti statistika, matematika dan data mining sehingga mesin dapat belajar dengan menganalisis data tanpa perlu di program ulang atau diperintah.
+
+Dalam hal ini machine learning memiliki kemampuan untuk memperoleh data yang ada dengan perintah ia sendiri. ML juga dapat mempelajari data yang ada dan data yang ia peroleh sehingga bisa melakukan tugas tertentu. Tugas yang dapat dilakukan oleh ML pun sangat beragam, tergantung dari apa yang ia pelajari \cite{dicodingMachineLearning}.
+
+\subsection{Exploratory Data Analysis (EDA)}
+Exploratory Data Analysis (EDA) atau dikenal juga dengan analisis data eksploratif merupakan pendekatan analisis untuk suatu data untuk membuat gambaran keseluruhan (summary) data, sehingga mudah untuk dipahami. Metode analisis ini menyediakan berbagai alat untuk meringkas dan memperoleh wawasan tentang sekumpulan data dengan cepat menggunakan graﬁk sebagai bentuk visualisasi data, tanpa menggunakan model statistik, atau formulasi hipotesis \cite{ugmMENGENALEXPLORATORY}.
+
+\subsection{Data Preprocessing}
+Data preprocessing adalah proses mempersiapkan data mentah agar siap digunakan dalam analisis atau model machine learning. Tahapan ini mencakup pembersihan data, transformasi, integrasi, dan reduksi untuk memastikan data berkualitas tinggi, bebas dari noise, serta dalam format yang sesuai. Dengan preprocessing yang baik, model dapat belajar lebih efektif, menghindari bias, dan menghasilkan prediksi yang lebih akurat \cite{digitalskolaDataPreprocessing}.
+
+
+\section{Hasil dan Pembahasan}
+\subsection{Exploratory Data Analysis (EDA)}
+\subsubsection{Import Library}
+Ada 3 library yang digunakan untuk melakukan EDA, yaitu Pandas, Matplotlib, dan Seaborn. Pandas digunakan untuk memanipulasi data, Matplotlib digunakan untuk membuat visualisasi data, dan Seaborn digunakan untuk membuat visualisasi data yang lebih kompleks dan menarik. 
+
+Pada pertemuan sebelumnya, praktikan telah menginstall library pandas dan numpy. Namun, untuk library matplotlib, praktikan perlu menginstallnya terlebih dahulu menggunakan perintah:
+\begin{lstlisting}[language=Python, style=pythonnb]
+    pip install matplotlib
+\end{lstlisting}
+Berikut adalah kode untuk mengimpor library yang digunakan dalam EDA:
+\begin{lstlisting}[language=Python, style=pythonnb]
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import numpy as np
+\end{lstlisting}
+
+\subsubsection{Load Dataset}
+Dataset yang akan digunakan di dalam praktikum ini diambil dari kaggle dengan link \url{https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers}
+Untuk membaca dataset, praktikan dapat menggunakan perintah:
+\begin{lstlisting}[language=Python, style=pythonnb]
+df_churning = pd.read_csv('https://raw.githubusercontent.com/ganjar87
+/data_science_practice/main/BankChurners.csv', delimiter=',') 
+\end{lstlisting}
+\subsubsection{Melihat 5 baris pertama dataset}
+Untuk melihat 5 baris pertama dataset, praktikan dapat menggunakan perintah:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/1-head.png}
+    \caption{Membuat array dengan string sebagai member}
+    \label{head}
+\end{figure}
+
+\subsubsection{Melihat 5 baris terakhir dataset}
+Untuk melihat 5 baris terakhir dataset, praktikan dapat menggunakan perintah:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/2-tail.png}
+    \caption{Membuat array dengan string sebagai member}
+    \label{tail}
+\end{figure}
+
+\subsubsection{Menyimpan nilai dari class menjadi 2 dataframe yang berbeda}
+\begin{lstlisting}[language=Python, style=pythonnb]
+existing_data = df_churning[(df_churning.Attrition_Flag == 'Existing Customer')]
+attrited_data = df_churning[(df_churning.Attrition_Flag == 'Attrited Customer')]
+\end{lstlisting}
+Kode tersebut digunakan untuk menyimpan nilai dari class menjadi 2 dataframe yang berbeda, yaitu existing\_data dan attrited\_data. Dataframe existing\_data berisi data pelanggan yang masih aktif, sedangkan dataframe attrited\_data berisi data pelanggan yang sudah tidak aktif (churn).
+
+\subsubsection{Line Chart}
+Untuk membuat line chart, praktikan dapat menggunakan data dummy terlebih dahulu seperti pada gambar \ref{linechart}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/3-chart-line.png}
+    \caption{Linechart dari data dummy}
+    \label{linechart}
+\end{figure}
+Berdasarkan gambar \ref{linechart}, Kode tersebut digunakan untuk membuat grafik garis dengan dua data menggunakan library \textit{Matplotlib}. Variabel \(x\) berisi data untuk \textbf{sumbu \(x\)}, sedangkan \(y_1\) dan \(y_2\) berisi data untuk \textbf{sumbu \(y\)}. Perintah \texttt{plt.plot(x, y1, marker='o')} digunakan untuk membuat garis pertama dengan penanda berbentuk lingkaran, sedangkan \texttt{plt.plot(x, y2, marker='X')} digunakan untuk membuat garis kedua dengan penanda berbentuk \(X\). Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik yang telah dibuat. 
+
+Setelah mencoba membuat line chart dengan data dummy, praktikan dapat mencoba membuat line chart dengan data yang ada pada dataset ioT untuk menampilkan perubahan nilai sensor terhadap waktu. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/4-iot-dataset-load.png}
+    \caption{Load dataset IoT}
+    \label{linechart-iot}
+\end{figure}
+
+Selanjutnya, praktikan dapat membuat line chart dengan data yang ada pada dataset ioT untuk menampilkan perubahan nilai sensor terhadap waktu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/5-iot-dataset-linechart.png}
+    \caption{Linechart dari data ioT}
+    \label{linechart-iot}
+\end{figure}
+Kode tersebut digunakan untuk membuat grafik garis yang menampilkan hubungan antara tanggal dan tingkat kelembapan pada data IoT. Perintah \texttt{plt.figure(figsize=(15, 3))} digunakan untuk mengatur ukuran grafik dengan lebar \(15\) dan tinggi \(3\). Selanjutnya, \texttt{plt.plot(df\_iot['date'], df\_iot['Humidity'])} digunakan untuk membuat grafik dengan kolom \texttt{date} sebagai sumbu \(x\) dan kolom \texttt{Humidity} sebagai sumbu \(y\). Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik yang telah dibuat.
+
+
+\subsubsection{Pie Chart}
+Pie Chart digunakan untuk menampilkan proporsi dari setiap kategori dalam bentuk lingkaran. Setiap irisan pada lingkaran mewakili persentase dari kategori tersebut. Pie Chart sangat berguna untuk memahami distribusi data secara visual.
+
+\begin{lstlisting}[language=Python, style=pythonnb]
+y = np.array([35, 25, 25, 15])
+mylabels = ["Web Programmer", "Data Scientist", "DB Admin", "Manager"]
+
+plt.pie(y, labels = mylabels, autopct='%.2f%%')
+plt.show()
+\end{lstlisting}
+
+Kode tersebut digunakan untuk membuat \textit{pie chart} yang menunjukkan persentase dari beberapa jenis pekerjaan. Variabel \(y\) berisi nilai data, sedangkan \texttt{mylabels} berisi label untuk setiap bagian, yaitu \textit{Web Programmer}, \textit{Data Scientist}, \textit{DB Admin}, dan \textit{Manager}. Perintah \texttt{plt.pie(y, labels=mylabels, autopct='\%.2f\%\%')} digunakan untuk membuat diagram lingkaran dan menampilkan persentase setiap kategori dengan dua angka di belakang koma. Terakhir, \texttt{plt.show()} digunakan untuk menampilkan diagram seperti pada gambar \ref{diagram-dummy}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/6-pie-chart.png}
+    \caption{Pie Chart dari Data Pekerjaan}
+    \label{diagram-dummy}
+\end{figure}
+
+Selanjutnya, pembuatan pie chart dilakukan menggunakan dataset sebelumnya yaitu Bank Churner. Visualisasi ini bertujuan untuk menampilkan proporsi kategori pada 
+variabel Marital\_Status.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/7-pie-marital.png}
+    \caption{Pie Chart dari Data Marital Status}
+    \label{diagram-marital-status}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{pie chart} yang menampilkan distribusi status pernikahan dari data pelanggan. Perintah \texttt{df\_churning['Marital\_Status']
+.value\_counts()} digunakan untuk menghitung jumlah data pada setiap kategori status pernikahan. Selanjutnya, \texttt{data.index} digunakan untuk mengambil label atau nama kategori dari \textit{Series}. Perintah \texttt{plt.pie(data, labels=label, autopct='\%.2f\%')} digunakan untuk membuat diagram lingkaran dan menampilkan persentase setiap kategori dengan dua angka di belakang koma. Perintah \texttt{plt.title('Marital Status')} memberikan judul pada grafik, sedangkan \texttt{plt.show()} digunakan untuk menampilkan grafik.
+
+\subsubsection{Bar Plot}
+\begin{lstlisting}[language=Python, style=pythonnb]
+y = np.array([35, 25, 25, 15])
+x = ["Web Programmer", "Data Scientist", "DB Admin", "Manager"]
+
+plt.bar(x,y)
+
+plt.xticks(rotation=45)
+plt.ylabel('Jumlah')
+plt.show()
+\end{lstlisting}
+Kode tersebut digunakan untuk membuat \textit{bar chart} yang menampilkan jumlah pada setiap kategori pekerjaan. Variabel \(y\) berisi nilai jumlah, sedangkan \(x\) berisi nama kategori. Perintah \texttt{plt.bar(x,y)} membuat grafik batang, \texttt{plt.xticks(rotation=45)} memiringkan label sumbu \(x\) sebesar \(45^\circ\), dan \texttt{plt.ylabel('Jumlah')} memberikan label pada sumbu \(y\). Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik seperti pada gambar \ref{bar-plot}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/8-bar-plot.png}
+    \caption{Bar Plot dari Data Pekerjaan}
+    \label{bar-plot}
+\end{figure}
+
+Selanjutnya, buat plot dengan dataset bank churner untuk membandingkan distribusi kategori marital\_status antara 2 kelompok nasabah, yaitu existing customer dan attrited customer. Visualisasi ini bertujuan untuk menampilkan perbandingan distribusi kategori pada variabel Marital\_Status antara kedua kelompok nasabah.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/9-comparison-marital.png}
+    \caption{Perbandingan Distribusi Marital Status}
+    \label{comparison-marital}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{bar chart} yang membandingkan jumlah pelanggan berdasarkan status pernikahan pada dua kelompok data, yaitu \textit{existing} dan \textit{attrited}. Variabel \(y_1\) dan \(y_2\) digunakan untuk menghitung jumlah setiap kategori \texttt{Marital\_Status}, sedangkan \(x_1\) dan \(x_2\) menentukan posisi batang pada sumbu \(x\). Variabel \texttt{bar\_width} mengatur lebar batang sebesar \(0.4\). Dua perintah \texttt{plt.bar()} digunakan untuk menampilkan kedua kelompok data secara berdampingan. Selanjutnya, \texttt{plt.title()} memberikan judul grafik, \texttt{plt.ylabel()} memberikan label sumbu \(y\), dan \texttt{plt.xticks()} memberikan label kategori pada sumbu \(x\). Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/10-visual-marital.png}
+    \caption{Perbandingan Distribusi Marital Status}
+    \label{comparison-marital}
+\end{figure}
+
+\subsubsection{Stacked Bar Plot}
+\subsubsection{Histogram}
+\subsubsection{Scatter Plot}
+\subsubsection{Box Plot}
+\subsubsection{Violin Plot}
+\subsubsection{Sub Plot}
+\subsubsection{Annotation}
+\subsubsection{Axis}
+\subsubsection{Legend}
+
+\subsection{Data Preprocessing}
+\subsection{Tugas dan Analisis}
 
 
 

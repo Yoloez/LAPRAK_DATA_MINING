@@ -4,7 +4,6 @@ The top-level auxiliary file: template.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
 The style file: IEEEtran.bst
 Reallocating 'name_of_file' (item size: 1) to 4 items.
-I found no \citation commands---while reading file template.aux
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
@@ -16,45 +15,44 @@ Database file #1: ref.bib
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 0 entries,
+You've used 4 entries,
             4087 wiz_defined-function locations,
-            821 strings with 7288 characters,
-and the built_in function-call counts, 104 in all, are:
-= -- 0
-> -- 0
+            845 strings with 8344 characters,
+and the built_in function-call counts, 1708 in all, are:
+= -- 143
+> -- 16
 < -- 0
-+ -- 0
-- -- 0
-* -- 19
-:= -- 27
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
++ -- 8
+- -- 4
+* -- 71
+:= -- 329
+add.period$ -- 8
+call.type$ -- 4
+change.case$ -- 8
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 3
+cite$ -- 4
+duplicate$ -- 136
+empty$ -- 153
+format.name$ -- 4
+if$ -- 362
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 23
-num.names$ -- 0
-pop$ -- 0
+int.to.str$ -- 4
+missing$ -- 32
+newline$ -- 35
+num.names$ -- 4
+pop$ -- 80
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1
+skip$ -- 132
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
+substring$ -- 12
+swap$ -- 80
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 0
+type$ -- 4
 warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 22
-(There was 1 error message)
+while$ -- 4
+width$ -- 5
+write$ -- 58

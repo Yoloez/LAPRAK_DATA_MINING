@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  21 AUG 2026 19:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  28 AUG 2026 17:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -245,27 +245,34 @@ Package chngcntr Info: \counterwithout already defined.
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count285
 \l__pdf_internal_box=\box55
-) (template.aux)
+) (template.aux
+
+LaTeX Warning: Label `linechart-iot' multiply defined.
+
+
+LaTeX Warning: Label `comparison-marital' multiply defined.
+
+)
 \openout1 = `template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
-LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -321,53 +328,180 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count292
-Package hyperref Info: Link coloring OFF on input line 68.
+Package hyperref Info: Link coloring OFF on input line 64.
  (template.out) (template.out)
 \@outlinefile=\write3
 \openout3 = `template.out'.
 
-<../images/ugm.png, id=27, 1606.0pt x 1606.0pt>
+<../images/ugm.png, id=119, 1606.0pt x 1606.0pt>
 File: ../images/ugm.png Graphic file (type png)
 <use ../images/ugm.png>
-Package pdftex.def Info: ../images/ugm.png  used on input line 83.
+Package pdftex.def Info: ../images/ugm.png  used on input line 79.
 (pdftex.def)             Requested size: 199.15665pt x 199.16928pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 91.
+(Font)              <12> on input line 87.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 91.
+(Font)              <8> on input line 87.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 91.
+(Font)              <6> on input line 87.
  [1
 
-{C:/Users/ASUS/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../images/ugm.png>] (template.bbl
+{C:/Users/ASUS/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../images/ugm.png>]
+Overfull \hbox (5.58751pt too wide) in paragraph at lines 114--115
+[]\OT1/cmr/m/n/12 Mahasiswa di-hara-p-kan mampu menge-tahui dasar-dasar Ma-chine Learn-ing (ML) 
+ []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
-)
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.130 \end{document}
-                     [1] (template.aux)
+l.126 
+       [1] [2] (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 147.
+
+Overfull \hbox (3.62668pt too wide) in paragraph at lines 153--155
+\OT1/cmr/m/n/12 link []$\OT1/cmtt/m/n/12 https : / / www . kaggle . com / datasets / sakshigoyal7 / credit-[]card-[]customers$[]
+ []
+
+<../images/1-head.png, id=148, 813.0375pt x 322.20375pt>
+File: ../images/1-head.png Graphic file (type png)
+<use ../images/1-head.png>
+Package pdftex.def Info: ../images/1-head.png  used on input line 163.
+(pdftex.def)             Requested size: 341.43437pt x 135.30498pt.
+[3]
+<../images/2-tail.png, id=165, 635.37375pt x 295.1025pt>
+File: ../images/2-tail.png Graphic file (type png)
+<use ../images/2-tail.png>
+Package pdftex.def Info: ../images/2-tail.png  used on input line 172.
+(pdftex.def)             Requested size: 341.43437pt x 158.58746pt.
+ [4 <../images/1-head.png> <../images/2-tail.png>]
+<../images/3-chart-line.png, id=178, 459.96844pt x 545.03625pt>
+File: ../images/3-chart-line.png Graphic file (type png)
+<use ../images/3-chart-line.png>
+Package pdftex.def Info: ../images/3-chart-line.png  used on input line 188.
+(pdftex.def)             Requested size: 341.43437pt x 404.60127pt.
+
+Overfull \hbox (3.38158pt too wide) in paragraph at lines 192--193
+\OT1/cmtt/m/n/12 y1, marker='o') \OT1/cmr/m/n/12 di-gu-nakan un-tuk mem-buat garis per-tama den-gan penanda berben-
+ []
+
+[5 <../images/3-chart-line.png>]
+<../images/4-iot-dataset-load.png, id=186, 687.31781pt x 229.60782pt>
+File: ../images/4-iot-dataset-load.png Graphic file (type png)
+<use ../images/4-iot-dataset-load.png>
+Package pdftex.def Info: ../images/4-iot-dataset-load.png  used on input line 197.
+(pdftex.def)             Requested size: 341.43437pt x 114.06087pt.
+
+Overfull \hbox (0.51125pt too wide) in paragraph at lines 194--200
+\OT1/cmr/m/n/12 coba mem-buat line chart den-gan data yang ada pada dataset ioT un-tuk menampilkan
+ []
+
+<../images/5-iot-dataset-linechart.png, id=187, 967.36406pt x 325.96782pt>
+File: ../images/5-iot-dataset-linechart.png Graphic file (type png)
+<use ../images/5-iot-dataset-linechart.png>
+Package pdftex.def Info: ../images/5-iot-dataset-linechart.png  used on input line 205.
+(pdftex.def)             Requested size: 384.1096pt x 129.42982pt.
+
+Overfull \hbox (59.40099pt too wide) in paragraph at lines 209--210
+\OT1/cmr/m/n/12 gan an-tara tang-gal dan tingkat kelem-ba-pan pada data IoT. Per-in-tah \OT1/cmtt/m/n/12 plt.figure(figsize=(15,
+ []
+
+[6 <../images/4-iot-dataset-load.png> <../images/5-iot-dataset-linechart.png>]
+<../images/6-pie-chart.png, id=201, 386.94562pt x 314.67563pt>
+File: ../images/6-pie-chart.png Graphic file (type png)
+<use ../images/6-pie-chart.png>
+Package pdftex.def Info: ../images/6-pie-chart.png  used on input line 226.
+(pdftex.def)             Requested size: 256.07741pt x 208.25313pt.
+ [7]
+<../images/7-pie-marital.png, id=213, 381.67593pt x 487.8225pt>
+File: ../images/7-pie-marital.png Graphic file (type png)
+<use ../images/7-pie-marital.png>
+Package pdftex.def Info: ../images/7-pie-marital.png  used on input line 235.
+(pdftex.def)             Requested size: 256.07741pt x 327.30832pt.
+ [8 <../images/6-pie-chart.png>]
+Overfull \hbox (27.15431pt too wide) in paragraph at lines 239--241
+\OT1/cmr/m/n/12 nama kat-e-gori dari \OT1/cmr/m/it/12 Se-ries\OT1/cmr/m/n/12 . Per-in-tah \OT1/cmtt/m/n/12 plt.pie(data, labels=label, autopct='%.2f%')
+ []
+
+
+Overfull \hbox (18.39288pt too wide) in paragraph at lines 239--241
+\OT1/cmr/m/n/12 kat-e-gori den-gan dua angka di be-lakang koma. Per-in-tah \OT1/cmtt/m/n/12 plt.title('Marital Status')
+ []
+
+
+Overfull \hbox (5.40622pt too wide) in paragraph at lines 239--241
+\OT1/cmr/m/n/12 mem-berikan judul pada grafik, sedan-gkan \OT1/cmtt/m/n/12 plt.show() \OT1/cmr/m/n/12 di-gu-nakan un-tuk menampilkan
+ []
+
+[9 <../images/7-pie-marital.png>]
+<../images/8-bar-plot.png, id=228, 444.91219pt x 390.70969pt>
+File: ../images/8-bar-plot.png Graphic file (type png)
+<use ../images/8-bar-plot.png>
+Package pdftex.def Info: ../images/8-bar-plot.png  used on input line 256.
+(pdftex.def)             Requested size: 256.07741pt x 224.8769pt.
+
+Overfull \hbox (10.93655pt too wide) in paragraph at lines 253--259
+\OT1/cmr/m/n/12 kat-e-gori. Per-in-tah \OT1/cmtt/m/n/12 plt.bar(x,y) \OT1/cmr/m/n/12 mem-buat grafik batang, \OT1/cmtt/m/n/12 plt.xticks(rotation=45)
+ []
+
+[10 <../images/8-bar-plot.png>]
+<../images/9-comparison-marital.png, id=243, 475.02469pt x 251.43938pt>
+File: ../images/9-comparison-marital.png Graphic file (type png)
+<use ../images/9-comparison-marital.png>
+Package pdftex.def Info: ../images/9-comparison-marital.png  used on input line 265.
+(pdftex.def)             Requested size: 341.43437pt x 180.73311pt.
+<../images/10-visual-marital.png, id=244, 456.95718pt x 342.5297pt>
+File: ../images/10-visual-marital.png Graphic file (type png)
+<use ../images/10-visual-marital.png>
+Package pdftex.def Info: ../images/10-visual-marital.png  used on input line 273.
+(pdftex.def)             Requested size: 341.43437pt x 255.94539pt.
+ [11 <../images/9-comparison-marital.png>] (template.bbl [12 <../images/10-visual-marital.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 37--42
+[]\OT1/cmr/m/n/12 yunita ws, ``MEN-GE-NAL EX-PLORATORY DATA ANAL-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--42
+\OT1/cmr/m/n/12 Y-SIS &#x2013; ek-splo-rasi-data.mipa.ugm.ac.id --- ek-splo-rasi-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--42
+\OT1/cmr/m/n/12 data.mipa.ugm.ac.id,'' []$https : / / eksplorasidata . mipa . ugm . ac . id / 2021 / 08 / 16 /
+ []
+
+[13]
+Underfull \hbox (badness 2318) in paragraph at lines 44--48
+[]\OT1/cmr/m/n/12 D. S. C. Team, ``Data Pre-pro-cess-ing: Defin-isi, Taha-pan, dan Im-ple-
+ []
+
+) [14] (template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: FB3A50C7A7AB37ABC1CFD13C0F93E702;586.
+(rerunfilecheck)             Checksum: E8D96E2B246933CFB4024AA30B003CCE;4365.
  ) 
 Here is how much of TeX's memory you used:
- 11023 strings out of 474486
- 171014 string characters out of 5744228
- 1930542 words of memory out of 5000000
- 33174 multiletter control sequences out of 15000+600000
- 562323 words of font info for 50 fonts, out of 8000000 for 9000
+ 11750 strings out of 474486
+ 180418 string characters out of 5744228
+ 1950542 words of memory out of 5000000
+ 33816 multiletter control sequences out of 15000+600000
+ 563307 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,307b,520s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on template.pdf (2 pages, 2898741 bytes).
+ 75i,7n,79p,879b,2095s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on template.pdf (15 pages, 3291586 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 333 PDF objects out of 1000 (max. 8388607)
+ 89 named destinations out of 1000 (max. 500000)
+ 288 words of extra memory for PDF output out of 10000 (max. 10000000)
 
