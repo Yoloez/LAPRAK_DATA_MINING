@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt, a4paper]{article}
 \usepackage[a4paper, margin=3cm]{geometry}
 \usepackage{graphicx}
 \usepackage{setspace}
@@ -16,6 +16,7 @@
 % \usepackage[natbibapa]{apacite}
 % \usepackage{natbib}
 \usepackage{chngcntr}
+\usepackage{amsmath}
 
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
@@ -276,21 +277,513 @@ Kode tersebut digunakan untuk membuat \textit{bar chart} yang membandingkan juml
 \end{figure}
 
 \subsubsection{Stacked Bar Plot}
+Stacked bar plot adalah jenis grafik batang yang digunakan untuk menampilkan distribusi data dalam bentuk tumpukan. Setiap batang mewakili total nilai dari beberapa kategori, dan setiap kategori ditumpuk di atas satu sama lain. Stacked bar plot sangat berguna untuk membandingkan proporsi kategori dalam satu kelompok data. Berikut merupakan contoh kode untuk membuat stacked bar plot menggunakan dataset Bank Churner untuk membandingkan distribusi kategori Marital\_Status antara 2 kelompok nasabah, yaitu existing customer dan attrited customer.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/11-stack-bar.png}
+    \caption{Stacked Bar Plot dari Data Marital Status}
+    \label{stacked-bar}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{stacked bar plot} yang membandingkan jumlah pelanggan \textit{existing} dan \textit{attrited} berdasarkan \texttt{Marital\_Status}. Perintah \texttt{value\_counts()} menghitung jumlah tiap kategori, kemudian \texttt{pd.concat()} menggabungkan kedua data tersebut. Selanjutnya, \texttt{plot(kind='bar', stacked=True)} membuat diagram batang bertumpuk. Perintah \texttt{plt.title()} dan \texttt{plt.ylabel()} digunakan untuk memberikan judul dan label sumbu \(y\), sedangkan \texttt{plt.show()} menampilkan grafik.
+
 \subsubsection{Histogram}
+Histogram adalah jenis grafik yang digunakan untuk menampilkan distribusi data numerik dalam bentuk batang. Setiap batang mewakili jumlah data yang berada dalam rentang nilai tertentu (bin). Histogram sangat berguna untuk memahami sebaran data, mengidentifikasi pola, dan mendeteksi outlier. Berikut merupakan contoh kode untuk membuat histogram menggunakan dataset Bank Churner untuk menampilkan distribusi variabel Customer\_Age.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/12-histogram.png}
+    \caption{Histogram dari Data Customer Age}
+    \label{histogram}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{histogram} yang membandingkan distribusi usia pelanggan pada kelompok \textit{existing} dan \textit{attrited}. Variabel \texttt{data1} dan \texttt{data2} mengambil data usia pelanggan dari masing-masing kelompok. Perintah \texttt{plt.hist()} digunakan untuk membuat histogram, sedangkan \texttt{plt.title()}, \texttt{plt.ylabel()}, dan \texttt{plt.xlabel()} digunakan untuk memberikan judul serta label pada sumbu grafik. Perintah \texttt{plt.legend()} menampilkan keterangan untuk membedakan kedua kelompok, dan \texttt{plt.show()} digunakan untuk menampilkan grafik.
+
 \subsubsection{Scatter Plot}
+Pembuatan scatter plot dilakukan untuk menampilkan hubungan antara dua variabel numerik. Scatter plot sangat berguna untuk mengidentifikasi pola, tren, dan korelasi antara variabel. Berikut merupakan contoh kode untuk membuat scatter plot menggunakan dataset Bank Churner dengan plt.scatter().
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/13-kode-sp-1.png}
+    \caption{Pembuatan Scatter Plot dengan plt.scatter}
+    \label{scatter-plot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/14-output-sp-1.png}
+    \caption{Scatter Plot dari Data Customer Age dan Credit Limit}
+    \label{scatter-plot}
+\end{figure}
+
+Versi lain dalam pembuatan scatter plot menggunakan .plot.scatter() yang lebih ringkas dan terstruktur.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/15-kode-sp-2.png}
+    \caption{Pembuatan Scatter Plot dengan plt.plot}
+    \label{scatter-plot-2}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/16-output-sp-2.png}
+    \caption{Scatter Plot dari Data Customer Age dan Credit Limit}
+    \label{scatter-plot-2}
+\end{figure}
+
 \subsubsection{Box Plot}
+Box plot adalah jenis grafik yang digunakan untuk menampilkan distribusi data numerik melalui lima nilai ringkasan: minimum, kuartil pertama (Q1), median (Q2), kuartil ketiga (Q3), dan maksimum. Box plot sangat berguna untuk mengidentifikasi outlier dan memahami sebaran data. Berikut merupakan contoh kode untuk membuat box plot menggunakan dataset Bank Churner untuk menampilkan distribusi variabel Customer\_Age.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/17-box-plot.png}
+    \caption{Box Plot dari Data Customer Age}
+    \label{box-plot}
+\end{figure}
+
+Selain itu, boxplot juga dapat dibuat dengan menggunakan fungsi plot.box() dari objek dataframe.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/18-box-plot-2.png}
+    \caption{Box Plot dari Data Customer Age}
+    \label{box-plot-2}
+\end{figure}
+
 \subsubsection{Violin Plot}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/19-violin-plot-kode.png}
+    \caption{Violin Plot dari Data Customer Age}
+    \label{violin-plot}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{violin plot} yang membandingkan distribusi usia pelanggan pada kelompok \textit{existing} dan \textit{attrited}. Data usia disimpan dalam \textit{dictionary} dengan nama masing-masing kelompok sebagai \textit{key}. Perintah \texttt{plt.violinplot()} digunakan untuk menampilkan distribusi data, sedangkan \texttt{plt.xticks()} memberikan label \textit{existing} dan \textit{attrited} pada sumbu \(x\). Perintah \texttt{plt.title()} dan \texttt{plt.ylabel()} memberikan judul serta label sumbu \(y\), kemudian \texttt{plt.show()} digunakan untuk menampilkan grafik.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/20-violin-plot-output.png}
+    \caption{Output Violin Plot dari Data Customer Age}
+    \label{violin-plot-output}
+\end{figure}
+
 \subsubsection{Sub Plot}
+Subplot digunakan untuk menampilkan beberapa grafik dalam satu figure. Hal ini memungkinkan perbandingan visual yang lebih mudah antara berbagai set data atau jenis grafik. Berikut merupakan contoh kode untuk membuat subplot menggunakan dataset Bank Churner.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/21-subplot-kode.png}
+    \caption{Sub Plot dari Data Customer Age dan Credit Limit}
+    \label{sub-plot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/22-subplot-output.png}
+    \caption{Output Sub Plot dari Data Customer Age dan Credit Limit}
+    \label{sub-plot-output}
+\end{figure}
+
+
 \subsubsection{Annotation}
+Annotation digunakan untuk menambahkan teks atau keterangan pada grafik. Hal ini berguna untuk memberikan informasi tambahan, menyoroti titik tertentu, atau menjelaskan data yang ditampilkan. Berikut merupakan contoh kode untuk menambahkan annotation pada grafik menggunakan dataset Bank Churner.
+\begin{figure}[H]   
+    \centering
+        \includegraphics[width=0.8\textwidth]{../images/23-annotation.png}
+        \caption{Annotation pada Scatter Plot dari Data Customer Age dan Credit Limit}
+        \label{annotation}
+\end{figure}
+Kode tersebut digunakan untuk menampilkan distribusi usia pelanggan dalam bentuk \textit{histogram} sekaligus menunjukkan ukuran tendensi sentral berupa \textit{mean} dan \textit{median}. Perintah \texttt{data.median()} menghitung nilai median, sedangkan \texttt{data.mean()} menghitung nilai rata-rata. Perintah \texttt{plt.text()} digunakan untuk menampilkan nilai \textit{median} dan \textit{mean} pada grafik, sementara \texttt{round()} membulatkan nilainya menjadi dua angka desimal. Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik.
 \subsubsection{Axis}
+Axis digunakan untuk mengatur sumbu pada grafik, termasuk rentang nilai, label, dan skala. Hal ini penting untuk memastikan grafik mudah dibaca dan interpretatif. Berikut merupakan contoh kode untuk mengatur axis pada grafik menggunakan dataset Bank Churner.
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=0.8\textwidth]{../images/24-axis.png}
+        \caption{Axis pada suhu}
+        \label{axis}
+\end{figure}
+Kode tersebut digunakan untuk membuat grafik garis yang membandingkan data suhu dari dua perangkat IoT berdasarkan tanggal. Variabel \(x\) berisi tanggal, sedangkan \(y_1\) dan \(y_2\) berisi data suhu dari IoT 1 dan IoT 2. Perintah \texttt{plt.plot()} digunakan untuk membuat kedua garis dengan marker yang berbeda, sedangkan \texttt{plt.legend()} menampilkan keterangan masing-masing garis. Perintah \texttt{plt.xlabel()} dan \texttt{plt.ylabel()} memberikan label pada sumbu \(x\) dan \(y\), sementara \texttt{plt.ylim([-20,38])} mengatur rentang sumbu \(y\) dari \(-20\) hingga \(38\). Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik.
+
 \subsubsection{Legend}
+Legend adalah keterangan yang digunakan untuk menjelaskan simbol, warna, atau pola pada grafik. Legend membantu pembaca memahami data yang ditampilkan dan membedakan antara berbagai elemen dalam grafik. Berikut merupakan contoh kode untuk menambahkan legend pada grafik menggunakan dataset Bank Churner.
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=0.8\textwidth]{../images/25-legend.png}
+        \caption{Legend pada bank churner}
+        \label{legend}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{histogram} yang membandingkan distribusi usia pelanggan \textit{Existing} dan \textit{Attrited}. Variabel \texttt{data1} dan \texttt{data2} berisi data usia dari masing-masing kelompok. Perintah \texttt{plt.hist()} membuat histogram sekaligus memberikan label pada setiap kelompok, sedangkan \texttt{plt.title()}, \texttt{plt.ylabel()}, dan \texttt{plt.xlabel()} digunakan untuk memberikan judul serta label pada sumbu grafik. Perintah \texttt{plt.legend()} menampilkan keterangan dari kedua kelompok, kemudian \texttt{plt.show()} digunakan untuk menampilkan grafik.
 
 \subsection{Data Preprocessing}
+Data preprocessing adalah tahap penting dalam analisis data dan machine learning. Proses ini melibatkan beberapa langkah untuk memastikan data yang digunakan berkualitas tinggi, konsisten, dan siap untuk dianalisis atau digunakan dalam model. 
+\subsubsection{Import Pustaka}
+Sebelum mengimport pustaka yang penting, praktikan perlu menginstall pustaka scikit-learng terlebih dahulu menggunakan perintah:
+\begin{lstlisting}[language=Python, style=pythonnb]
+pip install scikit-learn
+\end{lstlisting}
+
+Setelah berhasil terinstall, import beberapa pustaka seperti berikut:
+\begin{lstlisting}[language=Python, style=pythonnb]
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler 
+\end{lstlisting}
+
+\subsubsection{Load Dataset}
+Praktikan menggunakan dataset dari kaggle dengan link \url{https://www.kaggle.com/datasets/yasserh/titanic-dataset}. Dataset tersebut kemudian dibaca menggunakan perintah:
+\begin{lstlisting}[language=Python, style=pythonnb]
+df = pd.read_csv('https://raw.githubusercontent.com/ganjar87/data_science_practice/main/train.csv')
+\end{lstlisting}
+
+\subsubsection{Melihat Lima Baris Data Pertama dengan df.head()}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/26-df-head.png}
+    \caption{Melihat Lima Baris Data Pertama dengan df.head()}  
+    \label{df-head}
+\end{figure}
+
+\subsubsection{Melihat lima baris data terkahir dengan df.tail()}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/27-df-tail.png}
+    \caption{Melihat Lima Baris Data Terakhir dengan df.tail()}  
+    \label{df-tail}
+\end{figure}
+
+\subsubsection{Melihat bentuk dataset dengan df.shape}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{../images/28-df-shape.png}
+    \caption{Melihat Bentuk Dataset dengan df.shape}
+    \label{df-shape}
+\end{figure}
+Dapat dilihat pada gambar \ref{df-shape}, bahwa terdapat 891 baris dan 12 kolom pada dataset. Hal ini menunjukkan bahwa dataset memiliki 891 sampel data dan 12 fitur atau atribut yang berbeda.
+
+\subsubsection{Visualisasi Distribusi Data}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/29-pie-chart-kode.png}
+    \caption{Visualisasi Distribusi Data dengan Pie Chart}
+    \label{pie-chart}
+\end{figure}
+Kode tersebut digunakan untuk membuat \textit{pie chart} yang menunjukkan proporsi data pada kolom \texttt{Survived}. Perintah \texttt{value\_counts()} menghitung jumlah masing-masing kategori, kemudian \texttt{data.plot(kind='pie')} membuat diagram lingkaran dengan persentase ditampilkan menggunakan \texttt{autopct='\%.2f\%\%'}. Terakhir, \texttt{plt.show()} digunakan untuk menampilkan grafik. Hasilnya dapat dilihat pada gambar \ref{}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/30-pie-chart-output.png}
+    \caption{Output Visualisasi Distribusi Data dengan Pie Chart}
+    \label{pie-chart-output}
+\end{figure}
+
+Selain itu, praktikan juga dapat membuat visualisasi menggunakan histogram dengan kode berikut:
+\begin{lstlisting}[language=Python, style=pythonnb]
+df.hist(figsize=(10,10))
+plt.show()
+\end{lstlisting}
+Kode di atas menampilkan histogram untuk seluruh kolom numerik dalam dataset guna melihat distribusi datanya. Hasilnya dapat dilihat pada Gambar \ref{histogram}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/31-histogram.png}
+    \caption{Histogram Distribusi Data}
+    \label{histogram}
+\end{figure}
+
+\subsubsection{Analisis Korelasi antar variabel}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/32-korelasi-antar-variabel.png}
+    \caption{Analisis Korelasi antar Variabel}
+    \label{correlation}
+\end{figure}
+Kode tersebut digunakan untuk menghitung nilai korelasi antar kolom numerik pada \textit{DataFrame}. Parameter \texttt{numeric\_only=True} memastikan bahwa hanya data bertipe numerik yang digunakan dalam perhitungan korelasi. Hasilnya berupa matriks korelasi dengan nilai antara \(-1\) hingga \(1\), yang menunjukkan hubungan antar variabel.
+
+\subsubsection{Descriptive Statistics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/33-descriptive-statistic.png}
+    \caption{Descriptive Statistics dari Dataset}
+    \label{descriptive-statistics}
+\end{figure}
+Kode tersebut digunakan untuk menampilkan statistik deskriptif dari data pada \textit{DataFrame}. Fungsi \texttt{df.describe()} menghasilkan informasi seperti jumlah data (\textit{count}), rata-rata (\textit{mean}), standar deviasi (\textit{std}), nilai minimum (\textit{min}), kuartil (\(25\%\), \(50\%\), \(75\%\)), dan nilai maksimum (\textit{max}) untuk kolom numerik.
+
+\subsubsection{Mengecek missing values dan duplicates}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{../images/34-missing-value.png}
+    \caption{Mengecek Missing Values}
+    \label{missing-value}
+\end{figure}
+Berdasarkan gambar \ref{missing-value}, Pengecekan missing values menunjukkan bahwa sebagian besar kolom tidak memiliki data kosong, namun terdapat 177 missing pada kolom Age, 687 missing pada Cabin, dan 2 missing pada Embarked. Kolom Cabin, Age dan Embarked perlu di-impute agar dataset tetap dapat digunakan. 
+
+\begin{lstlisting}[language=Python, style=pythonnb]
+df.duplicated().sum()
+df.drop_duplicates(inplace=True)
+\end{lstlisting}
+Kode tersebut digunakan untuk mendeteksi dan menghapus data duplikat pada \textit{DataFrame}. Perintah \texttt{df.duplicated().sum()} menghitung jumlah baris yang memiliki data duplikat. Selanjutnya, \texttt{df.drop\_duplicates(inplace=True)} digunakan untuk menghapus baris duplikat secara langsung pada \textit{DataFrame} asli.
+
+\subsubsection{Imputation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/35-imputation-code.png}
+    \caption{Imputation Data}
+    \label{imputation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{../images/36-imputation-output.png}
+    \caption{Output Imputation Data}
+    \label{imputation-output}
+\end{figure}
+
+\subsubsection{Memeriksa categorical attribute}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/37-attribute.png}   
+    \caption{Memeriksa Categorical Attribute}
+    \label{categorical-attribute}
+\end{figure}
+
+Kode tersebut digunakan untuk memisahkan data menjadi variabel fitur \(X\) dan target \(y\). Perintah \texttt{df\_X} mengambil data fitur dengan menghapus kolom yang tidak digunakan, sedangkan \texttt{df\_y} mengambil kolom \texttt{Survived} sebagai target. Selanjutnya, \texttt{select\_dtypes()} digunakan untuk mencari kolom pada \(X\) yang memiliki tipe data kategorikal, yaitu \texttt{object} dan \texttt{bool}. Output tersebut menunjukkan bahwa kolom kategorikal dalam fitur X adalah Sex dan Embarked, sehingga kedua kolom ini perlu dilakukan encoding sebelum modelling.
+
+\subsubsection{One hot encoding}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/38-onehot-encoding.png}   
+    \caption{One Hot Encoding}
+    \label{one-hot-encoding}
+\end{figure}
+Kode tersebut digunakan untuk mengubah data kategorikal pada kolom \texttt{Sex} dan \texttt{Embarked} menjadi bentuk numerik menggunakan metode \textit{One Hot Encoding}. Parameter \texttt{drop\_first=True} digunakan untuk menghapus satu kategori dari setiap variabel agar tidak terjadi redundansi data. Perintah \texttt{df\_onehot.head()} digunakan untuk menampilkan lima baris pertama dari hasil transformasi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/39-onehot-2.png}
+    \caption{Output One Hot Encoding}
+    \label{one-hot-encoding-output}
+\end{figure}
+Kode tersebut digunakan untuk melakukan \textit{One Hot Encoding} pada kolom kategorikal \texttt{Sex} dan \texttt{Embarked}. Objek \texttt{OneHotEncoder} digunakan untuk mempelajari kategori melalui \texttt{fit()}, kemudian \texttt{transform()} mengubah data kategorikal menjadi bentuk numerik berupa nilai \(0\) dan \(1\). Hasil transformasi disimpan dalam variabel \texttt{df\_ohe} dan kemudian ditampilkan.
+
+\subsubsection{Label Encoding}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/40-label-encoding.png}
+    \caption{Label Encoding}
+    \label{label-encoding}
+\end{figure}
+Kode tersebut digunakan untuk melakukan \textit{categorical encoding} dengan mengubah data kategorikal menjadi nilai numerik. Perintah \texttt{select\_dtypes()} digunakan untuk memilih kolom bertipe \texttt{object} dan \texttt{bool}. Selanjutnya, \texttt{LabelEncoder()} mengubah setiap kategori menjadi angka, kemudian proses tersebut dilakukan pada seluruh kolom kategorikal menggunakan \textit{loop}. Hasil akhirnya disimpan kembali ke dalam \texttt{df\_X}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/41-label-encoding-output.png}
+    \caption{Output Label Encoding}
+    \label{label-encoding-output}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/42-label-encoding-y.png}
+    \caption{Output Label Encoding}
+    \label{label-encoding-output-2}
+\end{figure}
+Kode tersebut digunakan untuk melakukan \textit{Label Encoding} pada variabel target \(y\). Objek \texttt{LabelEncoder()} digunakan untuk mengubah kategori pada \texttt{df\_y} menjadi nilai numerik. Perintah \texttt{fit\_transform()} melakukan proses pembelajaran kategori sekaligus mengubahnya menjadi angka. Hasil akhirnya disimpan kembali ke dalam \texttt{df\_y}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/43-label-encoding-y-output.png}
+    \caption{Output Label Encoding}
+    \label{label-encoding-y-output}
+\end{figure}
+
+\subsubsection{Mengecek korelasi atribut}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/44-korelasi-atribut.png}
+    \caption{Mengecek Korelasi Atribut} 
+    \label{korelasi-atribut}
+\end{figure}
+Kode tersebut digunakan untuk menggabungkan data fitur \(X\) dengan variabel target \(y\) agar dapat dianalisis korelasinya. Perintah \texttt{pd.DataFrame()} mengubah \texttt{df\_y} menjadi \textit{DataFrame} dengan nama kolom \texttt{Survived}. Selanjutnya, \texttt{pd.concat()} menggabungkan \texttt{df\_X} dan \texttt{df\_y\_new} berdasarkan baris. Terakhir, \texttt{df\_gabung.corr()} digunakan untuk menghitung korelasi antar seluruh variabel numerik.
+
+\subsubsection{Membagi dataset}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/45-split-dataset.png}
+    \caption{Membagi Dataset}
+    \label{membagi-dataset} 
+\end{figure}
+Kode tersebut digunakan untuk membagi dataset menjadi \textit{training set} dan \textit{testing set} menggunakan metode \textit{hold out}. Perintah \texttt{train\_test\_split()} membagi \(70\%\) data untuk \textit{training} dan \(30\%\) untuk \textit{testing} melalui parameter \texttt{test\_size=0.3}. Parameter \texttt{random\_state=42} digunakan agar pembagian data tetap konsisten setiap kali kode dijalankan. Hasil pembagian disimpan dalam \(X_{\text{train}}\), \(X_{\text{test}}\), \(y_{\text{train}}\), dan \(y_{\text{test}}\).
+
+\subsubsection{Scaling}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/46-scaling-1.png}
+    \caption{Scaling Data dengan StandardScaler}
+    \label{scaling}
+\end{figure}
+Kode tersebut digunakan untuk melakukan \textit{scaling} pada data menggunakan \texttt{StandardScaler}. Perintah \texttt{scaler.fit(X\_train)} mempelajari rata-rata dan standar deviasi dari data \textit{training}. Selanjutnya, \texttt{transform()} digunakan untuk mengubah \(X_{\text{train}}\) dan \(X_{\text{test}}\) ke skala standar, sehingga data memiliki rata-rata mendekati \(0\) dan standar deviasi mendekati \(1\).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/47-scaling-2.png}
+    \caption{Scaling Data dengan MinMaxScaler}
+    \label{scaling-minmax}
+\end{figure}
+Kode tersebut digunakan untuk melakukan \textit{scaling} menggunakan \texttt{MinMaxScaler}. Perintah \texttt{scaler.fit(X\_train)} mempelajari nilai minimum dan maksimum dari data \textit{training}. Selanjutnya, \texttt{transform()} mengubah \(X_{\text{train}}\) dan \(X_{\text{test}}\) ke dalam skala tertentu, umumnya antara \(0\) dan \(1\). Proses ini membantu menyamakan skala antar fitur.
+
 \subsection{Tugas dan Analisis}
+\subsubsection{Exploratory Data Analysis}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/48-soal-eda.png}
+    \caption{Soal Exploratory Data Analysis}
+    \label{eda}
+\end{figure}
+\begin{enumerate}
+    \item \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/49-soal-1.png}
+        \caption{EDA 1}
+        \label{eda-1}
+    \end{figure}
+    Kode tersebut digunakan untuk membaca dataset dari BankChurners.csv dan menampilkan lima baris pertama dari dataset. Perintah \texttt{pd.read\_csv()} digunakan untuk membaca file CSV, sedangkan \texttt{df.head()} menampilkan lima baris pertama dari data. 
 
+    \item Tujuan utama dataset ini adalah memprediksi apakah seorang customer akan berhenti menggunakan layanan kartu kredit (churn) atau tetap menjadi customer. Permasalahan ini penting bagi bank karena kehilangan customer dapat menyebabkan kehilangan pendapatan. Dengan menganalisis karakteristik dan perilaku customer, bank dapat mengidentifikasi customer yang memiliki kemungkinan tinggi untuk churn dan kemudian melakukan tindakan seperti memberikan penawaran, meningkatkan pelayanan, atau membuat program retensi. Kaggle secara eksplisit menjelaskan bahwa dataset ini dibuat untuk membantu bank memprediksi customer yang kemungkinan akan churn sehingga bank dapat melakukan tindakan preventif.
+    
+    \item Pada dataset \textit{Credit Card Customers}, atribut yang menjadi \textbf{output/class/label} adalah \texttt{Attrition\_Flag}. Atribut ini menunjukkan status pelanggan, yaitu \textit{Existing Customer} atau \textit{Attrited Customer}. Sementara itu, atribut lainnya digunakan sebagai \textbf{input/features} untuk membantu memprediksi status pelanggan tersebut. Dengan demikian, permasalahan ini dapat dikategorikan sebagai klasifikasi, karena output yang diprediksi terdiri dari dua kelas.
+    \item \begin{itemize}
+    \item \texttt{CLIENTNUM}: Nomor identitas unik untuk setiap pelanggan.
+    \item \texttt{Attrition\_Flag}: Status pelanggan, yaitu apakah pelanggan masih menggunakan layanan (\textit{Existing Customer}) atau telah berhenti (\textit{Attrited Customer}). Atribut ini merupakan \textbf{target/output}.
+    \item \texttt{Customer\_Age}: Usia pelanggan dalam tahun.
+    \item \texttt{Gender}: Jenis kelamin pelanggan.
+    \item \texttt{Dependent\_count}: Jumlah tanggungan yang dimiliki pelanggan.
+    \item \texttt{Education\_Level}: Tingkat pendidikan pelanggan.
+    \item \texttt{Marital\_Status}: Status pernikahan pelanggan, seperti menikah, lajang, atau bercerai.
+    \item \texttt{Income\_Category}: Kategori pendapatan tahunan pelanggan.
+    \item \texttt{Card\_Category}: Jenis kartu kredit yang dimiliki pelanggan, seperti Blue, Silver, Gold, atau Platinum.
+    \item \texttt{Months\_on\_book}: Lama pelanggan menjadi nasabah dalam satuan bulan.
+    \item \texttt{Total\_Relationship\_Count}: Jumlah produk atau layanan yang dimiliki pelanggan dari bank.
+    \item \texttt{Months\_Inactive\_12\_mon}: Jumlah bulan pelanggan tidak aktif selama 12 bulan terakhir.
+    \item \texttt{Contacts\_Count\_12\_mon}: Jumlah interaksi atau kontak pelanggan dengan bank selama 12 bulan terakhir.
+    \item \texttt{Credit\_Limit}: Batas kredit yang diberikan kepada pelanggan.
+    \item \texttt{Total\_Revolving\_Bal}: Total saldo kredit yang belum dilunasi oleh pelanggan.
+    \item \texttt{Avg\_Open\_To\_Buy}: Rata-rata jumlah kredit yang masih tersedia untuk digunakan pelanggan selama 12 bulan terakhir.
+    \item \texttt{Total\_Amt\_Chng\_Q4\_Q1}: Perubahan jumlah transaksi antara kuartal keempat dan kuartal pertama.
+    \item \texttt{Total\_Trans\_Amt}: Total nilai transaksi pelanggan selama 12 bulan terakhir.
+    \item \texttt{Total\_Trans\_Ct}: Total jumlah transaksi pelanggan selama 12 bulan terakhir.
+    \item \texttt{Total\_Ct\_Chng\_Q4\_Q1}: Perubahan jumlah transaksi antara kuartal keempat dan kuartal pertama.
+    \item \texttt{Avg\_Utilization\_Ratio}: Rata-rata persentase penggunaan batas kredit pelanggan.
+    \item \texttt{Naive\_Bayes\_Classifier\_...}: Nilai hasil prediksi dari model Naive Bayes yang terdapat dalam dataset. Atribut ini sebaiknya tidak digunakan sebagai input utama karena berisi hasil klasifikasi yang berkaitan dengan target.
+\end{itemize}
+\end{enumerate}
 
+\subsubsection{Data Preprocessing}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/51-soal-dp.png}
+    \caption{Soal Data Preprocessing}
+    \label{data-preprocessing}
+\end{figure}
+Berikut jawaban dari soal data preprocessing:
+\begin{enumerate}
+    \item Untuk membaca dataset dari file CSV, praktikan dapat menggunakan perintah \texttt{pd.read\_csv()} dari pustaka pandas.
+    \begin{figure}[H]
+    \centering
+        \includegraphics[width=0.8\textwidth]{../images/52-read-csv.png}
+        \caption{Data Preprocessing 1}
+        \label{data-preprocessing-1}
+    \end{figure}
+
+    \item Untuk membuat histogram variabel numerik, praktikan dapat menggunakan perintah \texttt{df.hist()} dari pustaka pandas. Perintah ini akan menampilkan histogram untuk setiap kolom numerik dalam dataset.
+    \begin{figure}[H]
+    \centering
+        \includegraphics[width=0.5\textwidth]{../images/50-jwb-1.png}
+        \caption{Data Preprocessing 2}
+        \label{data-preprocessing-2}
+    \end{figure}
+    Kode tersebut digunakan untuk membuat histogram dari seluruh atribut numerik dalam dataset. Perintah \texttt{df[numeric\_cols].hist()} membuat histogram untuk setiap kolom numerik dengan ukuran grafik \(12 \times 8\) dan jumlah \textit{bin} sebanyak \(30\). Perintah \texttt{plt.tight\_layout()} digunakan untuk mengatur tata letak agar setiap grafik tidak saling bertumpuk, sedangkan \texttt{plt.show()} digunakan untuk menampilkan seluruh histogram.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/53-output-histogram.png}
+        \caption{Output Histogram Variabel Numerik}
+        \label{data-preprocessing-2-output}
+    \end{figure}
+
+    \item Untuk memvisualisasikan korelasi antar variabel, berikut yang dapat dilakukan:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/54-kode-korelasi.png}
+        \caption{Visualisasi Korelasi Antar Variabel}
+        \label{data-preprocessing-3}
+    \end{figure}
+    Kode tersebut digunakan untuk membuat visualisasi \textit{correlation matrix} dalam bentuk \textit{heatmap}. Perintah \texttt{plt.imshow()} menampilkan nilai korelasi dengan gradasi warna, sedangkan \texttt{plt.colorbar()} menunjukkan skala korelasi. Perintah \texttt{plt.xticks()} dan \texttt{plt.yticks()} memberikan nama atribut pada sumbu \(x\) dan \(y\). Perulangan \texttt{for} digunakan untuk menampilkan nilai korelasi hingga dua angka desimal pada setiap sel. Terakhir, \texttt{plt.title()}, \texttt{plt.tight\_layout()}, dan \texttt{plt.show()} digunakan untuk memberikan judul, mengatur tata letak, dan menampilkan grafik.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/55-output-korelasi.png}
+        \caption{Output Visualisasi Korelasi Antar Variabel}
+        \label{data-preprocessing-3-output}
+    \end{figure}
+    \item Melakukan descriptive statistics 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/56-descriptive-statistics.png}
+        \caption{Output Descriptive Statistics}
+        \label{data-preprocessing-4-output}
+    \end{figure}
+    Setelah itu, tentukan missing values 
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{../images/57-missing-values.png}
+        \caption{Output Missing Values}
+        \label{data-preprocessing-5-output}
+    \end{figure}
+    Isi missing value
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=0.5\textwidth]{../images/58-fix-missing-value.png}
+        \caption{Output Imputation}
+        \label{data-preprocessing-6-output}
+\end{figure}
+fix duplikasi data
+\begin{figure}[H]
+    \centering
+        \includegraphics[width=0.5\textwidth]{../images/59-fix-duplicate.png}
+        \caption{Output Fix Duplicate Data}
+        \label{data-preprocessing-7-output}
+\end{figure}
+    \item Label Encoding
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{../images/60-label-encoding.png}
+        \caption{Output Label Encoding}
+        \label{data-preprocessing-8-output}
+    \end{figure}
+    Selanjutnya lakukan standardisasi data dengan StandardScaler
+    \begin{lstlisting}[language=Python, style=pythonnb]
+        scaler = StandardScaler()
+
+X_train_num = scaler.fit_transform(
+    X_train[numeric_cols]
+)
+
+X_test_num = scaler.transform(
+    X_test[numeric_cols]
+)
+    \end{lstlisting}
+
+    Setelah itu, lakukan train test split dengan perbandingan 80:20
+    \begin{lstlisting}[language=Python, style=pythonnb]
+        X = df.drop(columns=['price'])
+y = df['price']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+    \end{lstlisting}
+
+\end{enumerate}
+
+\newpage
 
 \section{Kesimpulan}
+Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa proses eksplorasi data dan visualisasi sangat penting dalam memahami karakteristik dataset. Melalui berbagai jenis grafik seperti bar plot, stacked bar plot, histogram, scatter plot, box plot, violin plot, dan subplot, praktikan dapat mengidentifikasi pola, distribusi, dan hubungan antar variabel. Selain itu, tahap data preprocessing yang meliputi pengecekan missing values, duplikasi data, imputation, encoding, dan scaling sangat krusial untuk memastikan kualitas data sebelum digunakan dalam analisis lebih lanjut atau pemodelan. Dengan pemahaman yang baik terhadap data dan penerapan teknik preprocessing yang tepat, praktikan dapat meningkatkan akurasi model prediksi dan membuat keputusan yang lebih informasional.
+
+\newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
