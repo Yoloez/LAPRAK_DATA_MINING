@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  4 SEP 2026 14:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  4 SEP 2026 15:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -396,7 +396,7 @@ Package hyperref Info: Link coloring OFF on input line 65.
 \@outlinefile=\write3
 \openout3 = `template.out'.
 
-<../images/ugm.png, id=27, 1606.0pt x 1606.0pt>
+<../images/ugm.png, id=71, 1606.0pt x 1606.0pt>
 File: ../images/ugm.png Graphic file (type png)
 <use ../images/ugm.png>
 Package pdftex.def Info: ../images/ugm.png  used on input line 80.
@@ -407,31 +407,40 @@ Package pdftex.def Info: ../images/ugm.png  used on input line 80.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.122 \newpage
-               [1] [2] (template.bbl
+l.130 
+       [1]
+Overfull \hbox (1.69771pt too wide) in paragraph at lines 136--137
+[]\OT1/cmr/m/n/12 Dalam klasi-fikasi biner, \OT1/cmr/m/it/12 Con-fu-sion Ma-trix \OT1/cmr/m/n/12 meng-hasilkan em-pat kom-po-nen utama,
+ []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 24.
-
-) [3] (template.aux)
+[2] [3] (C:\Users\ASUS\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+<../images/1.png, id=113, 411.78844pt x 295.1025pt>
+File: ../images/1.png Graphic file (type png)
+<use ../images/1.png>
+Package pdftex.def Info: ../images/1.png  used on input line 184.
+(pdftex.def)             Requested size: 320.0935pt x 229.391pt.
+ [4 <../images/1.png>] [5] [6] (template.bbl) [7] (template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: FB3A50C7A7AB37ABC1CFD13C0F93E702;586.
+(rerunfilecheck)             Checksum: 4D5F55E7FC228AD61926B345A584E6B7;1799.
  ) 
 Here is how much of TeX's memory you used:
- 11755 strings out of 474486
- 180954 string characters out of 5744228
- 1931542 words of memory out of 5000000
- 33882 multiletter control sequences out of 15000+600000
- 562997 words of font info for 53 fonts, out of 8000000 for 9000
+ 12311 strings out of 474486
+ 186607 string characters out of 5744228
+ 1932542 words of memory out of 5000000
+ 34398 multiletter control sequences out of 15000+600000
+ 564677 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,307b,521s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on template.pdf (4 pages, 2899819 bytes).
+ 75i,7n,79p,745b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ASUS\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on template.pdf (8 pages, 3016740 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 193 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 

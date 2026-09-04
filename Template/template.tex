@@ -73,8 +73,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 3}}\\[0.3cm]
+    { \textbf{CLASSIFICATION}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -111,12 +111,89 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa mampu memahami konsep dasar beberapa algoritma klasifikasi, seperti 
+Logistic Regression, KNN, Decision Tree, dan Random Forest 
+    \item Mahasiswa mampu melakukan evaluasi model dengan menyusun tabel performa berisi 
+accuracy, precision, dan recall dari setiap model 
+\item Mahasiswa mengetahui fungsi dan peran metrik evaluasi klasifikasi, seperti accuracy, 
+precision, dan recall dalam menilai performa model 
+    \item Mahasiswa mampu melakukan evaluasi model klasifikasi menggunakan metrik yang sesuai
 \end{enumerate}
 \section{Dasar Teori}
-\section{Hasil dan Pemabahasan}
+\subsection{Classification}
+Klasifikasi adalah salah satu metode dalam data mining yang digunakan untuk mengelompokkan data ke dalam kelas atau kategori tertentu berdasarkan pola yang telah dipelajari sebelumnya.
 
-\subsection{}
+Metode ini bekerja dengan memanfaatkan data historis yang sudah memiliki label atau kategori. Data tersebut digunakan untuk melatih sebuah model sehingga model tersebut dapat mengenali pola tertentu. Setelah model terbentuk, sistem dapat menggunakannya untuk memprediksi kategori dari data baru yang belum pernah dilihat sebelumnya \cite{klasifikasi}.
+
+\subsection{Algoritma Classification}
+Klasifikasi (\textit{classification}) merupakan salah satu teknik utama dalam pembelajaran mesin terarah (\textit{supervised learning}) dan penggalian data (\textit{data mining}). Tujuan utama dari algoritma klasifikasi adalah untuk memetakan suatu data masukan ke dalam target kategori atau kelas yang telah ditentukan sebelumnya. Proses ini didasarkan pada pembelajaran model menggunakan sekumpulan data pelatihan (\textit{training data}) yang sudah memiliki label kebenaran aktual \cite{han2011data}. 
+
+Secara umum, proses klasifikasi terdiri dari dua tahapan utama. Tahap pertama adalah fase pembelajaran (\textit{learning phase}) di mana algoritma membangun model klasifikasi berdasarkan data pelatihan. Tahap kedua adalah fase pengujian (\textit{testing phase}) di mana model yang telah dibangun dievaluasi menggunakan data uji (\textit{testing data}) untuk memprediksi label kelas yang belum diketahui, sehingga tingkat akurasi model tersebut dapat diukur. Beberapa algoritma klasifikasi yang umum digunakan dalam penelitian antara lain \textit{K-Nearest Neighbors} (KNN), \textit{Naive Bayes}, \textit{Decision Tree}, dan \textit{Support Vector Machine} (SVM).
+
+\subsection{Matriks Evaluasi Klasifikasi}
+Untuk mengukur seberapa baik kinerja dari sebuah algoritma klasifikasi, diperlukan alat ukur atau matriks evaluasi. Metode evaluasi dasar yang paling sering digunakan untuk masalah klasifikasi adalah \textit{Confusion Matrix} (matriks kebingungan). Matriks ini menyajikan perbandingan antara nilai prediksi yang dihasilkan oleh model dengan nilai kelas aktual dari data uji \cite{fawcett2006introduction}. 
+
+Dalam klasifikasi biner, \textit{Confusion Matrix} menghasilkan empat komponen utama, yaitu:
+\begin{itemize}
+    \item \textbf{\textit{True Positive} (TP):} Jumlah data positif yang diprediksi benar sebagai positif oleh model.
+    \item \textbf{\textit{True Negative} (TN):} Jumlah data negatif yang diprediksi benar sebagai negatif oleh model.
+    \item \textbf{\textit{False Positive} (FP):} Jumlah data negatif yang secara keliru diprediksi sebagai positif oleh model (Galat Tipe I).
+    \item \textbf{\textit{False Negative} (FN):} Jumlah data positif yang secara keliru diprediksi sebagai negatif oleh model (Galat Tipe II).
+\end{itemize}
+
+Berdasarkan keempat komponen matriks tersebut, beberapa metrik evaluasi kinerja dapat dihitung menggunakan persamaan matematis sebagai berikut:
+
+\begin{enumerate}
+    \item \textbf{Akurasi (\textit{Accuracy})} \\
+    Akurasi mengukur rasio prediksi yang benar secara keseluruhan (baik kelas positif maupun negatif) terhadap total keseluruhan data yang diuji.
+    \begin{equation}
+        Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+    \end{equation}
+    
+    \item \textbf{Presisi (\textit{Precision})} \\
+    Presisi mengukur tingkat ketepatan prediksi kelas positif. Metrik ini menunjukkan persentase data yang benar-benar positif dari seluruh data yang diprediksi positif oleh model.
+    \begin{equation}
+        Precision = \frac{TP}{TP + FP}
+    \end{equation}
+    
+    \item \textbf{\textit{Recall} (Sensitivitas)} \\
+    \textit{Recall} mengukur kemampuan model dalam mengidentifikasi atau menemukan kembali seluruh data aktual yang bernilai positif.
+    \begin{equation}
+        Recall = \frac{TP}{TP + FN}
+    \end{equation}
+    
+    \item \textbf{\textit{F1-Score}} \\
+    \textit{F1-Score} merupakan rata-rata harmonik dari presisi dan \textit{recall}. Metrik ini sangat berguna dan menjadi acuan utama ketika set data yang digunakan memiliki distribusi kelas yang tidak seimbang (\textit{imbalanced dataset}).
+    \begin{equation}
+        F1\text{-}Score = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+    \end{equation}
+\end{enumerate}
+
+\section{Hasil dan Pembahasan}
+
+\subsection{Praktikum}
+\subsubsection{Import Library}
+Sebelum mengimport library, install library yang dibutuhkan seperti berikut.
+\begin{lstlisting}[language=Python, style=pythonnb]
+!pip install imbalanced-learn    
+\end{lstlisting}
+
+Library yang digunakan dalam praktikum ini adalah sebagai berikut:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/1.png}
+    \caption{Import Library}
+    \label{import}
+\end{figure}
+
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+\subsubsection{}
+
+\subsection{Tugas dan Analisis}
 
 
 \newpage
