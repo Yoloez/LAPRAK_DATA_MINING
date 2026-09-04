@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt, a4paper]{article}
 \usepackage[a4paper, margin=3cm]{geometry}
 \usepackage{graphicx}
 \usepackage{setspace}
@@ -16,22 +16,22 @@
 % \usepackage[natbibapa]{apacite}
 % \usepackage{natbib}
 \usepackage{chngcntr}
+\usepackage{amsmath}
 
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
 
-\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codebg}{RGB}{255,255,255}   % background putih seperti sel Jupyter
 \definecolor{codetext}{RGB}{0,0,0}
 \definecolor{linenumcol}{RGB}{128,128,128}
-\definecolor{phpkw}{RGB}{180,0,120}    % Pink/Magenta
-\definecolor{phpstr}{RGB}{255,100,0}   % Orange
-\definecolor{commentcol}{RGB}{0,128,0} % Hijau
-\definecolor{phpfunc}{RGB}{128,128,0}  % Gold/Yellow
-\definecolor{phpvar}{RGB}{150,0,150}
-\definecolor{htmltagcol}{RGB}{0,25,10}
+\definecolor{pykw}{RGB}{0,128,0}         % keyword (def, if, for, import, dll) - hijau
+\definecolor{pystr}{RGB}{186,33,33}      % string - merah kecoklatan
+\definecolor{commentcol}{RGB}{64,128,128}% comment - abu kebiruan
+\definecolor{pyfunc}{RGB}{0,0,255}       % fungsi/built-in - biru
+\definecolor{pyconst}{RGB}{0,128,0}      % True/False/None - hijau (sama seperti keyword)
+\definecolor{pyvar}{RGB}{150,0,150}      % variabel khusus (opsional)
 
-
-\lstdefinestyle{phphtml}{
+\lstdefinestyle{pythonnb}{
     backgroundcolor=\color{codebg},
     basicstyle=\ttfamily\small\color{codetext},
     breaklines=true,
@@ -45,23 +45,20 @@
     rulecolor=\color{gray!40},
     framesep=5pt,
     xleftmargin=18pt,
-    % PHP language & keywords (pink/magenta)
-    language=PHP,
-    morekeywords={include, echo, while, if, else},
-    keywordstyle=\color{phpkw}\bfseries,
-    % Strings (orange)
-    stringstyle=\color{phpstr},
-    % Comments (green)
+    % Bahasa Python
+    language=Python,
+    morekeywords={self, as, with, lambda, yield, async, await},
+    keywordstyle=\color{pykw}\bfseries,
+    % String (merah kecoklatan)
+    stringstyle=\color{pystr},
+    % Comment (abu kebiruan, italic)
     commentstyle=\color{commentcol}\itshape,
-    % Functions (yellow/gold)
-    emph={mysqli_num_rows, mysqli_fetch_assoc, mysqli_close},
-    emphstyle=\color{phpfunc},
-    % Variables $... (pink)
-    alsoletter={\$},
-    emph={[2]\$result,\$row,\$koneksi},
-    emphstyle={[2]\color{phpvar}},
-    % HTML tags (cyan)
-    moredelim=[s][\color{htmltagcol}\bfseries]{<}{>},
+    % Fungsi / built-in umum (biru)
+    emph={print, len, range, int, str, float, type, open, input, list, dict, set, tuple, sum, min, max, sorted, enumerate, zip, map, filter, isinstance},
+    emphstyle=\color{pyfunc},
+    % Konstanta True/False/None (hijau, bold)
+    emph={[2]True, False, None},
+    emphstyle={[2]\color{pyconst}\bfseries},
 }
 \usepackage{chngcntr}
 
@@ -122,8 +119,9 @@ Disusun oleh:\\[0.3cm]
 \subsection{}
 
 
-
+\newpage
 \section{Kesimpulan}
+\newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
