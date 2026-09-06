@@ -17,6 +17,7 @@
 % \usepackage{natbib}
 \usepackage{chngcntr}
 \usepackage{amsmath}
+\usepackage{booktabs}
 
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
@@ -186,18 +187,436 @@ Library yang digunakan dalam praktikum ini adalah sebagai berikut:
     \label{import}
 \end{figure}
 
-\subsubsection{}
-\subsubsection{}
-\subsubsection{}
-\subsubsection{}
-\subsubsection{}
-\subsubsection{}
+\subsubsection{Load Dataset}
+Dataset yang digunakan dalam praktikum ini yaitu diambil dari kaggle dengan link \url{https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset}. 
+
+Dataset tersebut kemudian dibaca dengan pandas
+\begin{lstlisting}[language=Python, style=pythonnb]
+df = pd.read_csv ('https://raw.githubusercontent.com/ganjar87/
+data_science_practice/refs/heads/main/
+healthcare-dataset-stroke-data.csv') 
+\end{lstlisting}
+
+\subsubsection{Explatory Data Analysis (EDA)}
+\begin{enumerate}
+    \item \textbf{Melihat 5 data teratas dan terbawah} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{../images/2-head-tail.png}
+        \caption{Melihat 5 data teratas dan terbawah}
+        \label{eda1}
+    \end{figure}
+
+    \item \textbf{Melihat deskripsi statistik dengan df.describe} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/3-describe.png}
+        \caption{Deskripsi Statistik}
+        \label{eda2}
+    \end{figure}
+
+    \item \textbf{Melihat presentase target kelas} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/4-target.png}
+        \caption{Presentase Target Kelas}
+        \label{eda3}
+    \end{figure}
+    Berdasarkan gambar \ref{eda3}, Kode tersebut digunakan untuk menghitung frekuensi setiap kelas pada atribut \(stroke\) menggunakan fungsi \texttt{value\_counts()}, kemudian memvisualisasikannya dalam bentuk \textit{pie chart}. Parameter \texttt{autopct='\%.2f\%\%'} digunakan untuk menampilkan persentase dengan dua angka di belakang koma, sedangkan \texttt{plt.show()} digunakan untuk menampilkan grafik. Berdasarkan hasil visualisasi, kelas \(stroke=0\) memiliki proporsi sebesar \(95.13\%\), sedangkan kelas \(stroke=1\) sebesar \(4.87\%\). Dengan demikian, dataset memiliki \textbf{ketidakseimbangan kelas (\textit{class imbalance})}, karena jumlah data pada kelas \(stroke=0\) jauh lebih besar dibandingkan kelas \(stroke=1\).
+
+    \item \textbf{Melihat Histogram} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/5-histogram.png}
+        \caption{Histogram}
+        \label{eda4}
+    \end{figure}
+    Berdasarkan gambar \ref{eda4}, Kode \texttt{df.hist(figsize=(10,10))} digunakan untuk membuat histogram dari seluruh atribut numerik pada \textit{DataFrame} \(df\), sedangkan \texttt{figsize=(10,10)} mengatur ukuran visualisasi. Berdasarkan histogram, atribut \texttt{age}, \texttt{avg\_glucose\_level}, dan \texttt{bmi} memiliki distribusi yang bervariasi, sedangkan atribut \texttt{hypertension}, \texttt{heart\_disease}, dan \texttt{stroke} didominasi oleh nilai \(0\). Histogram \texttt{id} menunjukkan bahwa data tersebar pada rentang nilai ID. Visualisasi ini digunakan untuk memahami distribusi dan karakteristik setiap atribut sebelum dilakukan proses analisis atau pemodelan.
+
+
+    \item \textbf{Mengecek missing value dengan df.isnull().sum()} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.55\textwidth]{../images/6-missing-value.png}
+        \caption{Mengecek Missing Value}
+        \label{eda5}
+    \end{figure}
+    Berdasarkan pengecekan tersebut, terdapat missing value pada kolom \texttt{bmi} sebanyak \(201\) data.
+
+    \item \textbf{Mengecek atribut kategorikal} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/7-categorical.png}
+        \caption{Mengecek Atribut Kategorikal}
+        \label{eda6}
+    \end{figure}
+    Berdasarkan gambar \ref{eda6}, atribut kategorikal yang terdapat pada dataset ini adalah gender, ever\_married, work\_type, Residence\_type, dan 
+smoking\_status.
+\end{enumerate}
+
+\subsubsection{Data Preprocessing}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/8-data-preprocessing.png}
+    \caption{Data Preprocessing}
+    \label{data-preprocessing}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Feature and Target Separation}  
+    Memisahkan data menjadi variabel input \(X\) dan variabel target \(y\). Atribut \texttt{id} dan \texttt{stroke} dihapus dari \(X\), sedangkan \texttt{stroke} digunakan sebagai target klasifikasi.
+
+    \item \textbf{Label Encoding}  
+    Mengubah nilai pada variabel target \(y\) menjadi bentuk numerik \(0\) dan \(1\). Pada dataset ini, proses tersebut sebenarnya tidak diperlukan karena nilai \texttt{stroke} sudah berupa \(0\) dan \(1\).
+
+    \item \textbf{Imputation}  
+    Mengatasi \textit{missing value} pada atribut \texttt{bmi} dengan menggantinya menggunakan nilai median. Median dipilih agar lebih tahan terhadap pengaruh \textit{outlier}.
+
+    \item \textbf{Categorical Encoding}  
+    Mengidentifikasi atribut kategorikal bertipe \texttt{object} atau \texttt{bool}, kemudian mengubah nilainya menjadi representasi numerik menggunakan \textit{Label Encoding} agar dapat digunakan oleh algoritma \textit{machine learning}.
+
+    \item \textbf{Data Type Conversion}  
+    Mengubah seluruh nilai \(X\) dan \(y\) menjadi tipe data numerik \texttt{float} dan menyimpannya dalam bentuk \textit{NumPy array}.
+
+    \item \textbf{Hold-Out Method}  
+    Membagi dataset menjadi data \textit{training} sebesar \(70\%\) dan data \textit{testing} sebesar \(30\%\). Parameter \texttt{random\_state=42} digunakan agar pembagian data dapat direproduksi.
+
+    \item \textbf{Missing Value Checking}  
+    Memeriksa jumlah nilai \texttt{NaN} pada \(X_{\text{train}}\) dan \(X_{\text{test}}\) untuk memastikan tidak terdapat \textit{missing value} setelah proses imputasi.
+
+    \item \textbf{Feature Scaling}  
+    Melakukan standardisasi terhadap fitur menggunakan \textit{StandardScaler} dengan rumus:
+    \[
+    z = \frac{x-\mu}{\sigma}
+    \]
+    sehingga fitur memiliki rata-rata \(0\) dan standar deviasi \(1\). Parameter skala dihitung dari data \textit{training} dan kemudian diterapkan pada data \textit{testing} untuk mencegah \textit{data leakage}.
+\end{enumerate}
+
+Tahapan preprocessing yang telah dilakukan memastikan bahwa dataset berada dalam kondisi optimal sebelum digunakan untuk membangun model klasifikasi. Langkah berikutnya, dilakukan 
+proses pemeriksaan hasil preprocessing untuk memastikan seluruh transformasi sudah sesuai.
+
+\begin{enumerate}
+    \item \textbf{Variabel input X} \\ 
+    Seluruh nilai kategorik berhasil diubah menjadi representasi numerik, dan tidak terdapat nilai \texttt{NaN}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/9-variabel-input.png}
+        \caption{Variabel Input X}
+        \label{variabel-input}
+    \end{figure}
+
+    \item \textbf{Variabel target y} \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/10-variabel-target.png}
+        \caption{Variabel Target y}
+        \label{variabel-target}        
+    \end{figure}
+Variabel target \(y\) merupakan variabel yang ingin diprediksi oleh model \textit{machine learning}, yaitu atribut \texttt{stroke}. Berdasarkan hasil tersebut, \(y\) memiliki sebanyak \(5110\) data dengan dua kelas, yaitu \(0\) dan \(1\). Nilai \(0\) menunjukkan bahwa individu \textbf{tidak mengalami stroke}, sedangkan nilai \(1\) menunjukkan bahwa individu \textbf{mengalami stroke}. Dengan demikian, masalah yang digunakan merupakan \textbf{klasifikasi biner} karena hanya terdapat dua kelas target.
+
+    \item \textbf{Data training yang telah dinormalisasi (X\_train)} \\ 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/11-data-training.png}
+        \caption{Data Training yang Telah Dinormalisasi (X\_train)}
+        \label{data-training}
+    \end{figure}
+    Variabel \(X_{\text{train}}\) merupakan data fitur yang digunakan untuk melatih model. Berdasarkan hasil tersebut, terdapat \(3577\) data dengan \(10\) atribut, sehingga memiliki bentuk \((3577,10)\). Nilai pada fitur telah melalui proses \textit{feature scaling} menggunakan \textit{StandardScaler}, sehingga nilainya telah distandardisasi dengan rata-rata mendekati \(0\) dan standar deviasi mendekati \(1\).
+
+
+    \item \textbf{Data testing yang telah dinormalisasi (X\_test)} \\ 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/12-data-testing.png}
+        \caption{Data Testing yang Telah Dinormalisasi (X\_test)}
+        \label{data-testing}
+    \end{figure}
+    Variabel \(X_{\text{test}}\) merupakan data fitur yang digunakan untuk menguji kinerja model setelah proses pelatihan. Berdasarkan hasil tersebut, terdapat \(1533\) data dengan \(10\) atribut, sehingga memiliki bentuk \((1533,10)\). Data ini juga telah melalui proses \textit{feature scaling} menggunakan parameter yang diperoleh dari \(X_{\text{train}}\).
+
+\end{enumerate}
+
+\subsubsection{Model Logistic Regression}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/13-logistic-regression.png}
+    \caption{Model Logistic Regression}
+    \label{logistic-regression}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Model Training}  
+    Model \textit{Logistic Regression} dilatih menggunakan \(X_{\text{train}}\) dan \(y_{\text{train}}\) untuk mempelajari hubungan antara fitur dan target.
+
+    \item \textbf{Prediction}  
+    Model digunakan untuk memprediksi data pengujian sehingga menghasilkan \(y_{\text{pred}}\), yaitu hasil prediksi kelas \texttt{stroke} pada \(X_{\text{test}}\).
+
+    \item \textbf{Model Evaluation}  
+    Kinerja model dievaluasi menggunakan \textit{Accuracy}, \textit{Precision}, \textit{Recall}, dan \textit{F1-Score}. Selain itu, \textit{Confusion Matrix} digunakan untuk melihat jumlah prediksi benar dan salah pada setiap kelas.
+
+    \item \textbf{Confusion Matrix Visualization}  
+    \textit{Confusion Matrix} divisualisasikan menggunakan \texttt{ConfusionMatrixDisplay} untuk mempermudah interpretasi hasil klasifikasi.
+
+    \item \textbf{F1-Score}  
+    \textit{F1-Score} digunakan untuk mengukur keseimbangan antara \textit{Precision} dan \textit{Recall}. Pada kode ini digunakan \texttt{average='macro'}, sehingga skor dihitung dengan memberikan bobot yang sama pada setiap kelas.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/14-output.png}
+    \caption{Confusion Matrix Model Logistic Regression}
+    \label{logistic-regression}
+\end{figure}
+
+\subsubsection{Model K-Nearest Neighbors (KNN)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/15-knn.png}
+    \caption{Model K-Nearest Neighbors (KNN)}
+    \label{knn}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Model Training}  
+    Model \textit{K-Nearest Neighbors (KNN)} dibuat dengan \(n\_neighbors=10\), sehingga model menggunakan \(10\) tetangga terdekat dalam menentukan kelas data.
+
+    \item \textbf{Prediction}  
+    Model yang telah dilatih digunakan untuk memprediksi \(X_{\text{test}}\), kemudian menghasilkan \(y_{\text{pred}}\) sebagai hasil prediksi kelas \texttt{stroke}.
+
+    \item \textbf{Model Evaluation}  
+    Kinerja model dievaluasi menggunakan \textit{Accuracy}, \textit{Precision}, \textit{Recall}, dan \textit{Confusion Matrix}. Parameter \texttt{average='macro'} digunakan agar setiap kelas memperoleh bobot yang sama dalam perhitungan \textit{Precision} dan \textit{Recall}.
+
+    \item \textbf{Confusion Matrix Visualization}  
+    \textit{Confusion Matrix} dihitung berdasarkan \(y_{\text{test}}\) dan \(y_{\text{pred}}\), kemudian divisualisasikan menggunakan \texttt{ConfusionMatrixDisplay} untuk melihat hasil klasifikasi pada masing-masing kelas.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/16-output.png}
+    \caption{Confusion Matrix Model K-Nearest Neighbors (KNN)}
+    \label{knn-confusion-matrix}
+\end{figure}
+
+\subsubsection{Model Decision Tree}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/17-decision-tree.png}
+    \caption{Model Decision Tree}
+    \label{decision-tree}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Model Training}  
+    Model \textit{Decision Tree} dibuat menggunakan \texttt{criterion="entropy"}, sehingga pemisahan data pada setiap node ditentukan berdasarkan nilai \textit{Entropy} dan \textit{Information Gain}.
+
+    \item \textbf{Prediction}  
+    Model yang telah dilatih digunakan untuk memprediksi \(X_{\text{test}}\), sehingga menghasilkan \(y_{\text{pred}}\) sebagai hasil prediksi kelas \texttt{stroke}.
+
+    \item \textbf{Model Evaluation}  
+    Kinerja model dievaluasi menggunakan \textit{Accuracy}, \textit{Precision}, \textit{Recall}, dan \textit{Confusion Matrix}. Parameter \texttt{average='macro'} memberikan bobot yang sama pada setiap kelas dalam perhitungan \textit{Precision} dan \textit{Recall}.
+
+    \item \textbf{Confusion Matrix Visualization}  
+    \textit{Confusion Matrix} dihitung berdasarkan \(y_{\text{test}}\) dan \(y_{\text{pred}}\), kemudian divisualisasikan menggunakan \texttt{ConfusionMatrixDisplay} untuk melihat jumlah prediksi yang benar dan salah pada masing-masing kelas.
+\end{enumerate}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/18-output.png}
+    \caption{Confusion Matrix Model Decision Tree}
+    \label{decision-tree-confusion-matrix}
+\end{figure}
+
+
+\subsubsection{Model Random Forest}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/19-random-forest.png}
+    \caption{Model Random Forest}
+    \label{random-forest}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Model Training}  
+    Model \textit{Random Forest} dibuat dan dilatih menggunakan \(X_{\text{train}}\) dan \(y_{\text{train}}\). Model ini merupakan kumpulan beberapa \textit{Decision Tree} yang bekerja secara bersama-sama untuk menghasilkan prediksi.
+
+    \item \textbf{Prediction}  
+    Model yang telah dilatih digunakan untuk memprediksi \(X_{\text{test}}\), sehingga menghasilkan \(y_{\text{pred}}\) sebagai hasil prediksi kelas \texttt{stroke}.
+
+    \item \textbf{Model Evaluation}  
+    Kinerja model dievaluasi menggunakan \textit{Accuracy}, \textit{Precision}, \textit{Recall}, dan \textit{Confusion Matrix}. Parameter \texttt{average='macro'} memberikan bobot yang sama pada setiap kelas dalam perhitungan \textit{Precision} dan \textit{Recall}.
+
+    \item \textbf{Confusion Matrix Visualization}  
+    \textit{Confusion Matrix} dihitung berdasarkan \(y_{\text{test}}\) dan \(y_{\text{pred}}\), kemudian divisualisasikan menggunakan \texttt{ConfusionMatrixDisplay} untuk melihat jumlah prediksi benar dan salah pada masing-masing kelas.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/20-output.png}
+    \caption{Confusion Matrix Model Random Forest}
+    \label{random-forest-confusion-matrix}
+\end{figure}
+
+\subsubsection{Ada Boost}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/21-ada-boost.png}
+    \caption{Model Ada Boost}
+    \label{ada-boost}
+\end{figure}
+\begin{enumerate}
+    \item \textbf{Model Training}  
+    Model \textit{AdaBoost} dibuat dan dilatih menggunakan \(X_{\text{train}}\) dan \(y_{\text{train}}\). AdaBoost menggabungkan beberapa \textit{weak learner} secara bertahap untuk meningkatkan kemampuan klasifikasi.
+
+    \item \textbf{Prediction}  
+    Model digunakan untuk memprediksi \(X_{\text{test}}\), sehingga menghasilkan \(y_{\text{pred}}\) sebagai hasil prediksi kelas \texttt{stroke}.
+
+    \item \textbf{Model Evaluation}  
+    Kinerja model dievaluasi menggunakan \textit{Accuracy}, \textit{Precision}, \textit{Recall}, dan \textit{Confusion Matrix}. Parameter \texttt{average='macro'} memberikan bobot yang sama pada setiap kelas.
+
+    \item \textbf{Confusion Matrix Visualization}  
+    \textit{Confusion Matrix} dihitung berdasarkan \(y_{\text{test}}\) dan \(y_{\text{pred}}\), kemudian divisualisasikan menggunakan \texttt{ConfusionMatrixDisplay} untuk melihat jumlah prediksi benar dan salah pada setiap kelas.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/22-output.png}
+    \caption{Confusion Matrix Model Ada Boost}
+    \label{ada-boost-confusion-matrix}
+\end{figure}
+\newpage
+
 
 \subsection{Tugas dan Analisis}
+Diberikan dataset dengan link berikut \url{https://www.kaggle.com/datasets/bhavikjikadara/loan-status-prediction}
+\subsubsection{Tujuan Penggunaan Dataset}
+Dataset Loan Status Prediction digunakan untuk membangun sistem otomatisasi evaluasi kelayakan pinjaman nasabah pada institusi perbankan atau finansial. Tujuannya adalah memprediksi apakah pengajuan kredit seorang pemohon layak disetujui atau ditolak berdasarkan profil demografis, kapasitas finansial, dan riwayat kredit mereka, sehingga bank dapat menekan risiko kredit macet dan mempercepat proses persetujuan kredit.
+\subsubsection{Atribut Input dan Output}
+Variabel input \(X\) merupakan atribut yang digunakan sebagai dasar prediksi, yaitu \texttt{Gender}, \texttt{Married}, \texttt{Dependents}, \texttt{Education}, \texttt{Self\_Employed}, \texttt{ApplicantIncome}, \texttt{CoapplicantIncome}, \texttt{LoanAmount}, \texttt{Loan\_Amount\_Term}, \texttt{Credit\_History}, dan \texttt{Property\_Area}. Atribut \texttt{Loan\_ID} tidak digunakan sebagai input karena hanya merupakan identitas data. Variabel output \(y\) adalah \texttt{Loan\_Status}, dengan \(Y\) menunjukkan pinjaman disetujui dan \(N\) menunjukkan pinjaman ditolak.
 
+\subsubsection{Model Klasifikasi}
+\begin{lstlisting}[language=Python, style=pythonnb]
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.tree import DecisionTreeClassifier
+
+# Memuat dataset
+df = pd.read_csv('loan_dataset/loan_data.csv')
+
+# Menghapus kolom Loan_ID jika ada
+if 'Loan_ID' in df.columns:
+  df = df.drop(columns=['Loan_ID'])
+
+# Pemisahan fitur dan target
+X = df.drop(columns=['Loan_Status'])
+y = df['Loan_Status'].map({'Y': 1, 'N': 0})
+
+# Pembagian data latih dan data uji
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Definisi kolom numerik dan kategorikal
+num_cols = [
+    'ApplicantIncome',
+    'CoapplicantIncome',
+    'LoanAmount',
+    'Loan_Amount_Term',
+]
+cat_cols = [
+    'Gender',
+    'Married',
+    'Dependents',
+    'Education',
+    'Self_Employed',
+    'Credit_History',
+    'Property_Area',
+]
+
+# Pipeline preprocessing
+num_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='median')),
+    ('scaler', StandardScaler()),
+])
+
+cat_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('encoder', OneHotEncoder(handle_unknown='ignore')),
+])
+
+preprocessor = ColumnTransformer([
+    ('num', num_pipeline, num_cols),
+    ('cat', cat_pipeline, cat_cols),
+])
+
+# Daftar model klasifikasi
+models = {
+    'Logistic Regression': LogisticRegression(random_state=42),
+    'KNN': KNeighborsClassifier(n_neighbors=5),
+    'Decision Tree': DecisionTreeClassifier(random_state=42, max_depth=5),
+    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+}
+
+# Pelatihan dan evaluasi
+results = []
+for name, model in models.items():
+  pipeline = Pipeline([('prep', preprocessor), ('clf', model)])
+  pipeline.fit(X_train, y_train)
+  y_pred = pipeline.predict(X_test)
+
+  results.append({
+      'Model': name,
+      'Accuracy': accuracy_score(y_test, y_pred),
+      'Precision': precision_score(y_test, y_pred),
+      'Recall': recall_score(y_test, y_pred),
+  })
+\end{lstlisting}
+Outputnya sebagai berikut
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/23-output-tugas.png}
+    \caption{Output Evaluasi Model Klasifikasi}
+    \label{evaluasi-model}
+\end{figure}
+
+\subsubsection{Perbandingan performa model}
+\begin{table}[htbp]
+\centering
+\caption{Performa Model Klasifikasi Prediksi Kelayakan Pinjaman}
+\label{tab:evaluasi_model_booktabs}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\
+\midrule
+Logistic Regression & 0.8943 & 0.9238 & 0.9510 \\
+Random Forest       & 0.8862 & 0.9231 & 0.9412 \\
+KNN                 & 0.8780 & 0.8850 & 0.9804 \\
+Decision Tree       & 0.8780 & 0.9143 & 0.9412 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Model Paling Baik}
+\begin{enumerate}
+    \item \textbf{Akurasi dan Keseimbangan Metrik Tertinggi}  
+    \textit{Logistic Regression} mencapai akurasi tertinggi sebesar \(89.43\%\), serta mempertahankan nilai \textit{precision} dan \textit{recall} di atas \(92\%\).
+
+    \item \textbf{Sifat Fitur Dominan}  
+    Pada dataset persetujuan kredit, fitur \texttt{Credit\_History} memiliki peranan penting dalam menentukan probabilitas persetujuan. Algoritma linear seperti \textit{Logistic Regression} mampu memanfaatkan hubungan tersebut secara optimal.
+
+    \item \textbf{Minim Risiko Overfitting}  
+    Dataset memiliki jumlah observasi yang relatif terbatas, yaitu sekitar \(600\) data. \textit{Logistic Regression} memiliki kompleksitas model yang relatif rendah sehingga cenderung memiliki risiko \textit{overfitting} yang lebih kecil dibandingkan model pohon yang tidak dibatasi kedalamannya.
+
+    \item \textbf{Transparansi Regulasi}  
+    Dalam industri perbankan, \textit{Logistic Regression} lebih mudah diinterpretasikan melalui nilai koefisien setiap fitur. Hal ini dapat membantu proses audit dan memberikan penjelasan mengenai faktor yang memengaruhi keputusan persetujuan kredit.
+\end{enumerate}
+
+Berdasarkan hasil eksperimen tersebut, \textbf{\textit{Logistic Regression} dipilih sebagai model terbaik} karena memberikan performa yang paling baik sekaligus memiliki interpretabilitas dan risiko \textit{overfitting} yang relatif rendah.
 
 \newpage
 \section{Kesimpulan}
+Berdasarkan hasil praktikum klasifikasi, dapat disimpulkan bahwa proses klasifikasi dapat digunakan untuk membangun model yang mampu memprediksi kelas berdasarkan karakteristik data yang tersedia. Tahapan \textit{data preprocessing}, seperti \textit{imputation}, \textit{categorical encoding}, pembagian data menjadi data latih dan data uji, serta \textit{feature scaling}, merupakan tahap penting untuk memastikan data dapat diproses dengan baik oleh algoritma klasifikasi. Beberapa algoritma yang digunakan, yaitu \textit{Logistic Regression}, KNN, \textit{Decision Tree}, dan \textit{Random Forest}, menghasilkan performa yang berbeda berdasarkan metrik \textit{accuracy}, \textit{precision}, dan \textit{recall}.
+
+Dari hasil evaluasi, \textit{Logistic Regression} memberikan performa terbaik dengan \textit{accuracy} sebesar \(89.43\%\), \textit{precision} sebesar \(92.38\%\), dan \textit{recall} sebesar \(95.10\%\). Hasil tersebut menunjukkan bahwa \textit{Logistic Regression} mampu melakukan klasifikasi dengan baik dibandingkan model lainnya pada dataset yang digunakan. Oleh karena itu, \textit{Logistic Regression} dapat dipilih sebagai model yang paling sesuai dalam praktikum ini, dengan mempertimbangkan performa klasifikasi yang tinggi serta kompleksitas model yang relatif sederhana dan mudah diinterpretasikan.
+
 \newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
