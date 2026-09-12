@@ -2,12 +2,112 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{james2021statistical}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Tujuan}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {B}Dasar Teori}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pemabahasan}{1}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}}{1}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Kesimpulan}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Regresi}{1}{subsection.2.1}\protected@file@percent }
+\citation{james2021statistical}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Algoritma Regresi}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Linear Regression}{2}{subsection.2.3}\protected@file@percent }
+\citation{james2021statistical}
+\citation{scikitLearnLinearRegression}
+\citation{scikitLearnDecisionTree}
+\citation{breiman2001random}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Decision Tree Regression}{4}{subsection.2.4}\protected@file@percent }
+\citation{breiman2001random}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Random Forest Regression}{5}{subsection.2.5}\protected@file@percent }
+\citation{scikitLearnMetrics}
+\citation{nistGoodnessFit}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Metrik Evaluasi Regresi}{6}{subsection.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.7}Root Mean Squared Error (RMSE)}{6}{subsection.2.7}\protected@file@percent }
+\citation{scikitLearnMetrics}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.8}Coefficient of Determination ($R^2$)}{7}{subsection.2.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.9}Perbandingan Algoritma Regresi}{8}{subsection.2.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pembahasan}{8}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Import Library}{8}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Perintah Install Library Seaborn}}{9}{figure.1}\protected@file@percent }
+\newlabel{1}{{1}{9}{Perintah Install Library Seaborn}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Load Dataset}{9}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Exploratory Data Analysis (EDA)}{10}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.1}Melihat 5 baris pertama dan terakhir}{10}{subsubsection.3.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Melihat 5 baris pertama dan terakhir}}{10}{figure.2}\protected@file@percent }
+\newlabel{2}{{2}{10}{Melihat 5 baris pertama dan terakhir}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.2}Melihat deskripsi statistik dengan df.describe()}{10}{subsubsection.3.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Deskripsi Statistik}}{10}{figure.3}\protected@file@percent }
+\newlabel{3}{{3}{10}{Deskripsi Statistik}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.3}Melihat histogram}{11}{subsubsection.3.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Histogram}}{11}{figure.4}\protected@file@percent }
+\newlabel{4}{{4}{11}{Histogram}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.4}Mengecek korelasi atribut numeric dengan df.corr(numeric\_only = True)}{12}{subsubsection.3.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Korelasi Atribut Numerik}}{12}{figure.5}\protected@file@percent }
+\newlabel{5}{{5}{12}{Korelasi Atribut Numerik}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.5}Mengecek missing value dengan df.isnull().sum()}{13}{subsubsection.3.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Missing Value}}{13}{figure.6}\protected@file@percent }
+\newlabel{6}{{6}{13}{Missing Value}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.3.6}Mengecek atribut kategorikal}{14}{subsubsection.3.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Atribut Kategorikal}}{14}{figure.7}\protected@file@percent }
+\newlabel{7}{{7}{14}{Atribut Kategorikal}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}Modelling}{14}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.4.1}Linear Regression}{14}{subsubsection.3.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Linear Regression}}{14}{figure.8}\protected@file@percent }
+\newlabel{8}{{8}{14}{Linear Regression}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Output Linear Regression}}{15}{figure.9}\protected@file@percent }
+\newlabel{output-lr}{{9}{15}{Output Linear Regression}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Evaluasi Model Linear Regression}}{16}{figure.10}\protected@file@percent }
+\newlabel{eval-lr}{{10}{16}{Evaluasi Model Linear Regression}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Visualisasi Prediksi vs Aktual Linear Regression}}{17}{figure.11}\protected@file@percent }
+\newlabel{visual-lr}{{11}{17}{Visualisasi Prediksi vs Aktual Linear Regression}{figure.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.4.2}Decision Tree Regression}{17}{subsubsection.3.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Decision Tree Regression}}{17}{figure.12}\protected@file@percent }
+\newlabel{12}{{12}{17}{Decision Tree Regression}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Output Decision Tree Regression}}{18}{figure.13}\protected@file@percent }
+\newlabel{output-dtr}{{13}{18}{Output Decision Tree Regression}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Evaluasi Model Decision Tree Regression}}{18}{figure.14}\protected@file@percent }
+\newlabel{eval-dtr}{{14}{18}{Evaluasi Model Decision Tree Regression}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Visualisasi Prediksi vs Aktual Decision Tree Regression}}{19}{figure.15}\protected@file@percent }
+\newlabel{visual-dtr}{{15}{19}{Visualisasi Prediksi vs Aktual Decision Tree Regression}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {C.4.3}Random Forest Regression}{20}{subsubsection.3.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Random Forest Regression}}{20}{figure.16}\protected@file@percent }
+\newlabel{16}{{16}{20}{Random Forest Regression}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Output Random Forest Regression}}{21}{figure.17}\protected@file@percent }
+\newlabel{output-rfr}{{17}{21}{Output Random Forest Regression}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Evaluasi Model Random Forest Regression}}{21}{figure.18}\protected@file@percent }
+\newlabel{eval-rfr}{{18}{21}{Evaluasi Model Random Forest Regression}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Visualisasi Prediksi vs Aktual Random Forest Regression}}{22}{figure.19}\protected@file@percent }
+\newlabel{visual-rfr}{{19}{22}{Visualisasi Prediksi vs Aktual Random Forest Regression}{figure.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Tugas dan Analisis}{23}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1}Tujuan Penggunaan Dataset}{23}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Dataset Car Price Prediction}}{23}{figure.20}\protected@file@percent }
+\newlabel{dataset-car-price}{{20}{23}{Dataset Car Price Prediction}{figure.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.2}Variabel yang paling mempengaruhi output}{24}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Korelasi Atribut Numerik Dataset Car Price Prediction}}{24}{figure.21}\protected@file@percent }
+\newlabel{corr-car-price}{{21}{24}{Korelasi Atribut Numerik Dataset Car Price Prediction}{figure.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Heatmap Korelasi Atribut Numerik Dataset Car Price Prediction}}{25}{figure.22}\protected@file@percent }
+\newlabel{corr-car-price-heatmap}{{22}{25}{Heatmap Korelasi Atribut Numerik Dataset Car Price Prediction}{figure.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Visualisasi Korelasi Atribut Numerik Dataset Car Price Prediction}}{25}{figure.23}\protected@file@percent }
+\newlabel{corr-car-price-visual}{{23}{25}{Visualisasi Korelasi Atribut Numerik Dataset Car Price Prediction}{figure.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3}Model Regresi}{27}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.1}Linear Regression}{27}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Linear Regression}}{27}{figure.24}\protected@file@percent }
+\newlabel{linear-regression}{{24}{27}{Linear Regression}{figure.24}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.2}Decision Tree Regression}{28}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Decision Tree Regression}}{28}{figure.25}\protected@file@percent }
+\newlabel{decision-tree-regression}{{25}{28}{Decision Tree Regression}{figure.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.3}Random Forest Regression}{30}{subsubsection.4.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Random Forest Regression}}{30}{figure.26}\protected@file@percent }
+\newlabel{random-forest-regression}{{26}{30}{Random Forest Regression}{figure.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.4}Perbandingan performa Model}{31}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Perbandingan Performa Model}}{31}{figure.27}\protected@file@percent }
+\newlabel{perbandingan-model}{{27}{31}{Perbandingan Performa Model}{figure.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.5}Hasil Eksperimen}{32}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E}Kesimpulan}{33}{section.5}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{ref}
-\@writefile{toc}{\contentsline {section}{\numberline {E}Daftar Pustaka}{3}{section.5}\protected@file@percent }
-\gdef \@abspage@last{4}
+\bibcite{james2021statistical}{1}
+\bibcite{scikitLearnLinearRegression}{2}
+\bibcite{scikitLearnDecisionTree}{3}
+\bibcite{breiman2001random}{4}
+\bibcite{scikitLearnMetrics}{5}
+\bibcite{nistGoodnessFit}{6}
+\@writefile{toc}{\contentsline {section}{\numberline {F}Daftar Pustaka}{34}{section.6}\protected@file@percent }
+\gdef \@abspage@last{35}
