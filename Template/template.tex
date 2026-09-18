@@ -17,8 +17,10 @@
 % \usepackage{natbib}
 \usepackage{chngcntr}
 \usepackage{amsmath}
+\usepackage{multirow}
 
 \renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
 \renewcommand\thesection{\Alph{section}}
 
 \definecolor{codebg}{RGB}{255,255,255}   % background putih seperti sel Jupyter
@@ -73,8 +75,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 5}}\\[0.3cm]
+    { \textbf{FORECASTING}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -111,16 +113,411 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa dapat menerapkan metode forecasting berbasis machine learning, meliputi 
+Neural Network, K-Nearest Neighbors (KNN), Decision Tree, Support Vector 
+Regression (SVR), dan Random Forest, untuk memprediksi nilai periode berikutnya 
+berdasarkan data historis
+    \item Mahasiswa dapat melakukan evaluasi performa model forecasting berbasis machine learning menggunakan metrik Root Mean Squared Error (RMSE) dan Pearson Correlation Coefficient
+    \item Mahasiswa dapat membandingkan performa model forecasting berbasis machine learning dan menentukan model terbaik berdasarkan hasil evaluasi
 \end{enumerate}
 \section{Dasar Teori}
-\section{Hasil dan Pemabahasan}
+\subsection{Supervised Learning}
 
-\subsection{}
+Supervised learning merupakan pendekatan machine learning yang mempelajari hubungan antara variabel masukan (\textit{input}) dan keluaran (\textit{target}) berdasarkan data yang telah memiliki pasangan nilai masukan dan keluaran. Proses pembelajaran dilakukan dengan mengoptimalkan parameter model agar hasil prediksi mendekati nilai target yang sebenarnya. Pendekatan ini digunakan pada berbagai permasalahan prediksi, termasuk regresi dan klasifikasi \cite{zhang2020supervised}. Pada penelitian ini, supervised learning digunakan untuk mempelajari hubungan antara data historis harga saham dengan harga \textit{Close} yang menjadi target prediksi.
 
+\subsection{Forecasting}
+
+Forecasting merupakan proses memprediksi nilai pada waktu yang akan datang berdasarkan informasi yang tersedia pada waktu sebelumnya. Dalam konteks \textit{time series forecasting}, data historis digunakan sebagai dasar untuk menghasilkan prediksi pada periode mendatang sehingga urutan waktu dan pola historis menjadi bagian penting dalam proses pemodelan \cite{hyndman2021forecasting}. Machine learning juga dapat diterapkan pada forecasting dengan membentuk hubungan antara observasi masa lalu sebagai fitur dan nilai masa depan sebagai target \cite{masini2023machine}. Pada penelitian ini, forecasting digunakan untuk memprediksi harga \textit{Close} saham Tesla dua hari ke depan berdasarkan data historis tujuh hari sebelumnya.
+
+\subsection{Root Mean Squared Error (RMSE)}
+
+Root Mean Squared Error (RMSE) merupakan metrik yang digunakan untuk mengukur besarnya kesalahan antara nilai aktual dan nilai hasil prediksi. RMSE diperoleh dengan menghitung akar kuadrat dari rata-rata kuadrat selisih antara nilai aktual dan prediksi, yang dirumuskan sebagai berikut:
+
+\begin{equation}
+RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+\end{equation}
+
+dengan $y_i$ merupakan nilai aktual, $\hat{y}_i$ merupakan nilai prediksi, dan $n$ merupakan jumlah data. RMSE memiliki satuan yang sama dengan variabel target dan memberikan penalti yang lebih besar terhadap kesalahan yang besar karena error dikuadratkan. Nilai RMSE yang semakin kecil menunjukkan kesalahan prediksi yang semakin rendah \cite{chai2014rmse}.
+
+\subsection{Pearson Correlation Coefficient}
+
+Pearson Correlation Coefficient merupakan ukuran statistik yang digunakan untuk mengetahui kekuatan dan arah hubungan linear antara dua variabel. Dalam evaluasi model prediksi, koefisien Pearson dapat digunakan untuk melihat sejauh mana pola nilai prediksi mengikuti pola nilai aktual. Nilainya berada pada rentang $-1$ hingga $1$, dengan nilai mendekati $1$ menunjukkan hubungan linear positif yang kuat \cite{benesty2009pearson}.
+
+Persamaan Pearson Correlation Coefficient dapat dituliskan sebagai:
+
+\begin{equation}
+r =
+\frac{
+\sum_{i=1}^{n}(y_i-\bar{y})(\hat{y}*i-\overline{\hat{y}})
+}{
+\sqrt{
+\sum*{i=1}^{n}(y_i-\bar{y})^2
+\sum_{i=1}^{n}(\hat{y}_i-\overline{\hat{y}})^2
+}
+}
+\end{equation}
+
+Dalam forecasting, Pearson tidak mengukur besar kesalahan prediksi secara langsung, sehingga penggunaannya sebaiknya dikombinasikan dengan metrik error seperti RMSE untuk memperoleh evaluasi performa model yang lebih lengkap \cite{chicco2024evaluation}.
+\section{Hasil dan Pembahasan}
+
+\subsection{Persiapan Lingkungan dan Import Library}
+
+Tahap pertama yang dilakukan adalah menyiapkan lingkungan kerja menggunakan Google Colab sebagai platform eksekusi, karena mendukung seluruh \textit{library machine learning} yang diperlukan tanpa membebani perangkat lokal. Setelah lingkungan siap, seluruh \textit{library} yang dibutuhkan untuk \textit{preprocessing}, visualisasi, pemodelan, dan evaluasi diimpor sebagai berikut.
+
+\begin{lstlisting}[style=pythonnb, caption={Install library}]
+pip install xgboost
+\end{lstlisting}
+Setelah berhasil menginstall library xgboost, import beberapa library yang diperlukan.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/1-library.png}
+    \caption{Output instalasi library xgboost}
+    \label{fig:xgboost}
+\end{figure}
+
+\textit{Library} \texttt{pandas} dan \texttt{numpy} digunakan untuk membaca dan mengelola data, \texttt{matplotlib} digunakan untuk visualisasi, sedangkan \texttt{mean\_squared\_error} dan \texttt{pearsonr} digunakan sebagai metrik evaluasi model. Model \textit{machine learning} yang digunakan meliputi \texttt{MLPRegressor} (Neural Network), \texttt{KNeighborsRegressor} (KNN), \texttt{DecisionTreeRegressor} (Decision Tree), dan \texttt{RandomForestRegressor} (Random Forest).
+
+\subsection{Import Dataset}
+
+Dataset yang digunakan pada praktikum ini adalah \textit{Bike Sharing Dataset} (\url{https://www.kaggle.com/datasets/lakshmi25npathi/bike
+sharing-dataset}), yang berisi data peminjaman sepeda harian beserta tanggal, kondisi cuaca, dan jumlah total peminjaman (\texttt{cnt}). Dataset dibaca menggunakan \texttt{pandas} dan lima baris pertama ditampilkan untuk memastikan data terbaca dengan benar.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/2-csv.png}
+    \caption{Output pembacaan dataset}
+    \label{fig:dataset}
+\end{figure}
+
+Selanjutnya, kolom \texttt{dteday} dikonversi ke format \texttt{datetime} agar dapat digunakan sebagai indeks waktu pada analisis deret waktu (\textit{time series}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/3-date.png}
+    \caption{Output konversi kolom tanggal ke format datetime}
+    \label{fig:date}
+\end{figure}
+
+\subsection{Pembentukan Data Time Series dengan Sliding Window}
+
+Karena data bersifat deret waktu, dilakukan pembentukan pasangan input--output menggunakan teknik \textit{sliding window}, yaitu menggunakan nilai \texttt{cnt} selama 7 hari sebelumnya (\textit{input}, X) untuk memprediksi jumlah peminjaman pada hari ke-8 (\textit{output}, y).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/4-sliding.png}
+    \caption{Output pembentukan data time series dengan sliding window}
+    \label{fig:sliding}
+\end{figure}
+
+Fungsi ini menggeser jendela data satu hari demi satu hari sehingga menghasilkan kumpulan pasangan input (7 hari historis) dan target (1 hari ke depan) secara berurutan.
+
+\subsection{Penambahan Fitur Statistik}
+
+Agar model memiliki informasi tambahan mengenai karakteristik distribusi data pada setiap jendela waktu, dilakukan \textit{feature engineering} dengan menghitung delapan fitur statistik: nilai minimum, nilai maksimum, selisih maksimum-minimum, rata-rata, standar deviasi, median, \textit{kurtosis}, dan \textit{skewness}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/5-feature.png}
+    \caption{Output penambahan fitur statistik}
+    \label{fig:feature}
+\end{figure}
+
+Fitur-fitur ini memberikan gambaran mengenai sebaran nilai dalam setiap jendela waktu, sehingga diharapkan dapat meningkatkan kemampuan model dalam menangkap pola data.
+
+\subsection{Preprocessing dan Pembagian Data Training-Testing}
+
+Data yang telah dibentuk melalui \textit{sliding window} kemudian diproses lebih lanjut: bentuk array 3 dimensi (X) diubah menjadi 2 dimensi agar dapat digunakan sebagai input model, kemudian data dibagi menjadi data \textit{training} dan \textit{testing} dengan proporsi 80:20 tanpa pengacakan (\texttt{shuffle=False}) untuk mempertahankan urutan waktu. Fitur statistik kemudian diterapkan pada data \textit{training} dan \textit{testing}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/6-preprocessing.png}
+    \caption{Output preprocessing dataset}
+    \label{fig:preprocessing}
+\end{figure}
+
+Hasil preprocessing menunjukkan dataset memiliki total 724 pasangan data dengan 7 fitur input (nilai \texttt{cnt} 7 hari sebelumnya) sebelum ditambahkan fitur statistik.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/7-output-preprocessing.png}
+    \caption{Output preprocessing}
+    \label{fig:output}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/8-visualisasi-dataset.png}
+    \caption{Visualisasi Data Deret Waktu Jumlah Peminjaman Sepeda}
+    \label{fig:visualisasi}
+\end{figure}
+
+\subsection{Pelatihan Model Machine Learning}
+
+Empat model \textit{supervised learning} dilatih untuk melakukan \textit{forecasting}, yaitu Multilayer Perceptron (MLP/Neural Network), K-Nearest Neighbors (KNN), Decision Tree (DT), dan Random Forest (RF). Masing-masing model dibungkus dalam fungsi yang mengembalikan nilai RMSE, koefisien korelasi Pearson, dan hasil prediksi.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/9-mlp.png}
+\caption{Kode MLP}
+\label{fig:mlp}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/10-knn.png}
+\caption{Kode KNN}
+\label{fig:knn}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/11-dt.png}
+\caption{Kode DT}
+\label{fig:dt}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../images/12-rf.png}
+\caption{Kode RF}
+\label{fig:rf}
+\end{figure}
+
+Setiap model dilatih menggunakan data \textit{training} (\texttt{X\_train}, \texttt{y\_train}) yang telah melalui tahap \textit{feature engineering}, kemudian digunakan untuk menghasilkan prediksi pada data \textit{testing} (\texttt{X\_test}).
+
+\subsection{Prediksi dan Visualisasi Hasil}
+
+Keempat model dipanggil untuk menghasilkan nilai RMSE, korelasi Pearson, dan prediksi jumlah peminjaman sepeda pada data \textit{testing}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/13-prediksi.png}
+    \caption{Kode Prediksi}
+    \label{fig:prediksi}
+\end{figure}
+
+Untuk melihat seberapa dekat pola prediksi dengan pola data aktual, dibuat visualisasi perbandingan antara nilai aktual (\texttt{y\_test}) dan hasil prediksi tiap model pada 100 data uji pertama.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/14-visualisasi-prediksi.png}
+    \caption{Kode Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}
+    \label{fig:visualisasi-prediksi}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/15-output-visualisasi-prediksi.png}
+    \caption{Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}
+    \label{fig:visualisasi-prediksi-zoom}
+\end{figure}
+
+\subsection{Evaluasi dan Perbandingan Model}
+
+Evaluasi performa keempat model dilakukan menggunakan dua metrik, yaitu RMSE dan koefisien korelasi Pearson. Nilai RMSE yang lebih kecil menunjukkan kesalahan prediksi yang lebih rendah, sedangkan nilai korelasi Pearson yang mendekati 1 menunjukkan bahwa pola prediksi semakin mengikuti pola data aktual.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/16-kode-model-evaluasi.png}
+    \caption{Kode Model Evaluasi}
+    \label{fig:evaluasi-model}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/17-output-model-evaluasi.png}
+    \caption{Output Model Evaluasi}
+    \label{fig:output-evaluasi-model}
+\end{figure}
+
+
+Berdasarkan gambar \ref{fig:output-evaluasi-model}, (MLP) menghasilkan kinerja paling baik dengan nilai RMSE sebesar $1243.150$ dan koefisien korelasi Pearson sebesar $0.751$. Nilai RMSE yang lebih kecil menunjukkan kesalahan prediksi yang lebih rendah, sedangkan nilai Pearson yang lebih tinggi menunjukkan hubungan linear yang lebih kuat antara nilai aktual dan hasil prediksi. Model \textit{Random Forest} (RF) menghasilkan RMSE sebesar $1324.452$ dan Pearson sebesar $0.716$, sedangkan \textit{K-Nearest Neighbors} (KNN) memperoleh RMSE sebesar $1357.710$ dan Pearson sebesar $0.696$. Sementara itu, \textit{Decision Tree} (DT) menghasilkan RMSE paling tinggi, yaitu $1854.465$, serta Pearson paling rendah, yaitu $0.484$. Dengan demikian, berdasarkan kedua metrik evaluasi tersebut, hasil pengujian menunjukkan bahwa MLP memiliki kesalahan prediksi paling rendah dan korelasi antara prediksi dengan nilai aktual paling kuat dibandingkan ketiga model lainnya.
+
+\section{Tugas dan Analisis}
+
+Pada bagian ini disajikan penyelesaian terhadap tugas analisis pemodelan \textit{forecasting} menggunakan dataset historis harga saham Tesla (TSLA). Eksperimen mencakup eksplorasi dataset, pembentukan arsitektur \textit{sliding window} univariat (Soal 2) dan multivariat (Soal 3), rekayasa fitur statistik, pelatihan empat algoritma \textit{machine learning} (\textit{Multilayer Perceptron}, \textit{K-Nearest Neighbors}, \textit{Decision Tree}, dan \textit{Random Forest}), serta evaluasi performa komprehensif menggunakan metrik \textit{Root Mean Squared Error} (RMSE) dan koefisien korelasi Pearson.
+
+\subsection{Deskripsi dan Eksplorasi Dataset Saham Tesla}
+
+Dataset yang digunakan pada tugas ini adalah \textit{Tesla Stock Data from 2010 to 2020} yang diperoleh dari platform Kaggle (\url{https://www.kaggle.com/datasets/timoboz/tesla-stock-data-from-2010-to-2020/data}). Dataset ini mencatat riwayat transaksi perdagangan saham harian Tesla, Inc. (TSLA) di bursa NASDAQ sejak tanggal 29 Juni 2010 sampai dengan 3 Februari 2020, dengan total $2.416$ baris data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/18-soal-1.png}
+    \caption{Deskripsi detail dari dataset}
+    \label{fig:tugas-dataset-detail}
+\end{figure}
+
+Adapun struktur atribut pada dataset terdiri atas:
+\begin{enumerate}
+    \item \texttt{Date}: Tanggal pencatatan transaksi perdagangan saham harian.
+    \item \texttt{Open}: Harga pembukaan saham pada awal sesi perdagangan bursa (USD).
+    \item \texttt{High}: Harga tertinggi yang dicapai saham selama jam perdagangan bursa (USD).
+    \item \texttt{Low}: Harga terendah yang dialami saham selama jam perdagangan bursa (USD).
+    \item \texttt{Close}: Harga penutupan resmi pada akhir jam perdagangan bursa (USD), yang menjadi target prediksi utama.
+    \item \texttt{Adj Close}: Harga penutupan yang telah disesuaikan terhadap aksi korporasi (\textit{corporate actions}) seperti dividen atau pemecahan saham (\textit{stock split}).
+    \item \texttt{Volume}: Jumlah lembar saham yang ditransaksikan pada hari tersebut.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/19-tren-dataset.png}
+    \caption{Tren harga saham Tesla (TSLA) periode 2010 - 2020}
+    \label{fig:tren-dataset}
+\end{figure}
+
+Berdasarkan Gambar \ref{fig:tren-dataset}, terlihat bahwa data deret waktu saham Tesla memiliki karakteristik non-stasioner yang kuat dengan tren kenaikan jangka panjang (\textit{upward trend}). Pada kurun waktu 2010 hingga pertengahan 2013, harga saham cenderung berada pada kisaran rendah (\$20--\$35 USD). Selanjutnya pada 2014 hingga pertengahan 2019, harga berfluktuasi pada rentang \$180--\$380 USD, sebelum akhirnya mengalami lonjakan eksponensial yang sangat signifikan pada akhir 2019 hingga awal 2020 hingga mendekati \$800 USD. Karakteristik lonjakan tajam ini menjadi tantangan tersendiri bagi algoritma peramalan berbasis \textit{machine learning}.
+
+\subsection{Model Forecasting Target Close Berdasarkan Close 7 Hari Sebelumnya (Soal 2)}
+
+Pada tugas nomor 2, dibangun model \textit{forecasting} univariat untuk memprediksi harga \textit{Close} 2 hari ke depan berdasarkan nilai harga \textit{Close} selama 7 hari sebelumnya. 
+
+\subsubsection{Pemrosesan Data dan Feature Engineering}
+Data disiapkan dengan tahapan sistematis sebagai berikut:
+\begin{enumerate}
+    \item Pembentukan sekuens menggunakan teknik \textit{sliding window} melalui fungsi \texttt{split\_sequences} dengan parameter $n\_steps\_in = 7$ dan $n\_steps\_out = 2$. Dari total $2.416$ baris data, dihasilkan $2.408$ pasang data input dan target.
+    \item Matriks input dibentuk ulang (\textit{flatten}) sehingga menghasilkan 7 fitur masukan awal per sampel data.
+    \item Pemisahan data latih (\textit{training}) dan data uji (\textit{testing}) dilakukan dengan rasio 80:20 tanpa pengacakan (\texttt{shuffle=False}) untuk menjaga urutan kronologis deret waktu, menghasilkan $1.926$ data latih dan $482$ data uji.
+    \item Penerapan \textit{feature engineering} melalui fungsi \texttt{stats\_features} yang menambahkan 8 fitur statistik deskriptif pada setiap jendela: nilai minimum, maksimum, selisih (\textit{diff}), standar deviasi, rata-rata (\textit{mean}), median, \textit{kurtosis}, dan \textit{skewness}. Dengan demikian, dimensi fitur akhir yang digunakan model adalah $7 + 8 = 15$ fitur.
+\end{enumerate}
+
+Implementasi kode tahapan \textit{preprocessing} Soal 2 ditampilkan pada Gambar \ref{fig:kode-soal-2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/19-tren-dataset.png}
+    \caption{Kode preprocesing soal 2}
+    \label{fig:tugas-dataset-deskriptif}
+\end{figure}
+
+\subsubsection{Pelatihan Model dan Evaluasi Kinerja Soal 2}
+Empat model regresi \textit{supervised learning} dilatih pada data latih dan diuji pada data uji:
+\begin{itemize}
+    \item \textbf{MLP}: \texttt{MLPRegressor} dengan arsitektur \texttt{hidden\_layer\_sizes=(100, 100)}, \texttt{max\_iter=1000}, dan \texttt{random\_state=42}.
+    \item \textbf{KNN}: \texttt{KNeighborsRegressor()}.
+    \item \textbf{DT}: \texttt{DecisionTreeRegressor(random\_state=42)}.
+    \item \textbf{RF}: \texttt{RandomForestRegressor(random\_state=42)}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/23-evaluasi-forecasting-2.png}
+    \caption{Evaluasi model soal 2}
+    \label{fig:evaluasi-forecasting-2}
+\end{figure}
+Hasil evaluasi performa peramalan keempat model untuk Soal 2 menggunakan metrik RMSE dan koefisien korelasi Pearson dirangkum pada Tabel \ref{tab:tugas-eval-soal2}.
+
+\begin{table}[H]
+\centering
+\caption{Hasil Evaluasi Model Forecasting Soal 2 (Input: Close 7 Hari)}
+\label{tab:tugas-eval-soal2}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Model Machine Learning} & \textbf{RMSE} & \textbf{Pearson Correlation ($r$)} \\
+\hline
+Multilayer Perceptron (MLP)     & \textbf{18.985} & \textbf{0.968} \\
+K-Nearest Neighbors (KNN)       & 45.187          & 0.800 \\
+Decision Tree (DT)              & 47.375          & 0.772 \\
+Random Forest (RF)              & 45.030          & 0.805 \\
+\hline
+\end{tabular}
+\end{table}
+
+Visualisasi perbandingan antara nilai aktual (\texttt{y2\_test}) dan hasil prediksi keempat model pada 100 data uji pertama disajikan pada Gambar \ref{fig:tugas-soal2-prediksi}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/tugas-soal2-prediksi.png}
+    \caption{Perbandingan Hasil Prediksi Model pada Soal 2 (100 Data Uji Pertama)}
+    \label{fig:tugas-soal2-prediksi}
+\end{figure}
+
+Berdasarkan Tabel \ref{tab:tugas-eval-soal2} dan Gambar \ref{fig:tugas-soal2-prediksi}, model \textbf{MLP} menghasilkan performa peramalan paling akurat dengan nilai RMSE terendah ($19.007$) dan koefisien Pearson tertinggi ($0.968$). Hal ini membuktikan bahwa arsitektur jaringan saraf tiruan mampu menangkap hubungan non-linear yang sangat baik pada data harga saham. Model Random Forest menempati urutan kedua dengan RMSE $44.999$ dan korelasi $0.805$, disusul oleh KNN dengan RMSE $45.183$ dan Pearson $0.800$. Decision Tree memperoleh kinerja paling rendah dengan RMSE tertinggi yaitu $47.350$ dan korelasi $0.772$.
+
+\subsection{Model Forecasting Target Close Berdasarkan Close dan Open 7 Hari Sebelumnya (Soal 3)}
+
+Pada tugas nomor 3, dibangun model \textit{forecasting} multivariat di mana input memanfaatkan dua fitur pasar sekaligus, yaitu harga \textit{Close} dan \textit{Open} selama 7 hari sebelumnya, guna memprediksi harga \textit{Close} 2 hari ke depan:
+
+\subsubsection{Pemrosesan Data dan Feature Engineering Multivariat}
+Proses pembentukan data pada Soal 3 dilakukan sebagai berikut:
+\begin{enumerate}
+    \item Input data dibentuk dari kombinasi atribut \texttt{['Close', 'Open', 'Close']} sehingga fungsi \texttt{split\_sequences} mengumpulkan atribut \texttt{Close} dan \texttt{Open} sebagai input matriks $7 \times 2 = 14$ fitur dan kolom terakhir sebagai nilai target $\text{Close}_{t+2}$.
+    \item Total data hasil \textit{sliding window} adalah $2.408$ baris, dibagi menjadi $1.926$ data latih dan $482$ data uji dengan proporsi 80:20 tanpa pengacakan (\texttt{shuffle=False}).
+    \item Penambahan 8 fitur statistik deskriptif pada matriks jendela input menghasilkan total dimensi fitur akhir sebanyak $14 + 8 = 22$ fitur.
+\end{enumerate}
+
+Implementasi kode tahapan \textit{preprocessing} Soal 3 disajikan pada Gambar \ref{fig:kode-soal-3}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/21-soal-3.png}
+    \caption{Kode preprocesing soal 3}
+    \label{fig:kode-soal-3}
+\end{figure}
+
+\subsubsection{Pelatihan Model dan Evaluasi Kinerja Soal 3}
+Keempat model yang sama dilatih pada data latih multivariat (\texttt{X3\_train}, \texttt{y3\_train}) dan diuji pada data uji (\texttt{X3\_test}). Hasil evaluasi performa peramalan dirangkum pada Tabel \ref{tab:tugas-eval-soal3}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/22-evaluasi-forecasting-3.png}
+    \caption{Evaluasi model soal 3}
+    \label{fig:evaluasi-soal-3}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Hasil Evaluasi Model Forecasting Soal 3 (Input: Close \& Open 7 Hari)}
+\label{tab:tugas-eval-soal3}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Model Machine Learning} & \textbf{RMSE} & \textbf{Pearson Correlation ($r$)} \\
+\hline
+Multilayer Perceptron (MLP)     & \textbf{18.272} & \textbf{0.971} \\
+K-Nearest Neighbors (KNN)       & 44.660          & 0.806 \\
+Decision Tree (DT)              & 45.611          & 0.794 \\
+Random Forest (RF)              & 44.638          & 0.808 \\
+\hline
+\end{tabular}
+\end{table}
+
+Visualisasi perbandingan nilai aktual (\texttt{y3\_test}) dan hasil prediksi seluruh model pada 100 data uji pertama disajikan pada Gambar \ref{fig:tugas-soal3-prediksi}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/tugas-soal3-prediksi.png}
+    \caption{Perbandingan Hasil Prediksi Model pada Soal 3 (100 Data Uji Pertama)}
+    \label{fig:tugas-soal3-prediksi}
+\end{figure}
+
+Berdasarkan Tabel \ref{tab:tugas-eval-soal3}, model \textbf{MLP} kembali menjadi model paling unggul dengan nilai RMSE yang semakin mengecil menjadi $18.270$ dan korelasi Pearson meningkat mencapai $0.971$. Seluruh model lainnya (RF, KNN, DT) juga memperlihatkan tren peningkatan akurasi dan penurunan galat prediksi.
+
+
+
+\begin{enumerate}
+    \item \textbf{Pengaruh Signifikan Penambahan Fitur Open}:
+    Pada Tabel \ref{tab:tugas-rekap-komparasi}, terlihat jelas bahwa penambahan fitur \texttt{Open} pada jendela historis 7 hari sebelumnya menghasilkan peningkatan performa yang konsisten pada \textbf{seluruh model} (\textit{consistent improvement}). Nilai RMSE pada seluruh model mengalami penurunan ($\Delta\text{RMSE} < 0$), dengan penurunan terbesar terjadi pada Decision Tree sebesar $-1.687$ dan pada MLP sebesar $-0.736$. Pada saat yang sama, seluruh nilai koefisien korelasi Pearson mengalami peningkatan ($\Delta\text{Pearson} > 0$).
+    Secara finansial dan analitis, harga pembukaan (\texttt{Open}) merefleksikan ekspektasi pasar dan informasi baru yang terakumulasi di luar jam perdagangan (\textit{overnight trading} serta berita pasca-penutupan bursa). Selisih antara harga pembukaan hari ini dengan harga penutupan hari kemarin merepresentasikan \textit{opening gap} dan volatilitas awal. Penambahan atribut ini memperkaya representasi ruang fitur dengan informasi \textit{intraday spread} dan momentum, sehingga model dapat mengantisipasi arah pergerakan harga 2 hari ke depan dengan lebih akurat dibanding hanya mengandalkan harga penutupan tunggal.
+
+    \item \textbf{Keunggulan Dominan Multilayer Perceptron (MLP)}:
+    Model MLP secara konsisten menempati peringkat teratas pada kedua konfigurasi (RMSE $18.270$ dan Pearson $0.971$). Jaringan saraf tiruan memiliki keunggulan kapabilitas \textit{universal function approximator} dengan fungsi aktivasi non-linear yang memungkinkan pembentukan pemetaan kontinu yang halus (\textit{smooth manifold mapping}) pada data deret waktu finansial. MLP mampu menangkap tren kenaikan skala besar sekaligus meredam derau (\textit{noise}) fluktuasi jangka pendek.
+
+    \item \textbf{Keterbatasan Model Berbasis Pohon (DT dan RF) dan KNN}:
+    Model Decision Tree menghasilkan galat tertinggi pada kedua skenario (RMSE $47.350$ pada Soal 2 dan $45.663$ pada Soal 3). Hal ini disebabkan oleh sifat struktural pohon keputusan regresi yang membagi ruang fitur secara ortogonal dan menghasilkan prediksi bertingkat diskrit (\textit{piecewise constant}). Ketika data uji memasuki fase tren harga baru yang melebihi nilai maksimum historis pada data latih, pohon regresi gagal melakukan ekstrapolasi linear (\textit{failure to extrapolate upward trend}).
+    Random Forest berhasil memitigasi sebagian keterbatasan tersebut melalui teknik \textit{bagging} (agregasi 100 pohon acak), sehingga menghasilkan penurunan RMSE yang cukup tajam mendekati nilai $44.6$. Sementara itu, algoritma KNN bekerja berdasarkan kedekatan jarak Euclidean pada tetangga terdekat dalam ruang fitur data latih, yang pada data deret waktu saham bertren kuat juga mengalami bias keterbatasan nilai historis pada data latih.
+\end{enumerate}
 
 \newpage
 \section{Kesimpulan}
+
+Berdasarkan seluruh tahapan praktikum peramalan (\textit{forecasting}) deret waktu berbasis \textit{machine learning} dan penyelesaian tugas analisis yang telah dilakukan, dapat diambil kesimpulan sebagai berikut:
+\begin{enumerate}
+    \item Metode \textit{supervised learning} berbasis \textit{machine learning}, meliputi \textit{Multilayer Perceptron} (MLP), \textit{K-Nearest Neighbors} (KNN), \textit{Decision Tree} (DT), dan \textit{Random Forest} (RF), berhasil diimplementasikan untuk peramalan deret waktu menggunakan mekanisme \textit{sliding window} dan rekayasa fitur statistik deskriptif.
+    \item Evaluasi performa menggunakan metrik \textit{Root Mean Squared Error} (RMSE) dan \textit{Pearson Correlation Coefficient} memberikan gambaran yang saling melengkapi, di mana RMSE mengukur besaran rata-rata deviasi kuadratik prediksi terhadap nilai aktual, sedangkan koefisien Pearson mengukur derajat kekuatan keselarasan arah pola pergerakan data.
+    \item Pada peramalan harga saham Tesla (TSLA) untuk target penutupan (\textit{Close}) 2 hari ke depan, model \textbf{Multilayer Perceptron (MLP)} terbukti secara konsisten memiliki kinerja paling unggul dibandingkan algoritma lainnya, dengan menghasilkan RMSE terendah ($19.007$ pada univariat dan $18.270$ pada multivariat) serta koefisien korelasi Pearson tertinggi ($0.968$ pada univariat dan $0.971$ pada multivariat).
+    \item Penggunaan data multivariat (Soal 3) secara empiris terbukti meningkatkan akurasi seluruh model \textit{forecasting} dibandingkan penggunaan data univariat (\textit{Close} saja pada Soal 2). Penambahan fitur \texttt{Open} memberikan informasi esensial mengenai dinamika \textit{overnight sentiment} dan volatilitas \textit{intraday}, sehingga berhasil menurunkan nilai RMSE dan menaikkan korelasi Pearson pada seluruh model yang diuji.
+\end{enumerate}
+
 \newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}

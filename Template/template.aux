@@ -2,12 +2,98 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{zhang2020supervised}
+\citation{hyndman2021forecasting}
+\citation{masini2023machine}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Tujuan}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {B}Dasar Teori}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pemabahasan}{1}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}}{1}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Kesimpulan}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Supervised Learning}{1}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Forecasting}{1}{subsection.2.2}\protected@file@percent }
+\citation{chai2014rmse}
+\citation{benesty2009pearson}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Root Mean Squared Error (RMSE)}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Pearson Correlation Coefficient}{2}{subsection.2.4}\protected@file@percent }
+\citation{chicco2024evaluation}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pembahasan}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Persiapan Lingkungan dan Import Library}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Install library}{3}{lstlisting.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Output instalasi library xgboost}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:xgboost}{{1}{4}{Output instalasi library xgboost}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Import Dataset}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Output pembacaan dataset}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:dataset}{{2}{5}{Output pembacaan dataset}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Output konversi kolom tanggal ke format datetime}}{5}{figure.3}\protected@file@percent }
+\newlabel{fig:date}{{3}{5}{Output konversi kolom tanggal ke format datetime}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Pembentukan Data Time Series dengan Sliding Window}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Output pembentukan data time series dengan sliding window}}{6}{figure.4}\protected@file@percent }
+\newlabel{fig:sliding}{{4}{6}{Output pembentukan data time series dengan sliding window}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}Penambahan Fitur Statistik}{6}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Output penambahan fitur statistik}}{7}{figure.5}\protected@file@percent }
+\newlabel{fig:feature}{{5}{7}{Output penambahan fitur statistik}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.5}Preprocessing dan Pembagian Data Training-Testing}{7}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Output preprocessing dataset}}{8}{figure.6}\protected@file@percent }
+\newlabel{fig:preprocessing}{{6}{8}{Output preprocessing dataset}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Output preprocessing}}{9}{figure.7}\protected@file@percent }
+\newlabel{fig:output}{{7}{9}{Output preprocessing}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Visualisasi Data Deret Waktu Jumlah Peminjaman Sepeda}}{10}{figure.8}\protected@file@percent }
+\newlabel{fig:visualisasi}{{8}{10}{Visualisasi Data Deret Waktu Jumlah Peminjaman Sepeda}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.6}Pelatihan Model Machine Learning}{10}{subsection.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Kode MLP}}{10}{figure.9}\protected@file@percent }
+\newlabel{fig:mlp}{{9}{10}{Kode MLP}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Kode KNN}}{11}{figure.10}\protected@file@percent }
+\newlabel{fig:knn}{{10}{11}{Kode KNN}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Kode DT}}{11}{figure.11}\protected@file@percent }
+\newlabel{fig:dt}{{11}{11}{Kode DT}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Kode RF}}{12}{figure.12}\protected@file@percent }
+\newlabel{fig:rf}{{12}{12}{Kode RF}{figure.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.7}Prediksi dan Visualisasi Hasil}{12}{subsection.3.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Kode Prediksi}}{12}{figure.13}\protected@file@percent }
+\newlabel{fig:prediksi}{{13}{12}{Kode Prediksi}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Kode Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}}{13}{figure.14}\protected@file@percent }
+\newlabel{fig:visualisasi-prediksi}{{14}{13}{Kode Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}}{13}{figure.15}\protected@file@percent }
+\newlabel{fig:visualisasi-prediksi-zoom}{{15}{13}{Visualisasi Perbandingan Hasil Prediksi dengan Data Aktual}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.8}Evaluasi dan Perbandingan Model}{13}{subsection.3.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Kode Model Evaluasi}}{14}{figure.16}\protected@file@percent }
+\newlabel{fig:evaluasi-model}{{16}{14}{Kode Model Evaluasi}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Output Model Evaluasi}}{15}{figure.17}\protected@file@percent }
+\newlabel{fig:output-evaluasi-model}{{17}{15}{Output Model Evaluasi}{figure.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Tugas dan Analisis}{16}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1}Deskripsi dan Eksplorasi Dataset Saham Tesla}{16}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Deskripsi detail dari dataset}}{17}{figure.18}\protected@file@percent }
+\newlabel{fig:tugas-dataset-detail}{{18}{17}{Deskripsi detail dari dataset}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Tren harga saham Tesla (TSLA) periode 2010 - 2020}}{18}{figure.19}\protected@file@percent }
+\newlabel{fig:tren-dataset}{{19}{18}{Tren harga saham Tesla (TSLA) periode 2010 - 2020}{figure.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.2}Model Forecasting Target Close Berdasarkan Close 7 Hari Sebelumnya (Soal 2)}{18}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.2.1}Pemrosesan Data dan Feature Engineering}{19}{subsubsection.4.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Kode preprocesing soal 2}}{20}{figure.20}\protected@file@percent }
+\newlabel{fig:tugas-dataset-deskriptif}{{20}{20}{Kode preprocesing soal 2}{figure.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.2.2}Pelatihan Model dan Evaluasi Kinerja Soal 2}{20}{subsubsection.4.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Evaluasi model soal 2}}{21}{figure.21}\protected@file@percent }
+\newlabel{fig:evaluasi-forecasting-2}{{21}{21}{Evaluasi model soal 2}{figure.21}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Hasil Evaluasi Model Forecasting Soal 2 (Input: Close 7 Hari)}}{21}{table.1}\protected@file@percent }
+\newlabel{tab:tugas-eval-soal2}{{1}{21}{Hasil Evaluasi Model Forecasting Soal 2 (Input: Close 7 Hari)}{table.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Perbandingan Hasil Prediksi Model pada Soal 2 (100 Data Uji Pertama)}}{22}{figure.22}\protected@file@percent }
+\newlabel{fig:tugas-soal2-prediksi}{{22}{22}{Perbandingan Hasil Prediksi Model pada Soal 2 (100 Data Uji Pertama)}{figure.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3}Model Forecasting Target Close Berdasarkan Close dan Open 7 Hari Sebelumnya (Soal 3)}{22}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.1}Pemrosesan Data dan Feature Engineering Multivariat}{22}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Kode preprocesing soal 3}}{23}{figure.23}\protected@file@percent }
+\newlabel{fig:kode-soal-3}{{23}{23}{Kode preprocesing soal 3}{figure.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.2}Pelatihan Model dan Evaluasi Kinerja Soal 3}{23}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Evaluasi model soal 3}}{24}{figure.24}\protected@file@percent }
+\newlabel{fig:evaluasi-soal-3}{{24}{24}{Evaluasi model soal 3}{figure.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Hasil Evaluasi Model Forecasting Soal 3 (Input: Close \& Open 7 Hari)}}{24}{table.2}\protected@file@percent }
+\newlabel{tab:tugas-eval-soal3}{{2}{24}{Hasil Evaluasi Model Forecasting Soal 3 (Input: Close \& Open 7 Hari)}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Perbandingan Hasil Prediksi Model pada Soal 3 (100 Data Uji Pertama)}}{25}{figure.25}\protected@file@percent }
+\newlabel{fig:tugas-soal3-prediksi}{{25}{25}{Perbandingan Hasil Prediksi Model pada Soal 3 (100 Data Uji Pertama)}{figure.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}Kesimpulan}{27}{section.5}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{ref}
-\@writefile{toc}{\contentsline {section}{\numberline {E}Daftar Pustaka}{3}{section.5}\protected@file@percent }
-\gdef \@abspage@last{4}
+\bibcite{zhang2020supervised}{1}
+\bibcite{hyndman2021forecasting}{2}
+\bibcite{masini2023machine}{3}
+\bibcite{chai2014rmse}{4}
+\bibcite{benesty2009pearson}{5}
+\bibcite{chicco2024evaluation}{6}
+\@writefile{toc}{\contentsline {section}{\numberline {F}Daftar Pustaka}{28}{section.6}\protected@file@percent }
+\gdef \@abspage@last{29}
