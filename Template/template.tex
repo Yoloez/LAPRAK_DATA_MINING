@@ -17,6 +17,7 @@
 % \usepackage{natbib}
 \usepackage{chngcntr}
 \usepackage{amsmath}
+\usepackage{enumitem}
 
 \renewcommand{\figurename}{Gambar}
 \renewcommand\thesection{\Alph{section}}
@@ -73,8 +74,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 6}}\\[0.3cm]
+    { \textbf{CLUSTERING}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -111,16 +112,545 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa memahami konsep dasar unsupervised learning dan perannya dalam machine 
+learning.
+    \item Mahasiswa mampu menerapkan berbagai teknik clustering seperti K-Means, K Medoids, dan DBSCAN untuk mengelompokkan data berdasarkan karakteristik tertentu. 
+    \item Mahasiswa dapat membandingkan kualitas hasil clustering menggunakan metrik evaluasi seperti Inertia dan Silhouette Score. 
 \end{enumerate}
 \section{Dasar Teori}
+\subsection{Unsupervised Learning}
+Unsupervised learning merupakan salah satu metode dalam pembelajaran mesin yang memungkinkan model menemukan pola tersembunyi pada data tanpa memerlukan label acuan. Berbeda dengan pembelajaran terawasi, proses ini berlangsung tanpa campur tangan manusia dalam menentukan kategori data, sehingga model dituntut untuk menggali struktur data secara mandiri \cite{nurhalizah2024}. Pendekatan ini banyak dimanfaatkan untuk eksplorasi data serta pengelompokan menggunakan berbagai algoritma, di antaranya K-Means, Artificial Neural Network (ANN), dan Gaussian Mixture Model (GMM), yang masing-masing menawarkan tingkat fleksibilitas tinggi meskipun umumnya memiliki akurasi yang lebih rendah dibandingkan metode terawasi \cite{nurhalizah2024}.
+
+Penerapan unsupervised learning umumnya diarahkan pada dua tugas utama, yaitu pendeteksian pola dan pemodelan deskriptif, yang menjadi landasan bagi algoritma clustering maupun aturan asosiasi. Keunggulan utama dari pendekatan ini terletak pada fleksibilitasnya dalam menemukan pola yang sebelumnya tidak diketahui, karena tidak bergantung pada ketersediaan label pada data \cite{wijoyo2024}.
+
+\subsection{Clustering}
+Clustering atau klasterisasi adalah teknik pengelompokan data berdasarkan kemiripan karakteristik yang dimiliki oleh masing-masing objek data. Teknik ini menjadi salah satu alat penting dalam pengolahan data statistik karena mampu mengungkap struktur alami di dalam kumpulan data tanpa memerlukan informasi label sebelumnya. Analisis cluster pada dasarnya merupakan kumpulan metode untuk mengelompokkan objek ke dalam suatu cluster berdasarkan pola yang ditemukan pada data tersebut, dan telah diterapkan secara luas di berbagai bidang keilmuan seperti ekonomi, psikologi, kesehatan, hingga kependudukan. Salah satu metode clustering yang paling populer digunakan adalah K-Means \cite{afidaha2023}.
+
+\subsection{K-Means}
+K-Means merupakan algoritma clustering non-hirarki yang bekerja dengan cara membentuk partisi klaster awal, kemudian memperbaikinya secara iteratif hingga tidak terjadi lagi perubahan signifikan pada anggota masing-masing cluster. Data yang memiliki karakteristik serupa akan dikelompokkan ke dalam satu klaster yang sama, sementara data dengan karakteristik berbeda akan dipisahkan ke klaster lain. Prinsip dasar dari algoritma ini adalah menentukan sejumlah K titik pusat massa (centroid) yang merepresentasikan rata-rata dari sekelompok data. Tujuan akhir dari proses pengelompokan ini adalah meminimalkan variasi data di dalam satu klaster sekaligus memaksimalkan variasi antar klaster \cite{sulistiyawati2021}.
+
+\subsection{K-Medoids}
+K-Medoids merupakan algoritma clustering yang bertujuan menemukan medoid, yaitu objek data aktual yang berperan sebagai titik pusat suatu cluster. Berbeda dengan K-Means yang menggunakan nilai rata-rata (mean) sebagai titik referensi, K-Medoids memilih objek data yang benar-benar ada dalam dataset untuk merepresentasikan klaster. Pendekatan ini membuat K-Medoids relatif lebih tahan terhadap data noise dan outlier, karena tidak menggunakan hasil kuadrat jarak Euclidean sebagaimana pada K-Means, melainkan meminimalkan ketidaksamaan antar objek data secara langsung \cite{herviany2021}. Konsekuensinya, proses komputasi pada K-Medoids cenderung lebih kompleks dibandingkan K-Means, karena penentuan medoid memerlukan perhitungan berdasarkan frekuensi kemunculan serta pengujian beberapa kandidat titik pusat \cite{herviany2021}.
+
+\subsection{DBSCAN}
+DBSCAN (\textit{Density-Based Spatial Clustering of Applications with Noise}) adalah algoritma clustering berbasis kepadatan yang mengelompokkan titik data berdasarkan tingkat kepadatan area di sekitarnya. Algoritma ini memanfaatkan dua parameter utama, yaitu epsilon ($\varepsilon$) sebagai radius pencarian tetangga dan minPts sebagai jumlah minimum titik yang diperlukan agar suatu titik dapat dikategorikan sebagai \textit{core point}. Keunggulan DBSCAN terletak pada kemampuannya mendeteksi cluster dengan bentuk yang tidak beraturan serta mengidentifikasi noise atau outlier tanpa perlu menentukan jumlah cluster terlebih dahulu \cite{ester1996, han2011}.
+
+\subsection{Association Rule}
+Association Rule Mining adalah teknik dalam data mining yang digunakan untuk menemukan pola hubungan antar-item pada suatu dataset transaksi. Aturan asosiasi lazimnya dinyatakan dalam bentuk $A \rightarrow B$, yang menggambarkan bahwa kemunculan item A cenderung diikuti oleh kemunculan item B. Kualitas suatu aturan asosiasi dinilai melalui tiga ukuran utama, yaitu \textit{support}, \textit{confidence}, dan \textit{lift}, yang masing-masing merepresentasikan frekuensi kemunculan, probabilitas keterkaitan, serta kekuatan hubungan antar-item. Teknik ini umum diterapkan dalam \textit{market basket analysis} untuk mengungkap pola perilaku konsumen \cite{agrawal1993, han2011}.
+
+\subsection{Inertia}
+Inertia merupakan metrik evaluasi yang digunakan pada algoritma K-Means untuk mengukur tingkat kekompakan suatu cluster. Nilai ini dihitung berdasarkan jumlah kuadrat jarak seluruh titik data terhadap centroid klaster masing-masing. Semakin rendah nilai inertia, semakin kompak dan representatif cluster yang terbentuk. Metrik ini kerap digunakan dalam \textit{Elbow Method} untuk menentukan jumlah cluster optimal, meskipun penerapannya hanya relevan untuk metode clustering berbasis centroid seperti K-Means \cite{bishop2006, sklearn2024}.
+
+\subsection{Silhouette Score}
+Silhouette Score adalah metode evaluasi yang mengukur seberapa tepat suatu data ditempatkan pada klasternya dengan mempertimbangkan kedekatan data tersebut terhadap anggota cluster-nya sendiri dibandingkan dengan jarak terhadap cluster terdekat lainnya. Nilai silhouette berada pada rentang $-1$ hingga $1$; nilai yang mendekati $1$ menandakan pemisahan cluster yang baik, nilai $0$ mengindikasikan adanya overlap antar-cluster, sedangkan nilai negatif mengindikasikan kemungkinan kesalahan pengelompokan. Metrik ini sering digunakan untuk membandingkan performa beberapa algoritma clustering dalam satu eksperimen \cite{rousseeuw1987, tan2019}.
 \section{Hasil dan Pembahasan}
+\subsection{Import Library}
+Sebelum melakukan import library, pastikan library yang dibutuhkan sudah terinstall. Jika belum, lakukan instalasi terlebih dahulu menggunakan pip. Berikut adalah contoh perintah untuk menginstal library yang dibutuhkan:
+\begin{lstlisting}[style=pythonnb]
+import sys
 
-\subsection{}
+!{sys.executable} -m pip install --no-cache-dir numpy==1.26.4
+!{sys.executable} -m pip install --no-cache-dir scipy
+!{sys.executable} -m pip install --no-cache-dir scikit-learn==1.3.2
+!{sys.executable} -m pip install --no-cache-dir scikit-learn-extra==0.3.0
+\end{lstlisting}
+Jika semua library sudah terinstall, lakukan import library yang dibutuhkan untuk praktikum ini. Berikut adalah contoh kode untuk mengimpor library yang dibutuhkan:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/1-import.png}
+    \caption{Import Library yang dibutuhkan}
+    \label{1}
+\end{figure}
+
+\subsection{Read dan Load dataset information}
+\subsubsection{Import dataset dari kaggle}
+Import dataset dari kaggle dengan link berikut \url{https://raw.githubusercontent.com/ganjar87/data_science_practice/main/CC%20GENERAL.csv}, lalu tampilkan 5 data teratas dari dataset tersebut. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/2-import-dataset.png}
+    \caption{Import dataset dari kaggle}
+    \label{2}
+\end{figure}
+Berdasarkan dataset tersebut, terdapat 18 fitur. Di antaranya sebagai berikut:
+\begin{itemize}
+    \item \textbf{CUST\_ID}: Identitas unik setiap pelanggan.
+    
+    \item \textbf{BALANCE}: Saldo yang terdapat pada rekening kartu kredit pelanggan.
+    
+    \item \textbf{BALANCE\_FREQUENCY}: Frekuensi pelanggan dalam memiliki saldo selama periode pengamatan.
+    
+    \item \textbf{PURCHASES}: Total nilai pembelian yang dilakukan pelanggan.
+    
+    \item \textbf{ONEOFF\_PURCHASES}: Total nilai pembelian yang dilakukan secara satu kali pembayaran.
+    
+    \item \textbf{INSTALLMENTS\_PURCHASES}: Total nilai pembelian yang dilakukan secara cicilan.
+    
+    \item \textbf{CASH\_ADVANCE}: Total nilai penarikan tunai menggunakan kartu kredit.
+    
+    \item \textbf{PURCHASES\_FREQUENCY}: Frekuensi pelanggan melakukan pembelian.
+    
+    \item \textbf{ONEOFF\_PURCHASES\_FREQUENCY}: Frekuensi pelanggan melakukan pembelian satu kali pembayaran.
+    
+    \item \textbf{PURCHASES\_INSTALLMENTS\_FREQUENCY}: Frekuensi pelanggan melakukan pembelian secara cicilan.
+    
+    \item \textbf{CASH\_ADVANCE\_FREQUENCY}: Frekuensi pelanggan melakukan penarikan tunai.
+    
+    \item \textbf{CASH\_ADVANCE\_TRX}: Jumlah transaksi penarikan tunai.
+    
+    \item \textbf{PURCHASES\_TRX}: Jumlah transaksi pembelian.
+    
+    \item \textbf{CREDIT\_LIMIT}: Batas kredit yang diberikan kepada pelanggan.
+    
+    \item \textbf{PAYMENTS}: Total pembayaran yang dilakukan pelanggan.
+    
+    \item \textbf{MINIMUM\_PAYMENTS}: Jumlah pembayaran minimum yang dilakukan pelanggan.
+    
+    \item \textbf{PRC\_FULL\_PAYMENT}: Persentase pembayaran saldo secara penuh.
+    
+    \item \textbf{TENURE}: Lama periode pelanggan menggunakan layanan kartu kredit.
+\end{itemize}
+
+\subsubsection{Struktur dataset dan distribusinya}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/3-describe-dataset.png}
+    \caption{Struktur dataset dan distribusinya}
+    \label{3}
+\end{figure}
+
+\subsubsection{Korelasi antar kolom dataset}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/4-correlation.png}
+    \caption{Korelasi antar kolom dataset}
+    \label{4}
+\end{figure}
+
+\subsection{Data Cleaning}
+\subsubsection{Menghapus kolom yang tidak diperlukan}
+Pada tahap ini, kolom yang tidak diperlukan untuk analisis lebih lanjut akan dihapus. Kolom yang dihapus adalah \textbf{CUST\_ID} karena tidak memberikan informasi yang relevan untuk clustering dan analisis asosiasi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/5-drop-column.png}
+    \caption{Menghapus kolom yang tidak diperlukan}
+    \label{5}
+\end{figure}
+
+\subsubsection{Cek missing value dan menghapus baris yang memiliki missing value}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../images/6-missing-value.png}
+    \caption{Cek missing value}
+    \label{6}
+\end{figure}
+
+Berdasarkan gambar \ref{6}, terdapat 2 kolom yang memiliki missing value, yaitu \textbf{MINIMUM\_PAYMENTS} dan \textbf{CREDIT\_LIMIT}. Untuk mengatasi hal ini, baris yang memiliki missing value akan diisi dengan nilai median dari setiap kolom.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/7-fill-median.png}
+    \caption{Mengisi missing value dengan nilai median}
+    \label{7}
+\end{figure}
+
+Setelah mengisi missing value dengan nilai median, cek kembali apakah masih terdapat missing value pada dataset. Berdasarkan gambar \ref{8}, tidak terdapat missing value pada dataset setelah dilakukan pengisian.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../images/8-check-missing-value.png}
+    \caption{Cek missing value setelah pengisian}
+    \label{8}
+\end{figure}
+
+\subsection{Standardisasi Data}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/9-standardisasi-data.png}
+    \caption{Standardisasi Data}
+    \label{9}
+\end{figure}
+
+\begin{itemize}
+    \item \texttt{astype(float).values}: Mengubah data menjadi array numerik bertipe \texttt{float}.
+    
+    \item \texttt{StandardScaler()}: Melakukan standardisasi data agar setiap fitur memiliki skala yang sebanding.
+    
+    \item \texttt{transform(X)}: Menerapkan standardisasi pada data menggunakan rumus:
+    \[
+    z = \frac{x-\mu}{\sigma}
+    \]
+    
+    \item \texttt{X\_new}: Menyimpan data yang telah distandardisasi dan siap digunakan untuk proses clustering.
+\end{itemize}
+
+\subsection{Menentukan Jumlah Cluster (Elbow Method \& Silhoutte Score)}
+\subsubsection{Elbow Method}
+\begin{enumerate}[label=\alph*.]
+    \item K-Means \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/10-kmeans-elbow.png}
+        \caption{Elbow Method - K-Means}
+        \label{10a}
+    \end{figure}
+    Metode \textit{Elbow} digunakan untuk menentukan jumlah cluster ($k$) dengan menghitung nilai \textit{inertia} untuk $k=1$ hingga $k=10$. Nilai \textit{inertia} yang semakin kecil menunjukkan jarak data dalam cluster yang semakin rendah.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/11-visualisasi-kmeans-elbow.png}
+        \caption{Visualisasi Elbow Method - K-Means}
+        \label{10b}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/12-kmeans-titik-optimal.png}
+        \caption{Titik Optimal Elbow Method - K-Means}
+        \label{10c}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/13-kmeans-titik-optimal-2.png}
+        \caption{Visualisasi Titik Optimal Elbow Method - K-Means}
+        \label{10d}
+    \end{figure}
+
+    \item K-Medoids \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/14-kmedoids-elbow.png}
+        \caption{Elbow Method - K-Medoids}
+        \label{11a}
+    \end{figure}
+Metode \textit{Elbow} pada K-Medoids digunakan untuk menghitung nilai \textit{inertia} pada $k=1$ hingga $k=10$. Nilai \textit{inertia} menurun seiring bertambahnya jumlah cluster dan digunakan untuk menentukan titik \textit{elbow}.
+Berikut visualisasinya:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/15-kmedoids-elbow-visualisasi.png}
+    \caption{Visualisasi Elbow Method - K-Medoids}
+    \label{11b}
+\end{figure}
+Setelah itu, tentukan titik optimal dari metode \textit{Elbow} pada K-Medoids. Berikut visualisasinya:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/16-kmedoids-titik-optimal.png}
+    \caption{Titik Optimal Elbow Method - K-Medoids}
+    \label{11c}
+\end{figure}
+    
+\end{enumerate}
+
+\subsubsection{Silhouette Score}
+\begin{enumerate}[label=\alph*.]
+    \item K-Means \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/17-silhoutte-kmeans.png}
+        \caption{Silhouette Score - K-Means}
+        \label{12a}
+    \end{figure}
+    Kode tersebut digunakan untuk menghitung \textit{Silhouette Score} pada K-Means untuk jumlah cluster $k=2$ hingga $k=10$. Nilai \textit{Silhouette Score} digunakan untuk mengevaluasi kualitas pemisahan antar-cluster, di mana nilai yang lebih tinggi menunjukkan pemisahan cluster yang lebih baik.
+    Berikut visualisasi dari Silhouette Score pada K-Means:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{../images/18-silhoutte-kmeans-visualisasi.png}
+        \caption{Visualisasi Silhouette Score - K-Means}
+        \label{12b}
+    \end{figure}
+
+    \item K-Medoids \\
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/19-silhoutte-kmedoids.png}
+        \caption{Silhouette Score - K-Medoids}
+        \label{12c}
+    \end{figure}
+    Kode tersebut digunakan untuk menghitung \textit{Silhouette Score} pada K-Medoids untuk jumlah cluster $k=2$ hingga $k=10$. Nilai \textit{Silhouette Score} digunakan untuk mengevaluasi kualitas pemisahan antar-cluster, di mana nilai yang lebih tinggi menunjukkan pemisahan cluster yang lebih baik.
+    Berikut visualisasi dari Silhouette Score pada K-Medoids:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/20-silhoutte-kmedoids-visualisasi.png}
+        \caption{Visualisasi Silhouette Score - K-Medoids}
+        \label{12d}
+    \end{figure}
+\end{enumerate}
+
+\subsection{Menerapkan Algoritma K-Means}
+Berikut merupakan tahapan untuk mengimplementasikan algoritma K-Means pada dataset yang telah distandardisasi. Proses ini mencakup pemilihan jumlah cluster optimal, pelatihan model K-Means, dan visualisasi hasil clustering. Berikut tahapan yang dilakukan:
+\subsubsection{Melatih model K-means sesuai jumlah cluster optimal}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/21-training-kmeans.png}
+    \caption{Melatih model K-Means sesuai jumlah cluster optimal}
+    \label{13}
+\end{figure}
+
+\subsubsection{Menghasilkan label cluster untuk setiap data dan menambahkan label cluster ke DataFrame}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/22-centroids.png}
+    \caption{Menghasilkan label cluster untuk setiap data dan menambahkan label cluster ke DataFrame}
+    \label{14}
+\end{figure}
+Kode tersebut digunakan untuk memperoleh \textit{centroid} atau pusat dari setiap cluster K-Means. Setiap baris menunjukkan posisi pusat suatu cluster berdasarkan seluruh fitur yang telah distandardisasi. Nilai positif menunjukkan karakteristik di atas rata-rata, sedangkan nilai negatif menunjukkan karakteristik di bawah rata-rata.
+
+\subsubsection{Melakukan visualisasi 2D menggunakan fitur-fitur PURCHASES dan PAYMENTS}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/23-kmeans-clustering.png}
+    \caption{kode untuk visualisasi 2D menggunakan fitur-fitur purchases dan payments}
+    \label{15}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/24-visualisasi-kmeans-clustering.png}
+    \caption{Visualisasi 2D menggunakan fitur-fitur purchases dan payments}
+    \label{16}
+\end{figure}
+
+Selanjutnya, visualisasikan juga clustering dengan menggunakan seaborn
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/25-visualisasi-seaborn.png}
+    \caption{Visualisasi 2D menggunakan fitur-fitur purchases dan payments dengan seaborn}
+    \label{17}
+\end{figure}
+
+\subsubsection{Melakukan visualisasi 3D menggunakan fitur purchases dan payements}
+Berikut merupakan kode untuk melakukan visualisasi 3D menggunakan fitur purchases dan payments. Visualisasi ini bertujuan untuk memberikan pandangan yang lebih mendalam mengenai distribusi data dalam ruang tiga dimensi, sehingga memudahkan dalam memahami struktur cluster yang terbentuk.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/26-kode-3d.png}
+    \caption{Kode visualisasi 3D menggunakan fitur purchases dan payments}
+    \label{18}
+\end{figure}
+Jika kode tersebut dijalankan, maka secara otomatis, browser akan terbuka dan menampilkan visualisasi 3D dari hasil clustering K-Means. Visualisasi ini memungkinkan pengguna untuk memutar, memperbesar, dan menjelajahi data dari berbagai sudut pandang, sehingga memberikan pemahaman yang lebih baik mengenai distribusi dan pemisahan cluster dalam dataset.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/27-visualisasi-3d.png}
+    \caption{Visualisasi 3D menggunakan fitur purchases dan payments di browser}
+    \label{19}
+\end{figure}
+
+\subsection{Menerapkan Algoritma K-Medoids}
+\subsubsection{Evaluasi jumlah cluster menggunakan inertia}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/28-kmedoids-algoritma.png}
+    \caption{Evaluasi jumlah cluster menggunakan inertia}
+    \label{20}
+\end{figure}
+
+\subsubsection{Pelatihan model K-Medoids dan menambahkan label cluster ke DataFrame}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/29-kmedoid-pelatihan.png}
+    \caption{Pelatihan model K-Medoids dan menambahkan label cluster ke DataFrame}
+    \label{21}
+\end{figure}
+
+\subsubsection{Visualisasi hasil clustering untuk membandingkan pola dengan K-Means}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/30-visualisasi-kmedoids.png}
+    \caption{Visualisasi hasil clustering K-Medoids}
+    \label{22}
+\end{figure}
+
+\subsubsection{Visualisasi seaborn untuk membandingkan pola dengan K-Means}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/31-visualisasi-seaborn.png}
+    \caption{Visualisasi seaborn hasil clustering K-Medoids}
+    \label{23}
+\end{figure}
 
 
+\subsection{Analisis dan Interpretasi Hasil Clustering}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{../images/32-interpretasi-cluster.png}
+    \caption{Analisis dan Interpretasi Hasil Clustering}
+    \label{24}
+\end{figure}
+
+Berdasarkan hasil visualisasi diagram batang pada Gambar \ref{24}, dilakukan evaluasi karakteristik perilaku transaksi pelanggan pada masing-masing klaster berdasarkan tiga fitur utama: total pembelian (\textit{PURCHASES}), total pembayaran tagihan (\textit{PAYMENTS}), dan saldo rekening (\textit{BALANCE}). Ringkasan profil masing-masing klaster adalah sebagai berikut:
+
+\begin{enumerate}
+    \item \textbf{Cluster 0 (Low-Usage / Pelanggan Bertransaksi Rendah)}: \\
+    Memiliki nilai \textit{PURCHASES}, \textit{PAYMENTS}, dan \textit{BALANCE} yang sangat rendah. Kelompok ini mencerminkan nasabah pasif atau pengguna kartu kredit hemat yang jarang bertransaksi dan hanya menggunakan saldo dalam jumlah kecil.
+
+    \item \textbf{Cluster 1 (Moderate-Balance / Pembayaran Minimum Rendah)}: \\
+    Memiliki tingkat pembelian (\textit{PURCHASES}) paling rendah, namun memiliki saldo (\textit{BALANCE}) tingkat menengah dan pembayaran (\textit{PAYMENTS}) yang relatif rendah. Kelompok ini cenderung hanya melakukan pembayaran cicilan minimum atau sesekali memanfaatkan penarikan tunai (\textit{cash advance}) tanpa banyak melakukan transaksi belanja retail.
+
+    \item \textbf{Cluster 2 (High Transactor / Pelanggan Bertransaksi Tinggi)}: \\
+    Memiliki rata-rata \textit{PURCHASES} tertinggi dibandingkan seluruh kelompok lain, dengan tingkat \textit{PAYMENTS} yang juga tinggi dan saldo \textit{BALANCE} yang terjaga moderat. Karakteristik ini merepresentasikan pelanggan aktif konsumtif yang memiliki likuiditas dan kedisiplinan pelunasan tagihan yang baik.
+
+    \item \textbf{Cluster 3 (High Balance \& Heavy Revolver / Penggunaan Kartu Kredit Intensif)}: \\
+    Memiliki rata-rata \textit{BALANCE} dan \textit{PAYMENTS} tertinggi, dengan volume belanja (\textit{PURCHASES}) moderat. Kelompok ini memanfaatkan limit kartu kredit secara intensif (penggunaan kredit bernilai besar/pinjaman tunai) sehingga mempertahankan perputaran saldo serta pembayaran bulanan yang sangat besar.
+\end{enumerate}
+
+\section{Tugas dan Analisis}
+\subsection{Tugas 1}
+Pada tugas 1, praktikan diminta untuk menjelaskan tujuan dan feature yang terdapat pada dataset yang diperoleh dari \url{https://www.kaggle.com/datasets/arjunbhasin2013/ccdata}. Unduh dataset tersebut dan simpan ke dalam folder credit-card.
+\begin{enumerate}[label=\alph*.]
+    \item Tujuan \\ 
+    Tujuan utama dari dataset ini adalah untuk keperluan pengembangan segmentasi pelanggan (customer segmentation) guna menentukan strategi pemasaran yang lebih tepat sasaran.
+
+    \item Feature \\
+    Untuk dapat menentukan fitur dari dataset, praktikan perlu membaca dataset tersebut terlebih dahulu.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/33-tugas1-read.png}
+        \caption{Read dataset dan menampilkan 5 baris teratas}
+        \label{25}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/34-tugas1-fitur.png}
+        \caption{Menampilkan fitur-fitur dataset}
+        \label{26}
+    \end{figure}
+    Berdasarkan gambar \ref{26}, terdapat 18 fitur pada dataset, di antaranya yaitu:
+\begin{itemize}
+    \item \textbf{CUST\_ID}: Identitas unik pelanggan pemegang kartu kredit (tipe data kategorikal).
+    \item \textbf{BALANCE}: Jumlah saldo tagihan yang tersisa pada akun pelanggan untuk melakukan pembelian.
+    \item \textbf{BALANCE\_FREQUENCY}: Frekuensi pembaruan saldo rekening, yang direpresentasikan dengan nilai antara 0 hingga 1 (nilai 1 menandakan saldo sangat sering diperbarui, sedangkan 0 menandakan jarang diperbarui).
+    \item \textbf{PURCHASES}: Jumlah total nominal pembelian yang telah dilakukan oleh pelanggan menggunakan kartu kredit.
+    \item \textbf{ONEOFF\_PURCHASES}: Nominal pembelian tertinggi yang dilakukan dalam satu kali transaksi secara langsung (tanpa menggunakan sistem cicilan).
+    \item \textbf{INSTALLMENTS\_PURCHASES}: Nominal pembelian yang dilakukan dengan menggunakan sistem cicilan atau angsuran.
+    \item \textbf{CASH\_ADVANCE}: Jumlah uang tunai yang ditarik di muka (fasilitas tarik tunai) oleh pelanggan.
+    \item \textbf{PURCHASES\_FREQUENCY}: Frekuensi pelanggan dalam melakukan transaksi pembelian, yang direpresentasikan dengan nilai antara 0 hingga 1 (nilai 1 menandakan sangat sering berbelanja, sedangkan 0 menandakan jarang berbelanja).
+    \item \textbf{ONEOFF\_PURCHASES\_FREQUENCY}: Frekuensi terjadinya pembelian satu kali atau dibayar lunas secara langsung (nilai 1 menandakan sangat sering, sedangkan 0 menandakan jarang).
+    \item \textbf{PURCHASES\_INSTALLMENTS\_FREQUENCY}: Frekuensi pelanggan dalam melakukan pembelian dengan menggunakan sistem cicilan (nilai 1 menandakan sangat sering, sedangkan 0 menandakan jarang).
+    \item \textbf{CASH\_ADVANCE\_FREQUENCY}: Frekuensi pelanggan dalam melakukan transaksi tarik tunai menggunakan kartu kredit.
+    \item \textbf{CASH\_ADVANCE\_TRX}: Jumlah atau total frekuensi transaksi tarik tunai yang telah dilakukan oleh pelanggan.
+    \item \textbf{PURCHASES\_TRX}: Jumlah total transaksi pembelian yang berhasil dilakukan oleh pelanggan.
+    \item \textbf{CREDIT\_LIMIT}: Batas maksimal pagu kredit (limit kartu kredit) yang ditetapkan oleh bank untuk pelanggan tersebut.
+    \item \textbf{PAYMENTS}: Jumlah nominal pembayaran yang telah disetorkan oleh pelanggan untuk melunasi tagihan kartu kreditnya.
+    \item \textbf{MINIMUM\_PAYMENTS}: Jumlah minimum pembayaran tagihan yang wajib dibayarkan oleh pelanggan.
+    \item \textbf{PRC\_FULL\_PAYMENT}: Persentase jumlah bulan di mana pelanggan membayar seluruh tagihannya secara penuh (tanpa menyisakan tunggakan).
+    \item \textbf{TENURE}: Jangka waktu (tenor) atau masa penggunaan fasilitas layanan kartu kredit oleh pelanggan (dihitung dalam satuan bulan).
+\end{itemize}
+\end{enumerate}
+
+\subsection{Tugas 2}
+Pada tugas 2, praktikan diminta untuk menerapkan algoritma \textit{clustering} K-Means dan K-Medoids pada dataset \textit{Air Traffic Passengers Statistics} yang diperoleh dari repositori data San Francisco Open Data (\url{https://data.sfgov.org/Transportation/Air-Traffic-Passenger-Statistics/rkru-6vcg/about_data}). Dataset ini mencatat statistik operasional penerbangan bulanan dan volume penumpang di Bandara Internasional San Francisco (SFO).
+
+\begin{enumerate}[label=\alph*.]
+    \item \textbf{Load dan Eksplorasi Dataset} \\
+    Dataset dimuat ke dalam \textit{DataFrame} menggunakan library \texttt{pandas}. Dataset ini memiliki 40.626 baris dan 12 kolom yang memuat informasi maskapai pengoperasi (\textit{operating airline}), kode IATA, ringkasan geografis (\textit{geo summary} dan \textit{geo region}), jenis aktivitas, kategori harga tiket, terminal keberangkatan, area \textit{boarding}, hingga jumlah penumpang (\textit{passenger count}).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/35-tugas2-load-dataset.png}
+        \caption{Membaca dataset Air Traffic Passengers Statistics dan menampilkan struktur data}
+        \label{27}
+    \end{figure}
+
+    \item \textbf{Data Preprocessing dan Standarisasi} \\
+    Tahapan pra-pemrosesan data dilakukan melalui beberapa langkah:
+    \begin{itemize}
+        \item Pengambilan sampel data representatif sebanyak 5.000 baris secara acak (\textit{random sampling}) dengan \texttt{random\_state=42}. Hal ini dilakukan untuk mengoptimalkan efisiensi komputasi algoritma K-Medoids yang memiliki kompleksitas matriks jarak $O(N^2)$, sekaligus mencegah terjadinya kendala kehabisan memori (\textit{out of memory}).
+        \item Imputasi nilai hilang (\textit{missing values}) pada fitur kode IATA maskapai (\texttt{operating\_airline\_iata\_code} dan \texttt{published\_airline\_iata\_code}) menggunakan kategori \texttt{"Unknown"}.
+        \item Transformasi seluruh fitur bertipe kategorikal/objek ke dalam representasi numerik menggunakan \texttt{LabelEncoder}.
+        \item Standarisasi seluruh fitur numerik menggunakan \texttt{StandardScaler} agar seluruh variabel berada pada rentang skala yang sebanding dengan rata-rata 0 dan variansi 1.
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/36-tugas2-preprocessing.png}
+        \caption{Hasil pra-pemrosesan, encoding fitur kategorikal, dan standarisasi data}
+        \label{28}
+    \end{figure}
+
+    \item \textbf{Penentuan Jumlah Cluster Optimal K-Means} \\
+    Evaluasi jumlah klaster optimal dilakukan dengan menguji rentang nilai $k=1$ hingga $k=10$:
+    \begin{itemize}
+        \item \textit{Elbow Method}: Nilai \textit{inertia} dihitung dan divisualisasikan. Titik belok (\textit{knee point}) dideteksi secara otomatis menggunakan pustaka \texttt{kneed} (\texttt{KneeLocator}), yang menghasilkan titik siku optimal pada $k=4$.
+        \item \textit{Silhouette Score}: Evaluasi kualitas pemisahan klaster menunjukkan nilai skor yang stabil dan representatif pada $k=4$ dengan skor sebesar 0,2575.
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/37-tugas2-kmeans-elbow.png}
+        \caption{Visualisasi Elbow Method pada K-Means}
+        \label{29}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/38-tugas2-kmeans-sihoutte.png}
+        \caption{Visualisasi Silhouette Score pada K-Means}
+        \label{30}
+    \end{figure}
+
+    \item \textbf{Penentuan Jumlah Cluster Optimal K-Medoids} \\
+    Tahap penentuan jumlah klaster juga diuji pada algoritma K-Medoids menggunakan rentang $k=1$ hingga $k=10$:
+    \begin{itemize}
+        \item \textit{Elbow Method}: Penurunan nilai \textit{inertia} pada K-Medoids membentuk titik belok optimal pada $k=4$.
+        \item \textit{Silhouette Score}: Skor silhouette tertinggi pada K-Medoids dicapai pada $k=4$ dengan skor sebesar 0,1569.
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/39-tugas2-kmedoids-elbow.png}
+        \caption{Visualisasi Elbow Method pada K-Medoids}
+        \label{31}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/40-tugas2-kmedoids-silhouette.png}
+        \caption{Visualisasi Silhouette Score pada K-Medoids}
+        \label{32}
+    \end{figure}
+
+    \item \textbf{Implementasi dan Visualisasi Clustering (K-Means vs K-Medoids)} \\
+    Setelah nilai $k=4$ ditetapkan sebagai jumlah klaster optimal, kedua model dilatih menggunakan parameter tersebut:
+    \begin{itemize}
+        \item Model K-Means mempartisi data berdasarkan titik rata-rata (\textit{centroid}).
+        \item Model K-Medoids mempartisi data menggunakan titik data representatif aktual (\textit{medoid}), sehingga lebih tahan terhadap pencilan (\textit{outlier}).
+    \end{itemize}
+    Hasil sebaran anggota klaster kemudian divisualisasikan dalam bentuk \textit{scatter plot} 2D antara maskapai operasional (\textit{operating airline}) dan volume penumpang (\textit{passenger count}).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/41-tugas2-kmeans-clustering.png}
+        \caption{Visualisasi 2D hasil clustering K-Means}
+        \label{33}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{../images/42-tugas2-kmedoids-clustering.png}
+        \caption{Visualisasi 2D hasil clustering K-Medoids}
+        \label{34}
+    \end{figure}
+
+    \item \textbf{Analisis dan Interpretasi Cluster} \\
+    Berdasarkan perbandingan diagram batang rata-rata volume penumpang (\textit{passenger count}) dan tipe rute (\textit{domestic vs international}) pada masing-masing klaster, diperoleh profil operasional penerbangan sebagai berikut:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{../images/43-tugas2-interpretasi-cluster.png}
+        \caption{Analisis karakteristik dan distribusi volume penumpang pada masing-masing cluster}
+        \label{35}
+    \end{figure}
+
+    \begin{enumerate}
+        \item \textbf{Cluster 0 (Rute Internasional Volume Rendah)}: \\
+        Didominasi oleh penerbangan jarak jauh (\textit{long-haul international}) dengan rata-rata penumpang berkisar antara 6.000 hingga 8.700 penumpang per periode. Klaster ini diisi oleh maskapai internasional berjadwal reguler seperti Air Canada dan KLM.
+        
+        \item \textbf{Cluster 1 (Rute Internasional Volume Sedang)}: \\
+        Mencakup penerbangan internasional dengan frekuensi armada menengah dan rata-rata volume penumpang berkisar antara 11.000 hingga 14.000 penumpang, didukung oleh maskapai seperti Singapore Airlines serta rute trans-kontinental.
+        
+        \item \textbf{Cluster 2 (Rute Domestik Utama Berpenumpang Sangat Tinggi)}: \\
+        Memiliki rata-rata volume penumpang tertinggi ($\approx 81.700$ penumpang pada K-Means dan $>60.000$ pada K-Medoids). Klaster ini merepresentasikan operasional maskapai utama berkapasitas besar (\textit{hub carriers}) pada rute domestik tersibuk, terutama United Airlines dan Southwest Airlines.
+        
+        \item \textbf{Cluster 3 (Rute Domestik Regional / Volume Menengah)}: \\
+        Terdiri dari penerbangan domestik pengumpan (\textit{feeder/regional routes}) dengan rata-rata penumpang berkisar 36.000 penumpang, yang didominasi oleh maskapai regional dan bertarif rendah seperti SkyWest Airlines dan Frontier Airlines.
+    \end{enumerate}
+\end{enumerate}
 \newpage
+
 \section{Kesimpulan}
+Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa teknik \textit{unsupervised learning} melalui algoritma \textit{clustering} berhasil mengelompokkan data tanpa memerlukan label awal berdasarkan kemiripan karakteristik fiturnya. Tahapan pra-pemrosesan data—seperti penanganan nilai hilang (\textit{missing values}), \textit{encoding} fitur kategorikal, dan standarisasi fitur menggunakan \texttt{StandardScaler}—terbukti sangat penting untuk memastikan algoritma berbasis jarak bekerja secara optimal. Selain itu, penentuan jumlah klaster terbaik dapat ditentukan secara terukur melalui kombinasi evaluasi \textit{Elbow Method} untuk menemukan titik belok penurunan \textit{inertia} serta \textit{Silhouette Score} untuk menguji kualitas pemisahan antar-klaster.
+
+Penerapan algoritma K-Means dan K-Medoids pada dataset transaksi kartu kredit maupun statistik operasional penumpang bandara mampu menghasilkan segmentasi kelompok yang jelas dan memiliki interpretasi bisnis yang kuat. K-Means terbukti unggul dalam hal efisiensi dan kecepatan komputasi pada data berukuran besar menggunakan titik rata-rata (\textit{centroid}), sedangkan K-Medoids lebih tangguh terhadap keberadaan pencilan (\textit{outlier}) karena memilih objek data aktual (\textit{medoid}) sebagai pusat kelompok. Dengan demikian, hasil analisis klasterisasi ini dapat dimanfaatkan secara nyata untuk segmentasi pelanggan dan evaluasi pola operasional secara lebih tepat sasaran.
+
 \newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
