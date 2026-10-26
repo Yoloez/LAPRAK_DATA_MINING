@@ -73,8 +73,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 8}}\\[0.3cm]
+    { \textbf{IMBALANCED DATASET}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -111,17 +111,273 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa memahami konsep imbalanced dataset serta permasalahan yang muncul 
+akibat ketidakseimbangan kelas dalam model machine learning
+\item Mahasiswa mampu menerapkan teknik balancing data seperti SMOTE dan ADASYN 
+untuk menyeimbangkan distribusi kelas pada dataset 
+\item Mahasiswa memahami konsep dan metode feature selection (filter, wrapper, embedded) 
+untuk memilih fitur yang paling relevan 
 \end{enumerate}
+
 \section{Dasar Teori}
+
+\subsection{Imbalanced Class}
+\textit{Imbalanced class} atau ketidakseimbangan kelas merupakan kondisi pada klasifikasi di mana distribusi data antar kelas target tidak seimbang secara signifikan, ditandai dengan salah satu kelas yang mendominasi (\textit{majority class}) sementara kelas lainnya memiliki jumlah sampel yang jauh lebih sedikit (\textit{minority class}) \cite{he2009learning}. Kondisi ini menjadi permasalahan serius dalam pembelajaran mesin karena mayoritas algoritma klasifikasi dirancang untuk memaksimalkan akurasi keseluruhan, sehingga model cenderung bias ke arah kelas mayoritas dan mengabaikan kelas minoritas yang justru sering kali merupakan kelas krusial, seperti pada kasus deteksi kecurangan transaksi maupun diagnosis medis \cite{he2009learning}.
+
+\subsection{Confusion Matrix}
+\textit{Confusion matrix} adalah tabel kontingensi yang digunakan untuk mengukur dan mengevaluasi kinerja suatu model klasifikasi dengan memetakan perbandingan antara hasil prediksi model dengan label kelas sebenarnya, yang terdiri dari elemen \textit{True Positive} (TP), \textit{True Negative} (TN), \textit{False Positive} (FP), dan \textit{False Negative} (FN) \cite{fawcett2006introduction}. Berdasarkan nilai-nilai dalam matriks ini, dapat dihitung berbagai metrik evaluasi krusial seperti \textit{precision}, \textit{recall}, \textit{F1-score}, dan \textit{specificity}, yang memberikan penilaian performa yang jauh lebih komprehensif dan objektif daripada sekadar metrik akurasi dasar, terutama saat menangani data dengan distribusi kelas yang timpang \cite{fawcett2006introduction}.
+
+\subsection{Feature Selection}
+\textit{Feature selection} atau seleksi fitur adalah proses pemilihan subset fitur yang paling relevan dan informatif dari sekumpulan atribut pada data asli untuk digunakan dalam proses pelatihan model pembelajaran mesin \cite{guyon2003introduction}. Penerapan seleksi fitur bertujuan untuk mereduksi dimensionalitas data, mengeliminasi atribut yang bersifat redundan atau mengandung \textit{noise}, mempercepat waktu pelatihan komputasi, serta meningkatkan interpretabilitas dan performa generalisasi model klasifikasi dengan meminimalkan risiko terjadinya \textit{overfitting} \cite{guyon2003introduction}.
+
+\subsection{Filter Method}
+\textit{Filter method} merupakan pendekatan seleksi fitur yang mengevaluasi dan menyaring fitur berdasarkan karakteristik statistik intrinsik dari data tanpa melibatkan algoritma model pembelajaran mesin dalam proses pemilihannya \cite{saeys2007review}. Metode ini memanfaatkan perhitungan statistik seperti korelasi Pearson, \textit{Chi-square}, atau \textit{Information Gain} untuk memberikan bobot atau peringkat (\textit{ranking}) pada setiap atribut, sehingga memiliki keunggulan efisiensi komputasi yang sangat cepat dan skalabilitas tinggi untuk data berdimensi masif, meskipun memiliki keterbatasan karena tidak mempertimbangkan interaksi antarfitur maupun keterkaitannya dengan model klasifikasi yang digunakan \cite{saeys2007review}.
+
+\subsection{Wrapper Method}
+\textit{Wrapper method} adalah pendekatan seleksi fitur yang mengikutsertakan model pembelajaran mesin tertentu sebagai fungsi evaluasi untuk mengukur keefektifan dari suatu subset kombinasi fitur \cite{kohavi1997wrappers}. Melalui strategi pencarian sistematis seperti \textit{forward selection}, \textit{backward elimination}, atau \textit{recursive feature elimination} (RFE), metode ini secara iteratif melatih dan mengevaluasi model untuk menemukan kombinasi fitur yang menghasilkan performa prediksi paling optimal untuk algoritma yang dipilih, kendati membutuhkan beban komputasi yang jauh lebih berat dan memiliki kerentanan \textit{overfitting} pada dataset berskala kecil \cite{kohavi1997wrappers}.
+
+\subsection{Embedded Method}
+\textit{Embedded method} merupakan teknik seleksi fitur yang proses pemilihannya terintegrasi langsung di dalam proses pelatihan algoritma pembelajaran mesin itu sendiri \cite{tibshirani1996regression}. Pendekatan ini menggabungkan efisiensi komputasi dari \textit{filter method} serta kemampuan interaksi fitur yang presisi dari \textit{wrapper method}, salah satunya diwujudkan melalui teknik regularisasi seperti Lasso ($L_1$ \textit{regularization}) yang secara matematis menyusutkan koefisien fitur yang kurang signifikan menjadi tepat nol, maupun berbasis pohon seperti \textit{Random Forest} yang menghitung nilai tingkat kepentingan fitur (\textit{feature importance}) saat pohon dibangun \cite{tibshirani1996regression}.
+
+\subsection{Synthetic Minority Over-sampling Technique (SMOTE)}
+\textit{Synthetic Minority Over-sampling Technique} (SMOTE) adalah salah satu teknik \textit{data-level} berbasis \textit{oversampling} yang bekerja dengan membangkitkan sampel data sintetis baru untuk kelas minoritas, bukan sekadar menggandakan data yang telah ada \cite{chawla2002smote}. Algoritma SMOTE beroperasi dengan cara mengidentifikasi tetangga terdekat (\textit{k-nearest neighbors}) dari setiap sampel kelas minoritas, kemudian membuat titik data buatan baru di sepanjang garis penghubung antara sampel tersebut dengan tetangganya, sehingga dapat memperluas batas keputusan (\textit{decision boundary}) model terhadap kelas minoritas tanpa menimbulkan permasalahan \textit{overfitting} yang parah \cite{chawla2002smote}.
+
+\subsection{Adaptive Synthetic (ADASYN)}
+\textit{Adaptive Synthetic} (ADASYN) adalah algoritma pengembangan dari metode SMOTE yang menggunakan pendekatan adaptif dalam menghasilkan sampel sintetis untuk kelas minoritas berdasarkan tingkat kesulitan pembelajarannya \cite{he2008adasyn}. ADASYN secara otomatis menghitung distribusi bobot untuk setiap sampel minoritas berdasarkan proporsi sampel kelas mayoritas yang berada di sekitarnya, sehingga sampel yang berada di area perbatasan dan lebih sulit dipelajari oleh model akan menghasilkan jumlah data sintetis yang lebih banyak dibandingkan sampel yang mudah dipelajari, yang secara efektif menggeser fokus pembelajaran model ke arah area yang paling rentan terhadap kesalahan klasifikasi \cite{he2008adasyn}.
+
 \section{Hasil dan Pembahasan}
+\subsection{Import library}
+Pada tahap awal proses analisis data, dilakukan proses import library yang dibutuhkan untuk melakukan analisis data. Library yang digunakan adalah sebagai berikut:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/1-library.png}
+    \caption{Import library}
+    \label{1}
+\end{figure}
 
-\subsection{}
+\subsection{Import dan Load Dataset Information}
+Mahasiswa mengunduh dataset terlebih dahulu pada link yang disediakan \url{https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset?resource=download}.
+Panggil file csv yang telah diunduh tersebut menggunakan pandas, lalu tampilkan 5 data pertama.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/2-load-dataset.png}
+    \caption{Import dan load dataset information}
+    \label{2}
+\end{figure}
 
+\subsection{EDA (Exploratory Data Analysis)}
+Visualisasi distribusi variabel target (\textit{stroke}) dilakukan menggunakan \textit{pie chart} untuk mengidentifikasi keberadaan ketidakseimbangan kelas (\textit{imbalanced class}) pada dataset.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/3-pie-chart.png}
+    \caption{Visualisasi distribusi variabel target}
+    \label{3}
+\end{figure}
+Berdasarkan Gambar \ref{3}, dataset menunjukkan ketidakseimbangan kelas yang sangat ekstrem (\textit{highly imbalanced data}), dengan kelas 0 (tidak stroke) mendominasi sebesar 95,13\% dan kelas 1 (stroke) hanya sebesar 4,87\%. Ketimpangan proporsi yang tajam ini dapat menyebabkan model klasifikasi bias ke arah kelas mayoritas, sehingga penerapan teknik penyeimbangan data seperti \textit{undersampling}, \textit{oversampling}, SMOTE, maupun ADASYN sangat diperlukan sebelum tahap pemodelan.
 
+\subsection{Data Cleaning}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../images/18-isnull.png}
+    \caption{Cek missing value}
+    \label{isnull}
+\end{figure}
+Berdasarkan gambar \ref{isnull}, terdapat 201 baris yang kosong pada kolom bmi. Oleh karena itu diperlukan imputation untuk mengisi semua data kosong tersebut dengan nilai rata-rata dari kolom bmi. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/19-mean-imputation.png}
+    \caption{Mengisi value kosong dengan nilai rerata}
+    \label{imputation}
+\end{figure}
+Setelah melakukan imputation, lihat kembali dengan mengecek missing value. Dapat dilihat pada gambar \ref{balik}, jika semua kolom tidak ada missing value.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{../images/4-imputation.png}
+    \caption{Tidak ada missing value}
+    \label{balik}
+\end{figure}
+  
+\subsection{Random Undersampling}
+Penerapan \textit{Random Undersampling} dilakukan dengan mereduksi jumlah data pada kelas mayoritas (kelas 0) secara acak agar seimbang dengan jumlah data kelas minoritas (kelas 1).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/5-undersampling.png}
+    \caption{Penerapan kode Random Undersampling}
+    \label{fig:under-code}
+\end{figure}
+Berdasarkan Gambar \ref{fig:under-code}, jumlah sampel kelas 0 yang semula berjumlah 3.663 dipangkas secara acak menjadi 169 sampel, sehingga kedua kelas memiliki jumlah data yang seimbang yaitu masing-masing 169 data.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/7-under-histo.png}
+    \caption{Histogram fitur bmi sebelum dan sesudah Random Undersampling}
+    \label{fig:under-histo}
+\end{figure}
+Berdasarkan Gambar \ref{fig:under-histo}, distribusi frekuensi fitur \textit{bmi} setelah \textit{undersampling} mengalami penurunan skala jumlah data secara drastis, dengan proporsi kemunculan kelas 0 dan kelas 1 yang kini setara di seluruh rentang nilai \textit{bmi}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/8-under-scatter.png}
+    \caption{Scatterplot persebaran data sebelum dan sesudah Random Undersampling}
+    \label{fig:under-scatter}
+\end{figure}
+Berdasarkan Gambar \ref{fig:under-scatter}, kepadatan titik kelas 0 (biru) berkurang secara signifikan sehingga persebarannya menjadi berimbang dengan titik kelas 1 (oranye), meskipun terdapat banyak informasi dari kelas mayoritas yang terbuang.
+
+\subsection{Random Oversampling}
+Metode \textit{Random Oversampling} dilakukan dengan menduplikasi sampel kelas minoritas (kelas 1) secara acak hingga jumlahnya menyamai kelas mayoritas (kelas 0).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/9-oversampling.png}
+    \caption{Penerapan kode Random Oversampling}
+    \label{fig:over-code}
+\end{figure}
+Berdasarkan Gambar \ref{fig:over-code}, jumlah sampel kelas 1 berhasil ditingkatkan secara signifikan dari 169 menjadi 3.663 data, menghasilkan distribusi data latih yang seimbang sempurna dengan rasio 1:1.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/10-over-histo.png}
+    \caption{Histogram fitur bmi sebelum dan sesudah Random Oversampling}
+    \label{fig:over-histo}
+\end{figure}
+Berdasarkan Gambar \ref{fig:over-histo}, terlihat peningkatan tajam frekuensi kelas 1 pada fitur \textit{bmi} hingga menyamai tinggi kelas 0, dengan lonjakan runcing pada nilai-nilai tertentu akibat duplikasi langsung sampel yang sama secara berulang.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/11-over-scatter.png}
+    \caption{Scatterplot persebaran data sebelum dan sesudah Random Oversampling}
+    \label{fig:over-scatter}
+\end{figure}
+Berdasarkan Gambar \ref{fig:over-scatter}, titik-titik kelas 1 (oranye) tampak semakin tebal dan bertumpuk pada posisi koordinat data yang sama dengan data aslinya, karena tidak ada titik data baru yang dihasilkan melainkan hanya penggandaan sampel yang sudah ada.
+
+\subsection{SMOTE}
+Teknik SMOTE (\textit{Synthetic Minority Over-sampling Technique}) menyeimbangkan data dengan membangkitkan sampel sintetis baru di antara sampel minoritas terdekat menggunakan pendekatan interpolasi k-NN.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/12-smote.png}
+    \caption{Penerapan kode SMOTE}
+    \label{fig:smote-code}
+\end{figure}
+Berdasarkan Gambar \ref{fig:smote-code}, proses penyeimbangan dengan SMOTE berhasil meningkatkan jumlah kelas minoritas menjadi 3.663 data sintetis, menghasilkan keseimbangan penuh dengan kelas 0 tanpa menduplikasi data identik.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/13-smote-histo.png}
+    \caption{Histogram fitur bmi sebelum dan sesudah SMOTE}
+    \label{fig:smote-histo}
+\end{figure}
+Berdasarkan Gambar \ref{fig:smote-histo}, kurva sebaran kelas 1 pada fitur \textit{bmi} meningkat secara merata dan memiliki bentuk distribusi yang menyerupai sebaran kelas mayoritas, menunjukkan variasi data buatan yang lebih representatif.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/14-smote-scatter.png}
+    \caption{Scatterplot persebaran data sebelum dan sesudah SMOTE}
+    \label{fig:smote-scatter}
+\end{figure}
+Berdasarkan Gambar \ref{fig:smote-scatter}, titik-titik sintetis oranye baru terbentuk mengisi ruang-ruang di antara sampel minoritas asli, memperluas area keputusan kelas 1 secara kontinu dan menghindari penumpukan titik data yang identik.
+
+\subsection{ADASYN}
+Metode ADASYN (\textit{Adaptive Synthetic}) merupakan variasi adaptif dari SMOTE yang menghasilkan lebih banyak sampel sintetis pada area kelas minoritas yang sulit dipelajari atau berdekatan dengan kelas mayoritas.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/15-adasyn.png}
+    \caption{Penerapan kode ADASYN}
+    \label{fig:adasyn-code}
+\end{figure}
+Berdasarkan Gambar \ref{fig:adasyn-code}, ADASYN membangkitkan 3.676 sampel sintetis untuk kelas 1, sehingga distribusinya seimbang dengan kelas 0 (3.663 data) dengan penyesuaian bobot adaptif.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/16-adasyn-histo.png}
+    \caption{Histogram fitur bmi sebelum dan sesudah ADASYN}
+    \label{fig:adasyn-histo}
+\end{figure}
+Berdasarkan Gambar \ref{fig:adasyn-histo}, frekuensi kelas 1 pada fitur \textit{bmi} meningkat seimbang dengan kelas 0, dengan konsentrasi data sintetis yang lebih terfokus pada rentang nilai dengan tingkat ambiguitas klasifikasi tinggi.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/17-adasyn-scatter.png}
+    \caption{Scatterplot persebaran data sebelum dan sesudah ADASYN}
+    \label{fig:adasyn-scatter}
+\end{figure}
+Berdasarkan Gambar \ref{fig:adasyn-scatter}, sebaran data sintetis kelas 1 (oranye) tampak sangat padat dan terfokus pada batas keputusan (\textit{decision boundary}) antara kelas 0 dan kelas 1, membantu model dalam memisahkan kedua kelas yang tumpang tindih secara lebih efektif.
+
+\section{Tugas dan Analisis}
+\subsection{Tugas 1}
+Dataset \textit{Stroke Prediction Dataset} diunduh melalui Kaggle dengan link \url{https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset?resource=download} dan disimpan pada repositori kerja untuk kemudian dimuat serta ditampilkan ke dalam bentuk \textit{dataframe} menggunakan pustaka Pandas.
+
+\begin{figure}[H]
+    \centering
+    Tempatkan path gambar dataframe di bawah ini:
+    \includegraphics[width=1\textwidth]{../images/2-load-dataset.png}
+    \caption{Tampilan dataset dalam bentuk dataframe}
+    \label{fig:tugas1-dataframe}
+\end{figure}
+
+\noindent\textbf{Tujuan Penggunaan Dataset:}\\
+Tujuan utama penggunaan dataset ini adalah untuk membangun model pembelajaran mesin yang mampu mengklasifikasi dan memprediksi risiko kemungkinan seorang pasien terkena stroke berdasarkan kondisi kesehatan fisik, gaya hidup, serta faktor demografis.
+
+\noindent\textbf{Fitur-fitur Dataset:}\\
+Dataset terdiri dari 11 atribut fitur dan 1 variabel target:
+\begin{enumerate}
+    \item \texttt{id}: Nomor identitas unik setiap pasien.
+    \item \texttt{gender}: Jenis kelamin pasien (\textit{Male}, \textit{Female}, \textit{Other}).
+    \item \texttt{age}: Usia pasien.
+    \item \texttt{hypertension}: Riwayat hipertensi (0 = tidak memiliki, 1 = memiliki).
+    \item \texttt{heart\_disease}: Riwayat penyakit jantung (0 = tidak memiliki, 1 = memiliki).
+    \item \texttt{ever\_married}: Status pernikahan (\textit{No} atau \textit{Yes}).
+    \item \texttt{work\_type}: Kategori pekerjaan (\textit{children}, \textit{Govt\_job}, \textit{Never\_worked}, \textit{Private}, \textit{Self-employed}).
+    \item \texttt{Residence\_type}: Kategori tempat tinggal (\textit{Rural} atau \textit{Urban}).
+    \item \texttt{avg\_glucose\_level}: Rata-rata kadar glukosa dalam darah pasien.
+    \item \texttt{bmi}: Indeks Massa Tubuh (\textit{Body Mass Index}).
+    \item \texttt{smoking\_status}: Status merokok pasien (\textit{formerly smoked}, \textit{never smoked}, \textit{smokes}, \textit{Unknown}).
+    \item \texttt{stroke}: Variabel target penentu riwayat stroke (1 = terkena stroke, 0 = tidak terkena stroke).
+\end{enumerate}
+
+\subsection{Tugas 2}
+Pada Tugas 2, dilakukan eksperimen penanganan \textit{imbalanced dataset} menggunakan \textit{Pima Indians Diabetes Dataset}. Dataset ini memiliki distribusi target yang tidak seimbang (500 non-diabetes vs 268 diabetes). Dataset dibagi menjadi data latih (75\%) dan data uji (25\%) secara terstratifikasi. Teknik \textit{balancing} (SMOTE dan ADASYN) hanya diterapkan pada data latih guna mencegah \textit{data leakage}, kemudian model \textit{Random Forest Classifier} dievaluasi pada data uji yang sama.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/22-tugas2-code.png}
+    \caption{Implementasi kode pemodelan dan balancing data}
+    \label{fig:tugas2_code}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/20-tugas2-metrics.png}
+    \caption{Perbandingan metrik performa model sebelum dan sesudah data balancing}
+    \label{fig:tugas2_metrics}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/21-tugas2-cm.png}
+    \caption{Perbandingan confusion matrix (Baseline, SMOTE, dan ADASYN)}
+    \label{fig:tugas2_cm}
+\end{figure}
+
+Hasil evaluasi performa model sebelum dan sesudah penerapan \textit{data balancing} pada data latih disajikan pada Tabel \ref{tab:tugas2_evaluasi}.
+
+\begin{table}[H]
+\centering
+\caption{Perbandingan performa model sebelum dan sesudah data balancing}
+\label{tab:tugas2_evaluasi}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Skenario Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\ \hline
+Baseline (Sebelum Balancing) & 0.7500 & 0.6727 & 0.5522 & 0.6066 \\ \hline
+Setelah SMOTE & 0.7396 & 0.6269 & 0.6269 & 0.6269 \\ \hline
+Setelah ADASYN & \textbf{0.7708} & 0.6575 & \textbf{0.7164} & \textbf{0.6857} \\ \hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Analisis Singkat Hasil Tugas 2}:
+\begin{enumerate}
+    \item \textbf{Peningkatan Metrik \textit{Recall}}: Pada model dasar (\textit{baseline}) tanpa \textit{balancing}, nilai \textit{recall} kelas diabetes hanya sebesar 55,22\%. Setelah penerapan SMOTE, nilai \textit{recall} meningkat menjadi 62,69\% (+7,47\%). Peningkatan tertinggi dicapai oleh metode ADASYN dengan lonjakan \textit{recall} mencapai 71,64\% (+16,42\%).
+    \item \textbf{Penurunan Kasus \textit{False Negative}}: Berdasarkan Gambar \ref{fig:tugas2_cm}, jumlah pasien diabetes yang gagal terdeteksi (\textit{False Negative}) menurun drastis dari 30 pasien (Baseline) menjadi 25 pasien (SMOTE), dan tersisa hanya 19 pasien (ADASYN).
+    \item \textbf{Relevansi Medis}: Dalam klasifikasi medis, metrik \textit{recall} memiliki prioritas tertinggi agar dapat meminimalkan kasus pasien diabetes yang tidak terdeteksi secara dini.
+\end{enumerate}
 \newpage
+
 \section{Kesimpulan}
+Berdasarkan serangkaian praktikum dan eksperimen yang telah dilakukan, dapat disimpulkan bahwa ketidakseimbangan kelas (\textit{imbalanced class}) merupakan tantangan kritis dalam pembelajaran mesin karena menyebabkan model klasifikasi cenderung bias terhadap kelas mayoritas serta menghasilkan performa prediksi yang buruk terhadap kelas minoritas. Penerapan teknik penyeimbangan data berbasis sintesis sampel, yaitu \textit{Synthetic Minority Over-sampling Technique} (SMOTE) dan \textit{Adaptive Synthetic} (ADASYN), terbukti jauh lebih efektif dan representatif dibandingkan teknik konvensional seperti \textit{random undersampling} yang rentan membuang informasi penting maupun \textit{random oversampling} yang berisiko memicu \textit{overfitting} akibat duplikasi data yang identik.
+
+Selain itu, evaluasi komparatif pada dataset medis membuktikan bahwa penerapan SMOTE dan ADASYN pada data latih secara nyata mampu meningkatkan sensitivitas atau metrik \textit{recall} model klasifikasi secara signifikan, yaitu meningkat dari 55,22\% pada model \textit{baseline} menjadi 62,69\% dengan SMOTE dan mencapai performa tertinggi sebesar 71,64\% dengan ADASYN. Peningkatan tersebut berdampak langsung pada reduksi kesalahan \textit{False Negative} secara drastis, yang dalam konteks diagnosis medis merupakan indikator paling krusial guna meminimalkan risiko pasien berpenyakit yang tidak terdeteksi sehingga penanganan medis dapat diberikan sedini mungkin.
 \newpage
+
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
