@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  25 SEP 2026 14:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  30 OCT 2026 16:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -396,7 +396,7 @@ Package hyperref Info: Link coloring OFF on input line 65.
 \@outlinefile=\write3
 \openout3 = `template.out'.
 
-<../images/ugm.png, id=27, 1606.0pt x 1606.0pt>
+<../images/ugm.png, id=151, 1606.0pt x 1606.0pt>
 File: ../images/ugm.png Graphic file (type png)
 <use ../images/ugm.png>
 Package pdftex.def Info: ../images/ugm.png  used on input line 80.
@@ -404,41 +404,296 @@ Package pdftex.def Info: ../images/ugm.png  used on input line 80.
  [1
 
 {C:/Users/ASUS/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../images/ugm.png>]
+Overfull \hbox (0.82515pt too wide) in paragraph at lines 116--118
+[]\OT1/cmr/m/n/12 Mahasiswa mampu men-ganal-i-sis hasil re-gresi meng-gu-nakan MLP den-gan mem-
+ []
+
+
+Overfull \hbox (13.11095pt too wide) in paragraph at lines 121--122
+[]\OT1/cmr/m/n/12 Jaringan Saraf Tiruan (\OT1/cmr/m/it/12 Ar-ti-fi-cial Neu-ral Net-work \OT1/cmr/m/n/12 atau ANN) meru-pakan paradigma
+ []
+
+
+Overfull \hbox (3.58057pt too wide) in paragraph at lines 124--125
+\OT1/cmr/m/n/12 dilengkapi fungsi ak-ti-vasi non-lin-ier kon-tinu memi-liki ke-mam-puan un-tuk men-gaproksi-
+ []
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.122 \newpage
-               [1] [2] (template.bbl
+l.125 
+       [1] [2] [3]
+Overfull \hbox (1.09546pt too wide) in paragraph at lines 138--139
+\OT1/cmr/m/n/12 rangka-ian pus-taka \OT1/cmr/m/it/12 scikit-learn \OT1/cmr/m/n/12 yang meliputi fungsi pemisa-han data (\OT1/cmr/m/it/12 train[]test[]split\OT1/cmr/m/n/12 ),
+ []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 24.
+<../images/1-import.png, id=203, 330.48468pt x 219.06844pt>
+File: ../images/1-import.png Graphic file (type png)
+<use ../images/1-import.png>
+Package pdftex.def Info: ../images/1-import.png  used on input line 142.
+(pdftex.def)             Requested size: 320.0935pt x 212.18858pt.
+[4]
+<../images/2-read.png, id=210, 871.75688pt x 263.48438pt>
+File: ../images/2-read.png Graphic file (type png)
+<use ../images/2-read.png>
+Package pdftex.def Info: ../images/2-read.png  used on input line 152.
+(pdftex.def)             Requested size: 405.45047pt x 122.54308pt.
+ [5 <../images/1-import.png> <../images/2-read.png>]
+<../images/3-histogram.png, id=220, 1183.42125pt x 634.62094pt>
+File: ../images/3-histogram.png Graphic file (type png)
+<use ../images/3-histogram.png>
+Package pdftex.def Info: ../images/3-histogram.png  used on input line 162.
+(pdftex.def)             Requested size: 405.45047pt x 217.42415pt.
 
-) [3] (template.aux)
+Overfull \hbox (10.52487pt too wide) in paragraph at lines 167--167
+[]\OT1/cmr/bx/n/14.4 Langkah 4: Vi-su-al-isasi Pro-porsi Ke-las Tar-get (Pie Chart) 
+ []
+
+<../images/4-pie.png, id=222, 423.08063pt x 349.305pt>
+File: ../images/4-pie.png Graphic file (type png)
+<use ../images/4-pie.png>
+Package pdftex.def Info: ../images/4-pie.png  used on input line 172.
+(pdftex.def)             Requested size: 256.07741pt x 211.42877pt.
+[6 <../images/3-histogram.png>]
+Overfull \hbox (21.25467pt too wide) in paragraph at lines 178--179
+\OT1/cmr/m/n/12 ni-lai yang hi-lang (\OT1/cmr/m/it/12 miss-ing value\OT1/cmr/m/n/12 ) meng-gu-nakan fungsi \OT1/cmtt/m/n/12 df.isnull().sum()\OT1/cmr/m/n/12 . Berdasarkan
+ []
+
+<../images/5-isnull.png, id=232, 706.89093pt x 365.11406pt>
+File: ../images/5-isnull.png Graphic file (type png)
+<use ../images/5-isnull.png>
+Package pdftex.def Info: ../images/5-isnull.png  used on input line 182.
+(pdftex.def)             Requested size: 277.41176pt x 143.2853pt.
+
+Overfull \hbox (0.34859pt too wide) in paragraph at lines 188--189
+\OT1/cmr/m/n/12 ge-nal \OT1/cmtt/m/n/12 CLIENTNUM \OT1/cmr/m/n/12 dan kolom tar-get \OT1/cmtt/m/n/12 Attrition[]Flag\OT1/cmr/m/n/12 . Ke-mu-dian, ma-ha-siswa mengek-
+ []
+
+
+Overfull \hbox (42.51604pt too wide) in paragraph at lines 188--189
+\OT1/cmr/m/n/12 strak nama-nama atribut yang bertipe data tek-s/kat-e-gorikal meng-gu-nakan \OT1/cmtt/m/n/12 select[]dtypes()
+ []
+
+[7 <../images/4-pie.png> <../images/5-isnull.png>]
+<../images/6-atribute-numerik-kategorikal.png, id=241, 374.90062pt x 137.7647pt>
+File: ../images/6-atribute-numerik-kategorikal.png Graphic file (type png)
+<use ../images/6-atribute-numerik-kategorikal.png>
+Package pdftex.def Info: ../images/6-atribute-numerik-kategorikal.png  used on input line 192.
+(pdftex.def)             Requested size: 298.75264pt x 109.78937pt.
+
+Overfull \hbox (2.10811pt too wide) in paragraph at lines 197--197
+[]\OT1/cmr/bx/n/14.4 Langkah 7: Pre-pro-cess-ing, Pem-ba-gian Data, dan Pelati-
+ []
+
+<../images/7-split-data.png, id=243, 615.0478pt x 641.39626pt>
+File: ../images/7-split-data.png Graphic file (type png)
+<use ../images/7-split-data.png>
+Package pdftex.def Info: ../images/7-split-data.png  used on input line 202.
+(pdftex.def)             Requested size: 362.77525pt x 378.32263pt.
+[8 <../images/6-atribute-numerik-kategorikal.png>]
+<../images/8-model-koefs.png, id=252, 401.24907pt x 446.41782pt>
+File: ../images/8-model-koefs.png Graphic file (type png)
+<use ../images/8-model-koefs.png>
+Package pdftex.def Info: ../images/8-model-koefs.png  used on input line 212.
+(pdftex.def)             Requested size: 277.41176pt x 308.66211pt.
+ [9 <../images/7-split-data.png>]
+<../images/9-visualisasi-data-1.png, id=260, 1145.78062pt x 294.34969pt>
+File: ../images/9-visualisasi-data-1.png Graphic file (type png)
+<use ../images/9-visualisasi-data-1.png>
+Package pdftex.def Info: ../images/9-visualisasi-data-1.png  used on input line 222.
+(pdftex.def)             Requested size: 405.45047pt x 104.16025pt.
+ [10 <../images/8-model-koefs.png> <../images/9-visualisasi-data-1.png>]
+<../images/10-visualisasi-data-2.png, id=269, 364.36125pt x 123.46124pt>
+File: ../images/10-visualisasi-data-2.png Graphic file (type png)
+<use ../images/10-visualisasi-data-2.png>
+Package pdftex.def Info: ../images/10-visualisasi-data-2.png  used on input line 232.
+(pdftex.def)             Requested size: 298.75264pt x 101.2332pt.
+<../images/11-confusion-matrix.png, id=271, 611.28375pt x 524.71031pt>
+File: ../images/11-confusion-matrix.png Graphic file (type png)
+<use ../images/11-confusion-matrix.png>
+Package pdftex.def Info: ../images/11-confusion-matrix.png  used on input line 242.
+(pdftex.def)             Requested size: 320.0935pt x 274.75645pt.
+ [11 <../images/10-visualisasi-data-2.png>]
+<../images/12-train-mlp.png, id=280, 712.91344pt x 648.17157pt>
+File: ../images/12-train-mlp.png Graphic file (type png)
+<use ../images/12-train-mlp.png>
+Package pdftex.def Info: ../images/12-train-mlp.png  used on input line 252.
+(pdftex.def)             Requested size: 362.77525pt x 329.83124pt.
+ [12 <../images/11-confusion-matrix.png>]
+<../images/13-hasil-prediksi.png, id=289, 864.22874pt x 377.91188pt>
+File: ../images/13-hasil-prediksi.png Graphic file (type png)
+<use ../images/13-hasil-prediksi.png>
+Package pdftex.def Info: ../images/13-hasil-prediksi.png  used on input line 262.
+(pdftex.def)             Requested size: 362.77525pt x 158.6354pt.
+ [13 <../images/12-train-mlp.png>]
+Overfull \hbox (31.16104pt too wide) in paragraph at lines 268--269
+\OT1/cmr/m/n/12 dari Kag-gle. Ma-ha-siswa mem-baca dataset meng-gu-nakan pus-taka \OT1/cmr/m/it/12 pan-das \OT1/cmr/m/n/12 dan menampilkan
+ []
+
+<../images/14-read-2.png, id=297, 547.2947pt x 253.69781pt>
+File: ../images/14-read-2.png Graphic file (type png)
+<use ../images/14-read-2.png>
+Package pdftex.def Info: ../images/14-read-2.png  used on input line 272.
+(pdftex.def)             Requested size: 362.77525pt x 168.16496pt.
+[14 <../images/13-hasil-prediksi.png> <../images/14-read-2.png>]
+<../images/15-isnull-2.png, id=306, 167.12437pt x 319.1925pt>
+File: ../images/15-isnull-2.png Graphic file (type png)
+<use ../images/15-isnull-2.png>
+Package pdftex.def Info: ../images/15-isnull-2.png  used on input line 282.
+(pdftex.def)             Requested size: 234.73654pt x 448.36168pt.
+ [15 <../images/15-isnull-2.png>]
+<../images/16-histo-2.png, id=314, 766.36313pt x 600.74437pt>
+File: ../images/16-histo-2.png Graphic file (type png)
+<use ../images/16-histo-2.png>
+Package pdftex.def Info: ../images/16-histo-2.png  used on input line 292.
+(pdftex.def)             Requested size: 405.45047pt x 317.83383pt.
+<../images/17-cek-atribut.png, id=316, 339.51843pt x 118.19156pt>
+File: ../images/17-cek-atribut.png Graphic file (type png)
+<use ../images/17-cek-atribut.png>
+Package pdftex.def Info: ../images/17-cek-atribut.png  used on input line 302.
+(pdftex.def)             Requested size: 277.41176pt x 96.57504pt.
+ [16 <../images/16-histo-2.png>]
+<../images/18-split-data.png, id=325, 487.06969pt x 447.92343pt>
+File: ../images/18-split-data.png Graphic file (type png)
+<use ../images/18-split-data.png>
+Package pdftex.def Info: ../images/18-split-data.png  used on input line 312.
+(pdftex.def)             Requested size: 341.43437pt x 313.99535pt.
+ [17 <../images/17-cek-atribut.png>]
+Overfull \hbox (4.71326pt too wide) in paragraph at lines 317--317
+[]\OT1/cmr/bx/n/14.4 Langkah 19: Eval-u-asi Metrik Per-forma Re-gresi (RMSE
+ []
+
+<../images/19-r2.png, id=333, 267.24844pt x 161.85469pt>
+File: ../images/19-r2.png Graphic file (type png)
+<use ../images/19-r2.png>
+Package pdftex.def Info: ../images/19-r2.png  used on input line 322.
+(pdftex.def)             Requested size: 256.07741pt x 155.10458pt.
+[18 <../images/18-split-data.png>]
+<../images/20-visualisasi-prediksi-real.png, id=344, 438.13687pt x 469.00218pt>
+File: ../images/20-visualisasi-prediksi-real.png Graphic file (type png)
+<use ../images/20-visualisasi-prediksi-real.png>
+Package pdftex.def Info: ../images/20-visualisasi-prediksi-real.png  used on input line 332.
+(pdftex.def)             Requested size: 320.0935pt x 342.64784pt.
+ [19 <../images/19-r2.png>] [20 <../images/20-visualisasi-prediksi-real.png>]
+Overfull \hbox (68.6194pt too wide) in paragraph at lines 344--345
+\OT1/cmr/m/n/12 gle ([]$\OT1/cmtt/m/n/12 https : / / www . kaggle . com / datasets / gauravtopre / bank-[]customer-[]churn-[]dataset$[]\OT1/cmr/m/n/12 )
+ []
+
+
+Overfull \hbox (1.29587pt too wide) in paragraph at lines 344--345
+\OT1/cmr/m/n/12 yang memi-liki tu-juan utama un-tuk mem-prediksi ke-mu-ngk-i-nan se-o-rang nasabah
+ []
+
+
+Overfull \hbox (3.57104pt too wide) in paragraph at lines 344--345
+\OT1/cmr/m/n/12 berhenti me-man-faatkan layanan per-bankan atau kartu kredit (\OT1/cmr/m/it/12 cus-tomer churn\OT1/cmr/m/n/12 ).
+ []
+
+
+Overfull \hbox (8.72887pt too wide) in paragraph at lines 345--346
+\OT1/cmr/m/n/12 Kag-gle ([]$\OT1/cmtt/m/n/12 https : / / www . kaggle . com / datasets / shivachandel / kc-[]house-[]data$[]\OT1/cmr/m/n/12 )
+ []
+
+
+Overfull \hbox (9.345pt too wide) in paragraph at lines 354--355
+[]\OT1/cmtt/m/n/12 CLIENTNUM\OT1/cmr/m/n/12 : Nomor iden-ti-fikasi unik mi-lik masing-masing nasabah yang berfungsi
+ []
+
+[21]
+Overfull \hbox (1.4873pt too wide) in paragraph at lines 359--360
+[]\OT1/cmtt/m/n/12 Education[]Level\OT1/cmr/m/n/12 : Jen-jang pen-didikan for-mal ter-akhir yang ditem-puh nasabah
+ []
+
+[22]
+Overfull \hbox (2.08849pt too wide) in paragraph at lines 367--368
+[]\OT1/cmtt/m/n/12 Credit[]Limit\OT1/cmr/m/n/12 : Batasan mak-si-mum saldo kredit yang di-alokasikan bank kepada
+ []
+
+
+Overfull \hbox (19.37933pt too wide) in paragraph at lines 374--375
+[]\OT1/cmtt/m/n/12 Avg[]Utilization[]Ratio\OT1/cmr/m/n/12 : Ra-sio rata-rata util-isasi pe-maka-ian kartu kredit (persen-
+ []
+
+[23] [24]
+Overfull \hbox (17.26808pt too wide) in paragraph at lines 403--403
+[]\OT1/cmr/bx/n/14.4 Tugas 2: Im-ple-men-tasi Model MLP pada Dataset Mandiri 
+ []
+
+[25]
+<../images/tugas2-1-eda-klasifikasi.png, id=389, 722.7pt x 325.215pt>
+File: ../images/tugas2-1-eda-klasifikasi.png Graphic file (type png)
+<use ../images/tugas2-1-eda-klasifikasi.png>
+Package pdftex.def Info: ../images/tugas2-1-eda-klasifikasi.png  used on input line 417.
+(pdftex.def)             Requested size: 362.77525pt x 163.24724pt.
+<../images/tugas2-2-training-klasifikasi.png, id=391, 551.81157pt x 600.74437pt>
+File: ../images/tugas2-2-training-klasifikasi.png Graphic file (type png)
+<use ../images/tugas2-2-training-klasifikasi.png>
+Package pdftex.def Info: ../images/tugas2-2-training-klasifikasi.png  used on input line 427.
+(pdftex.def)             Requested size: 362.77525pt x 394.96169pt.
+ [26 <../images/tugas2-1-eda-klasifikasi.png>]
+<../images/tugas2-3-cm-loss-klasifikasi.png, id=401, 794.97pt x 325.215pt>
+File: ../images/tugas2-3-cm-loss-klasifikasi.png Graphic file (type png)
+<use ../images/tugas2-3-cm-loss-klasifikasi.png>
+Package pdftex.def Info: ../images/tugas2-3-cm-loss-klasifikasi.png  used on input line 437.
+(pdftex.def)             Requested size: 362.77525pt x 148.40974pt.
+ [27 <../images/tugas2-2-training-klasifikasi.png>]
+Overfull \hbox (10.72984pt too wide) in paragraph at lines 445--446
+ []\OT1/cmr/bx/n/12 Langkah 4: Ek-splo-rasi Data dan Dis-tribusi Fi-tur Re-gresi[] \OT1/cmr/m/n/12 Ma-ha-siswa memuat
+ []
+
+<../images/tugas2-4-eda-regresi.png, id=410, 794.97pt x 325.215pt>
+File: ../images/tugas2-4-eda-regresi.png Graphic file (type png)
+<use ../images/tugas2-4-eda-regresi.png>
+Package pdftex.def Info: ../images/tugas2-4-eda-regresi.png  used on input line 449.
+(pdftex.def)             Requested size: 362.77525pt x 148.40974pt.
+
+Overfull \hbox (9.63734pt too wide) in paragraph at lines 455--456
+\OT1/cmr/m/n/12 kan \OT1/cmtt/m/n/12 StandardScaler \OT1/cmr/m/n/12 pada vari-abel pen-je-las. Ma-ha-siswa melatih model \OT1/cmtt/m/n/12 MLPRegressor
+ []
+
+[28 <../images/tugas2-3-cm-loss-klasifikasi.png> <../images/tugas2-4-eda-regresi.png>]
+<../images/tugas2-5-training-regresi.png, id=421, 495.35063pt x 585.68813pt>
+File: ../images/tugas2-5-training-regresi.png Graphic file (type png)
+<use ../images/tugas2-5-training-regresi.png>
+Package pdftex.def Info: ../images/tugas2-5-training-regresi.png  used on input line 459.
+(pdftex.def)             Requested size: 362.77525pt x 428.93399pt.
+ [29 <../images/tugas2-5-training-regresi.png>]
+<../images/tugas2-6-visualisasi-regresi.png, id=431, 939.51pt x 361.35pt>
+File: ../images/tugas2-6-visualisasi-regresi.png Graphic file (type png)
+<use ../images/tugas2-6-visualisasi-regresi.png>
+Package pdftex.def Info: ../images/tugas2-6-visualisasi-regresi.png  used on input line 469.
+(pdftex.def)             Requested size: 384.1096pt x 147.73541pt.
+ [30 <../images/tugas2-6-visualisasi-regresi.png>]
+Overfull \hbox (2.3403pt too wide) in paragraph at lines 478--479
+\OT1/cmr/m/n/12 awasi, yaitu tu-gas klasi-fikasi diskret dan re-gresi nu-merik kon-tinu, berkat adanya
+ []
+
+
+Overfull \hbox (6.67175pt too wide) in paragraph at lines 481--482
+[]\OT1/cmr/m/n/12 Tahapan pra-pemrosesan data, khusus-nya stan-dard-is-asi fi-tur (\OT1/cmtt/m/n/12 StandardScaler\OT1/cmr/m/n/12 )
+ []
+
+[31] (template.bbl) [32] (template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-Package rerunfilecheck Warning: File `template.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `template.out':
-(rerunfilecheck)             Before: FB3A50C7A7AB37ABC1CFD13C0F93E702;586
-(rerunfilecheck)             After:  18F9317F97EA861E8ECC5103CA9C3600;581.
+Package rerunfilecheck Info: File `template.out' has not changed.
+(rerunfilecheck)             Checksum: 3DA86A99A72F8799E3017E5D5C9AF77B;10089.
  ) 
 Here is how much of TeX's memory you used:
- 11755 strings out of 474486
- 180954 string characters out of 5744228
- 1931542 words of memory out of 5000000
- 33882 multiletter control sequences out of 15000+600000
- 562997 words of font info for 53 fonts, out of 8000000 for 9000
+ 12130 strings out of 474486
+ 190197 string characters out of 5744228
+ 1932542 words of memory out of 5000000
+ 34142 multiletter control sequences out of 15000+600000
+ 564227 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,307b,521s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on template.pdf (4 pages, 2899822 bytes).
+ 75i,6n,79p,1323b,521s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ASUS\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti1200.pk> <C:\Users\ASUS\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on template.pdf (33 pages, 4276442 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 513 PDF objects out of 1000 (max. 8388607)
+ 123 named destinations out of 1000 (max. 500000)
+ 432 words of extra memory for PDF output out of 10000 (max. 10000000)
 

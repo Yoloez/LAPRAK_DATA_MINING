@@ -73,8 +73,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 9}}\\[0.3cm]
+    { \textbf{NEURAL NETWORK}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -93,8 +93,6 @@ Disusun oleh:\\[0.3cm]
     \end{tabular}
 \end{center}
 
-
-    
     \vspace{1.5cm}
     
     % Footer bawah
@@ -111,16 +109,377 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Mahasiswa memahami konsep Multilayer Perceptron (MLP) dan mampu
+menerapkannya pada teknik klasifikasi dan regresi.
+\item Mahasiswa mampu menganalisis hasil klasifikasi menggunakan MLP dengan
+memanfaatkan metrik evaluasi dan pengujian model.
+\item Mahasiswa mampu menganalisis hasil regresi menggunakan MLP dengan
+membandingkan hasil prediksi dengan data asli.
 \end{enumerate}
 \section{Dasar Teori}
+\subsection{Neural Network}
+Jaringan Saraf Tiruan (\textit{Artificial Neural Network} atau ANN) merupakan paradigma pemrosesan informasi yang terinspirasi oleh struktur dan fungsi sistem saraf biologis manusia \cite{haykin2009neural}. Jaringan ini tersusun atas interkoneksi sejumlah unit pemrosesan terdistribusi yang disebut neuron buatan. Setiap neuron menerima masukan dari neuron lain atau data eksternal, mengalikannya dengan bobot sinaptik tertentu, menjumlahkannya bersama nilai bias, dan kemudian mentransformasikannya melalui fungsi nonlinier untuk menghasilkan nilai keluaran \cite{lecun2015deep}. Kekuatan utama dari jaringan saraf tiruan terletak pada kapabilitasnya untuk mempelajari representasi pola yang kompleks dan relasi nonlinier secara mandiri dari kumpulan data pelatihan tanpa mengharuskan pemodelan aturan inferensi secara eksplisit atau rekayasa fitur manual yang rumit \cite{bishop2006pattern}.
+
+\subsection{Multilayer Perceptron (MLP)}
+\textit{Multilayer Perceptron} (MLP) adalah salah satu varian fundamental dari jaringan saraf tiruan berumpan maju (\textit{feedforward neural network}) yang terdiri dari lapisan masukan (\textit{input layer}), satu atau lebih lapisan tersembunyi (\textit{hidden layer}), dan lapisan keluaran (\textit{output layer}) \cite{haykin2009neural}. Berbeda dengan arsitektur \textit{perceptron} lapisan tunggal yang terbatas hanya pada permasalahan yang terpisah secara linier (\textit{linearly separable}), integrasi lapisan tersembunyi nonlinier memungkinkan MLP memetakan ruang fitur berdimensi tinggi yang memiliki batas keputusan nonlinier yang rumit. Berdasarkan teorema aproksimasi universal (\textit{universal approximation theorem}), jaringan berumpan maju dengan setidaknya satu lapisan tersembunyi yang dilengkapi fungsi aktivasi nonlinier kontinu memiliki kemampuan untuk mengaproksimasi fungsi kontinu sembarang pada ruang riil dengan tingkat akurasi yang diinginkan \cite{hornik1989multilayer}.
+
+\subsection{Backpropagation Learning}
+\textit{Backpropagation} (propagasi balik) merupakan algoritma pembelajaran (\textit{supervised learning}) yang menjadi landasan utama dalam melatih bobot dan bias pada arsitektur \textit{Multilayer Perceptron} \cite{rumelhart1986learning}. Siklus pembelajaran propagasi balik beroperasi dalam dua tahapan utama, yakni fase umpan maju (\textit{forward pass}) dan fase propagasi balik (\textit{backward pass}). Pada fase umpan maju, sinyal masukan dialirkan melintasi jaringan lapis demi lapis untuk menghasilkan estimasi keluaran, yang selanjutnya dibandingkan dengan nilai target aktual menggunakan fungsi kerugian (\textit{loss function}) guna mengukur besaran galat yang dihasilkan \cite{haykin2009neural}. Pada fase propagasi balik, galat tersebut ditransmisikan mundur dari lapisan keluaran ke lapisan-lapisan sebelumnya dengan menerapkan aturan rantai kalkulus (\textit{chain rule}) untuk menghitung gradien parsial fungsi kerugian terhadap setiap bobot dan bias. Gradien ini selanjutnya digunakan oleh algoritma optimasi, seperti \textit{gradient descent}, untuk memperbarui nilai parameter secara iteratif sehingga galat keseluruhan model dapat diminimalkan menuju titik konvergensi \cite{lecun2015deep, rumelhart1986learning}.
+
+\subsection{Activation Function}
+Fungsi aktivasi memegang peranan krusial dalam jaringan saraf tiruan karena bertanggung jawab menyuntikkan sifat nonlinieritas ke dalam pemrosesan sinyal pada setiap neuron \cite{dubey2022activation}. Tanpa adanya fungsi aktivasi nonlinier, gabungan dari berbagai lapisan linier pada jaringan akan tereduksi menjadi sebuah transformasi linier tunggal, sehingga menghilangkan keunggulan komputasi dari arsitektur multi-lapisan \cite{bishop2006pattern}. Terdapat beragam varian fungsi aktivasi yang umum digunakan, mulai dari fungsi berbasis saturasi seperti sigmoid dan hiperbolik tangen (\textit{tanh}), hingga fungsi non-saturasi seperti \textit{Rectified Linear Unit} (ReLU) beserta modifikasinya \cite{dubey2022activation}. ReLU menjadi pilihan standar pada lapisan tersembunyi model modern karena komputasinya yang sederhana dan efisien serta kemampuannya memitigasi permasalahan hilangnya gradien (\textit{vanishing gradient problem}) saat pelatihan \cite{lecun2015deep}. Selain itu, fungsi aktivasi pada lapisan keluaran juga dipilih secara khusus berdasarkan karakteristik tugas yang diselesaikan, misalnya fungsi \textit{softmax} untuk klasifikasi multikelas \cite{bishop2006pattern}.
+
+\subsection{Klasifikasi dan Regresi}
+Klasifikasi dan regresi adalah dua tugas fundamental dalam pembelajaran mesin terawasi (\textit{supervised machine learning}) yang dibedakan menurut sifat domain dari variabel target yang diprediksi \cite{han2022data}. Tugas klasifikasi berfokus pada pemetaan variabel prediktor menuju variabel target yang bersifat diskret, kategorikal, atau berupa label kelas terdefinisi, di mana model berupaya membangun batas pemisah antar-kelas dalam ruang fitur \cite{bishop2006pattern}. Sebaliknya, tugas regresi bertujuan memetakan variabel prediktor menuju variabel target yang bersifat kuantitatif, kontinu, atau bernilai riil, di mana model berupaya mengestimasi fungsi pemetaan numerik yang meminimalkan simpangan antara nilai prediksi dan nilai observasi asli \cite{han2022data}. Pada arsitektur \textit{Multilayer Perceptron}, kedua tugas ini diimplementasikan melalui penyesuaian jumlah unit neuron dan fungsi aktivasi pada lapisan keluaran, serta pemilihan fungsi kerugian yang selaras, seperti penggunaan fungsi kerugian \textit{cross-entropy} untuk klasifikasi dan \textit{Mean Squared Error} (MSE) untuk regresi \cite{haykin2009neural, bishop2006pattern}.
 \section{Hasil dan Pembahasan}
+Pada praktikum ini, mahasiswa melakukan implementasi algoritma \textit{Multilayer Perceptron} (MLP) untuk menyelesaikan dua permasalahan utama dalam penambangan data, yaitu klasifikasi dan regresi. Praktikum pertama menerapkan model \textit{MLP Classifier} pada dataset \textit{Credit Card Customers} (\textit{Bank Churners}) yang diperoleh dari platform Kaggle untuk memprediksi kecenderungan nasabah berhenti menggunakan layanan kartu kredit (\textit{churn}). Praktikum kedua menerapkan model \textit{MLP Regressor} pada dataset \textit{King County House Sales} (\textit{kc\_house\_data}) dari Kaggle untuk memprediksi harga penjualan rumah berdasarkan berbagai fitur fisik dan lingkungan. Tahapan implementasi beserta visualisasi dan analisis hasilnya dijelaskan melalui langkah-langkah terstruktur berikut:
 
-\subsection{}
+\subsection{Langkah 1: Mengimpor Pustaka Pemrograman}
+Pada tahap awal, mahasiswa mengimpor seluruh modul dan pustaka yang dibutuhkan dalam pemodelan klasifikasi. Pustaka tersebut mencakup modul pemrosesan data seperti \textit{pandas} dan \textit{numpy}, pustaka visualisasi grafik \textit{matplotlib.pyplot}, serta rangkaian pustaka \textit{scikit-learn} yang meliputi fungsi pemisahan data (\textit{train\_test\_split}), pengubah skala (\textit{StandardScaler}), pengodean kategori (\textit{LabelEncoder}), metrik pengujian performa, dan algoritma \textit{MLPClassifier} sebagaimana ditampilkan pada Gambar \ref{fig:import}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/1-import.png}
+    \caption{Proses Impor Pustaka Pemrograman yang Dibutuhkan}
+    \label{fig:import}
+\end{figure}
+
+\subsection{Langkah 2: Membaca Dataset Klasifikasi Credit Card Customers}
+Mahasiswa membaca dataset nasabah kartu kredit dari berkas \textit{BankChurners.csv} menggunakan fungsi \texttt{pd.read\_csv()}. Selanjutnya, mahasiswa menampilkan lima baris data teratas menggunakan perintah \texttt{df.head()} untuk mengamati atribut demografis dan transaksi nasabah seperti usia, jenis kelamin, limit kredit, dan status keaktifan kartu sebagaimana diperlihatkan pada Gambar \ref{fig:read1}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/2-read.png}
+    \caption{Tampilan Data Teratas pada Dataset Bank Churners}
+    \label{fig:read1}
+\end{figure}
+
+\subsection{Langkah 3: Visualisasi Distribusi Fitur Numerik (Histogram)}
+Mahasiswa menyajikan visualisasi distribusi dari seluruh atribut numerik pada dataset dengan memanfaatkan fungsi \texttt{df.hist()} berukuran dimensi besar. Histogram yang terbentuk pada Gambar \ref{fig:hist1} memudahkan mahasiswa dalam menganalisis bentuk sebaran data, rentang nilai, serta mengidentifikasi adanya kemiringan distribusi (\textit{skewness}) pada atribut transaksi nasabah.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/3-histogram.png}
+    \caption{Visualisasi Histogram Distribusi Seluruh Fitur Numerik}
+    \label{fig:hist1}
+\end{figure}
+
+\subsection{Langkah 4: Visualisasi Proporsi Kelas Target (Pie Chart)}
+Untuk mengamati keseimbangan kelas pada variabel target \texttt{Attrition\_Flag}, mahasiswa menghitung frekuensi kategori dan memvisualisasikannya ke dalam bentuk diagram lingkaran (\textit{pie chart}). Hasil pada Gambar \ref{fig:pie} memperlihatkan bahwa dataset bersifat tidak seimbang (\textit{imbalanced}), di mana proporsi nasabah yang bertahan (\textit{Existing Customer}) mendominasi sebanyak 83,93\%, sedangkan nasabah yang berhenti (\textit{Attrited Customer}) hanya sebesar 16,07\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/4-pie.png}
+    \caption{Visualisasi Proporsi Kelas Target Attrition\_Flag}
+    \label{fig:pie}
+\end{figure}
+
+\subsection{Langkah 5: Pemeriksaan Nilai Hilang (Missing Value)}
+Mahasiswa memeriksa integritas kualitas dataset dengan mendeteksi keberadaan nilai yang hilang (\textit{missing value}) menggunakan fungsi \texttt{df.isnull().sum()}. Berdasarkan Gambar \ref{fig:isnull1}, setiap atribut menunjukkan nilai 0, yang mengindikasikan bahwa dataset dalam kondisi bersih tanpa ada data yang rumpang sehingga tidak memerlukan penanganan imputasi data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../images/5-isnull.png}
+    \caption{Hasil Pengecekan Missing Value pada Dataset Klasifikasi}
+    \label{fig:isnull1}
+\end{figure}
+
+\subsection{Langkah 6: Identifikasi Fitur Kategorikal dan Numerik}
+Mahasiswa memisahkan atribut masukan (\texttt{df\_X}) dengan menghapus kolom pengenal \texttt{CLIENTNUM} dan kolom target \texttt{Attrition\_Flag}. Kemudian, mahasiswa mengekstrak nama-nama atribut yang bertipe data teks/kategorikal menggunakan \texttt{select\_dtypes()} sebagaimana tampak pada Gambar \ref{fig:cats1}, yang meliputi fitur \textit{Gender}, \textit{Education\_Level}, \textit{Marital\_Status}, \textit{Income\_Category}, dan \textit{Card\_Category}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/6-atribute-numerik-kategorikal.png}
+    \caption{Pemeriksaan Atribut Bertipe Data Kategorikal}
+    \label{fig:cats1}
+\end{figure}
+
+\subsection{Langkah 7: Preprocessing, Pembagian Data, dan Pelatihan MLP Classifier}
+Pada tahap ini, mahasiswa melakukan pra-pemrosesan data dengan menerapkan \textit{LabelEncoder} pada variabel target dan seluruh kolom kategorikal. Selanjutnya, mahasiswa membagi data menjadi data latih (70\%) dan data uji (30\%), menerapkan penyesuaian skala fitur menggunakan \texttt{StandardScaler}, serta melatih model \texttt{MLPClassifier} dengan batas iterasi maksimum 500 seperti yang tertera pada Gambar \ref{fig:split1}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/7-split-data.png}
+    \caption{Proses Pra-pemrosesan, Pembagian Data, dan Pelatihan Model MLP}
+    \label{fig:split1}
+\end{figure}
+
+\subsection{Langkah 8: Pemeriksaan Koefisien}
+Setelah pelatihan model tuntas, mahasiswa mengakses atribut \texttt{model.coefs\_} untuk meninjau struktur matriks bobot sinaptik yang menghubungkan lapisan masukan ke lapisan tersembunyi, serta lapisan tersembunyi ke lapisan keluaran. Tampilan sebagian matriks bobot yang berhasil dioptimasi selama proses propagasi balik ditunjukkan pada Gambar \ref{fig:coefs}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../images/8-model-koefs.png}
+    \caption{Tampilan Matriks Koefisien Bobot Model MLP}
+    \label{fig:coefs}
+\end{figure}
+
+\subsection{Langkah 9: Pemeriksaan Fitur Hasil Encoding (df\_X)}
+Mahasiswa menampilkan isi DataFrame \texttt{df\_X} yang telah melalui tahap pengodean nilai kategorikal. Pada Gambar \ref{fig:visdata1}, dapat diperhatikan bahwa seluruh fitur teks telah berhasil ditransformasikan menjadi representasi nilai numerik diskret diskalakan secara konsisten.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/9-visualisasi-data-1.png}
+    \caption{Struktur Data Fitur Setelah Penerapan Label Encoding}
+    \label{fig:visdata1}
+\end{figure}
+
+\subsection{Langkah 10: Pemeriksaan Fitur Hasil Standardisasi (X\_train[0])}
+Mahasiswa menampilkan larik numerik pada sampel baris pertama data latih (\texttt{X\_train[0]}). Gambar \ref{fig:visdata2} menunjukkan bahwa data telah berbentuk nilai riil kontinu hasil standardisasi distribusi (nilai tengah nol dan deviasi standar satu), yang sangat penting untuk mempercepat konvergensi gradien pada jaringan saraf tiruan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/10-visualisasi-data-2.png}
+    \caption{Vektor Fitur Baris Pertama Hasil Standardisasi StandardScaler}
+    \label{fig:visdata2}
+\end{figure}
+
+\subsection{Langkah 11: Evaluasi Performa Model dan Confusion Matrix}
+Mahasiswa melakukan pengujian performa model pada data uji dan menghitung metrik evaluasi klasifikasi. Sebagaimana ditampilkan pada Gambar \ref{fig:cm}, model mencapai akurasi sebesar 93,2\%, presisi sebesar 95,1\%, dan \textit{recall} sebesar 97,0\%. Visualisasi matriks konfusi (\textit{Confusion Matrix}) turut disajikan untuk memperlihatkan distribusi prediksi benar dan salah pada masing-masing kelas nasabah.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/11-confusion-matrix.png}
+    \caption{Hasil Pengukuran Metrik Evaluasi dan Tampilan Confusion Matrix}
+    \label{fig:cm}
+\end{figure}
+
+\subsection{Langkah 12: Pengujian Model dengan Data Sampel Baru}
+Untuk memastikan kepraktisan model, mahasiswa menguji inferensi model menggunakan dua profil data nasabah baru. Mahasiswa menyusun data input tersebut ke dalam DataFrame, menyelaraskan urutan kolom, menerapkan transformasi \textit{LabelEncoder} dan \textit{StandardScaler} yang telah di-fit sebelumnya, serta melakukan prediksi kelas seperti yang ditampilkan pada Gambar \ref{fig:trainmlp}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/12-train-mlp.png}
+    \caption{Prosedur Pengujian Inferensi Data Baru pada Model MLP}
+    \label{fig:trainmlp}
+\end{figure}
+
+\subsection{Langkah 13: Hasil Prediksi Data Sampel Baru}
+Hasil inferensi terhadap dua data sampel baru ditampilkan pada Gambar \ref{fig:hasilpred}. Model berhasil mengklasifikasikan nasabah pertama ke dalam kategori \textit{Attrited Customer} (berisiko berhenti) dan nasabah kedua ke dalam kategori \textit{Existing Customer} (nasabah aktif bertahan).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/13-hasil-prediksi.png}
+    \caption{Tampilan Luaran Hasil Prediksi Dua Profil Nasabah Baru}
+    \label{fig:hasilpred}
+\end{figure}
+
+\subsection{Langkah 14: Membaca Dataset Regresi King County House Data}
+Pada bagian eksperimen kedua, mahasiswa menyelesaikan permasalahan regresi harga rumah menggunakan dataset \textit{King County House Sales} (\texttt{kc\_house\_data.csv}) dari Kaggle. Mahasiswa membaca dataset menggunakan pustaka \textit{pandas} dan menampilkan lima baris teratasnya melalui \texttt{df.head()} sebagaimana tampak pada Gambar \ref{fig:read2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/14-read-2.png}
+    \caption{Tampilan Lima Baris Pertama Dataset Regresi Harga Rumah}
+    \label{fig:read2}
+\end{figure}
+
+\subsection{Langkah 15: Pemeriksaan Missing Value pada Dataset Regresi}
+Mahasiswa memeriksa keberadaan nilai yang hilang pada seluruh kolom dataset regresi dengan menjalankan fungsi \texttt{df.isnull().sum()}. Berdasarkan Gambar \ref{fig:isnull2}, seluruh atribut tidak memiliki nilai kosong sehingga proses analisis dapat dilanjutkan tanpa penghapusan baris data.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{../images/15-isnull-2.png}
+    \caption{Hasil Pengecekan Missing Value pada Dataset Regresi}
+    \label{fig:isnull2}
+\end{figure}
+
+\subsection{Langkah 16: Visualisasi Histogram Fitur Rumah}
+Mahasiswa membentuk grafik histogram untuk mengamati persebaran data fisik rumah, seperti luas bangunan (\textit{sqft\_living}), jumlah kamar tidur, kondisi fisik, dan harga rumah (\textit{price}). Gambar \ref{fig:hist2} menunjukkan ringkasan visual distribusi dari setiap atribut numerik pada dataset regresi tersebut.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/16-histo-2.png}
+    \caption{Histogram Persebaran Fitur pada Dataset Harga Rumah}
+    \label{fig:hist2}
+\end{figure}
+
+\subsection{Langkah 17: Pemeriksaan Atribut Kategorikal pada Data Regresi}
+Mahasiswa mengeliminasi kolom yang tidak relevan secara langsung dengan regresi numerik, yaitu \texttt{id}, \texttt{date}, dan kolom target \texttt{price}. Mahasiswa kemudian memeriksa apakah masih terdapat atribut bertipe kategorikal pada variabel prediktor. Hasil pada Gambar \ref{fig:cats2} menunjukkan indeks kosong, yang menandakan seluruh atribut prediktor telah bertipe numerik.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{../images/17-cek-atribut.png}
+    \caption{Pemeriksaan Atribut Kategorikal pada Variabel Prediktor Regresi}
+    \label{fig:cats2}
+\end{figure}
+
+\subsection{Langkah 18: Imputasi Data, Pembagian Data, dan Pelatihan MLP Regressor}
+Mahasiswa menerapkan \texttt{SimpleImputer} dengan strategi rerata (\textit{mean}) untuk menjaga konsistensi data masukan, kemudian membagi data menjadi 70\% porsi latih dan 30\% porsi uji. Selanjutnya, mahasiswa menginisialisasi model \texttt{MLPRegressor} dan melatihnya dengan data latih. Gambar \ref{fig:split2} menampilkan proses fitting model serta perbandingan sampel nilai prediksi dan nilai aktual.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/18-split-data.png}
+    \caption{Implementasi Imputasi, Pembagian Data, dan Pelatihan MLP Regressor}
+    \label{fig:split2}
+\end{figure}
+
+\subsection{Langkah 19: Evaluasi Metrik Performa Regresi (RMSE dan R2)}
+Mahasiswa menghitung metrik evaluasi model regresi menggunakan fungsi mean squared error dan \texttt{r2\_score} dari pustaka \textit{scikit-learn}. Gambar \ref{fig:r2} memperlihatkan nilai \textit{Root Mean Squared Error} (RMSE) serta nilai $R^2$ (\textit{R-squared}) yang diperoleh model dalam memprediksi harga rumah pada data uji.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/19-r2.png}
+    \caption{Hasil Perhitungan Metrik Evaluasi RMSE dan Nilai R-squared}
+    \label{fig:r2}
+\end{figure}
+
+\subsection{Langkah 20: Visualisasi Perbandingan Nilai Aktual dan Prediksi}
+Pada tahap akhir, mahasiswa menyajikan perbandingan visual antara nilai harga rumah aktual (\textit{real}) dan harga rumah hasil prediksi model (\textit{predicted}) pada 30 sampel data uji menggunakan diagram batang. Gambar \ref{fig:visrealpred} memperlihatkan perbandingan langsung antara kedua nilai tersebut sebagai bahan evaluasi kedekatan hasil estimasi model regresi terhadap nilai riil di lapangan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/20-visualisasi-prediksi-real.png}
+    \caption{Grafik Batang Perbandingan Nilai Aktual dan Prediksi pada 30 Sampel Data Uji}
+    \label{fig:visrealpred}
+\end{figure}
+
+\section{Tugas dan Analisis}
+\subsection{Tugas 1}
+Pada bagian ini, mahasiswa menganalisis dua dataset yang digunakan pada praktikum, yaitu \textit{Bank Customer Churn Dataset} untuk klasifikasi dan \textit{King County House Sales Dataset} (\texttt{kc\_house\_data}) untuk regresi, yang mencakup penjelasan mengenai tujuan dataset serta rincian seluruh fiturnya.
+
+\subsubsection{Tujuan Dataset}
+Tujuan dari kedua dataset yang digunakan pada praktikum dijabarkan sebagai berikut:
+\begin{enumerate}
+    \item \textbf{Bank Customer Churn Dataset}: Dataset ini bersumber dari platform Kaggle (\url{https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset}) yang memiliki tujuan utama untuk memprediksi kemungkinan seorang nasabah berhenti memanfaatkan layanan perbankan atau kartu kredit (\textit{customer churn}). Melalui analisis data dan pemodelan klasifikasi terawasi seperti \textit{Multilayer Perceptron} (MLP), dataset ini dimanfaatkan oleh pihak manajemen bank untuk mengidentifikasi indikator penurunan keaktifan nasabah secara dini, sehingga institusi dapat merumuskan langkah mitigasi dan program retensi pelanggan yang tepat sasaran demi menjaga loyalitas nasabah.
+    \item \textbf{King County House Sales Dataset}: Dataset ini bersumber dari platform Kaggle (\url{https://www.kaggle.com/datasets/shivachandel/kc-house-data}) yang menghimpun catatan transaksi penjualan rumah tinggal di kawasan King County, Washington, Amerika Serikat. Tujuan utama dari dataset ini adalah untuk membangun model estimasi atau regresi (seperti \textit{MLP Regressor}) yang mampu memprediksi nilai pasar wajar dari harga jual rumah berdasarkan kombinasi karakteristik fisik bangunan, kondisi struktural, fasilitas, serta posisi geografis properti tersebut.
+\end{enumerate}
+
+\subsubsection{Feature Dataset}
+Fitur atau variabel yang terkandung dalam masing-masing dataset dijabarkan secara rinci sebagai berikut:
+
+\paragraph{1. Fitur pada Bank Customer Churn Dataset}
+Dataset ini tersusun atas 21 fitur penjelas dan target utama yang mencakup atribut profil demografis, relasi akun, serta rekam jejak aktivitas transaksi:
+\begin{itemize}
+    \item \texttt{CLIENTNUM}: Nomor identifikasi unik milik masing-masing nasabah yang berfungsi sebagai indeks akun.
+    \item \texttt{Attrition\_Flag}: Variabel target bertipe kategorikal yang menyatakan status nasabah, terdiri dari kelas \textit{Existing Customer} (nasabah aktif) dan \textit{Attrited Customer} (nasabah berhenti/\textit{churn}).
+    \item \texttt{Customer\_Age}: Usia nasabah saat pendataan dilakukan dalam satuan tahun.
+    \item \texttt{Gender}: Jenis kelamin nasabah (\texttt{M} untuk laki-laki dan \texttt{F} untuk perempuan).
+    \item \texttt{Dependent\_count}: Jumlah tanggungan anggota keluarga dari nasabah.
+    \item \texttt{Education\_Level}: Jenjang pendidikan formal terakhir yang ditempuh nasabah (seperti: \textit{Graduate}, \textit{High School}, \textit{Uneducated}, \textit{College}, \textit{Post-Graduate}, \textit{Doctorate}, atau \textit{Unknown}).
+    \item \texttt{Marital\_Status}: Status pernikahan nasabah (\textit{Married}, \textit{Single}, \textit{Divorced}, atau \textit{Unknown}).
+    \item \texttt{Income\_Category}: Kategori pendapatan tahunan nasabah (\textit{Less than \$40K}, \textit{\$40K - \$60K}, \textit{\$60K - \$80K}, \textit{\$80K - \$120K}, \textit{\$120K+}, atau \textit{Unknown}).
+    \item \texttt{Card\_Category}: Tingkatan kelas kartu kredit yang digunakan (\textit{Blue}, \textit{Silver}, \textit{Gold}, atau \textit{Platinum}).
+    \item \texttt{Months\_on\_book}: Masa durasi keanggotaan nasabah terdaftar di bank dalam hitungan bulan.
+    \item \texttt{Total\_Relationship\_Count}: Jumlah total portofolio produk perbankan yang dimiliki nasabah.
+    \item \texttt{Months\_Inactive\_12\_mon}: Jumlah bulan saat nasabah tidak melakukan aktivitas transaksi selama kurun 12 bulan terakhir.
+    \item \texttt{Contacts\_Count\_12\_mon}: Frekuensi kontak atau interaksi antara nasabah dan pihak bank dalam 12 bulan terakhir.
+    \item \texttt{Credit\_Limit}: Batasan maksimum saldo kredit yang dialokasikan bank kepada nasabah.
+    \item \texttt{Total\_Revolving\_Bal}: Akumulasi saldo tagihan bergulir pada kartu kredit yang belum dilunasi.
+    \item \texttt{Avg\_Open\_To\_Buy}: Rata-rata nominal sisa batas kredit yang masih dapat digunakan untuk bertransaksi dalam 12 bulan terakhir.
+    \item \texttt{Total\_Amt\_Chng\_Q4\_Q1}: Rasio dinamika perubahan nominal transaksi kuartal ke-4 terhadap kuartal ke-1.
+    \item \texttt{Total\_Trans\_Amt}: Total akumulasi nominal nilai transaksi belanja nasabah selama 12 bulan terakhir.
+    \item \texttt{Total\_Trans\_Ct}: Frekuensi total banyaknya transaksi perbankan yang dilakukan nasabah selama 12 bulan terakhir.
+    \item \texttt{Total\_Ct\_Chng\_Q4\_Q1}: Rasio dinamika perubahan frekuensi transaksi kuartal ke-4 terhadap kuartal ke-1.
+    \item \texttt{Avg\_Utilization\_Ratio}: Rasio rata-rata utilisasi pemakaian kartu kredit (persentase limit kredit yang dipakai).
+\end{itemize}
+
+\paragraph{2. Fitur pada King County House Sales Dataset (kc\_house\_data)}
+Dataset ini memiliki 21 fitur yang merepresentasikan aspek fisik, struktural, kondisi, serta spasial properti:
+\begin{itemize}
+    \item \texttt{id}: Kode pengenal unik untuk setiap transaksi properti rumah.
+    \item \texttt{date}: Tanggal waktu transaksi penjualan rumah dicatat.
+    \item \texttt{price}: Variabel target kontinu yang merefleksikan harga riil penjualan rumah dalam mata uang Dollar AS (USD).
+    \item \texttt{bedrooms}: Jumlah ruang kamar tidur yang terdapat di dalam rumah.
+    \item \texttt{bathrooms}: Jumlah ruang kamar mandi (nilai pecahan merepresentasikan kamar mandi tanpa fasilitas mandi lengkap/shower).
+    \item \texttt{sqft\_living}: Luas total area ruang hunian interior rumah dalam satuan kaki persegi (\textit{square feet}).
+    \item \texttt{sqft\_lot}: Luas total area bidang tanah atau lahan pekarangan rumah dalam satuan kaki persegi.
+    \item \texttt{floors}: Jumlah tingkatan lantai konstruksi bangunan rumah.
+    \item \texttt{waterfront}: Variabel biner yang menandakan apakah properti berada persis di tepi perairan/danau (nilai 1 jika ya, 0 jika tidak).
+    \item \texttt{view}: Indeks penilaian kualitas panorama pemandangan di sekitar rumah (rentang skala 0 hingga 4).
+    \item \texttt{condition}: Indeks peringkat kondisi fisik dan kualitas perawatan struktur rumah (rentang skala 1 hingga 5).
+    \item \texttt{grade}: Indeks kualitas arsitektur, pengerjaan konstruksi, dan material bangunan berdasarkan klasifikasi resmi King County (skala 1 sampai 13).
+    \item \texttt{sqft\_above}: Luas ruang bangunan interior yang berada di atas permukaan tanah.
+    \item \texttt{sqft\_basement}: Luas area ruang interior yang berada di bawah tanah (\textit{basement}).
+    \item \texttt{yr\_built}: Tahun awal konstruksi rumah didirikan.
+    \item \texttt{yr\_renovated}: Tahun saat rumah terakhir kali dipugar atau direnovasi (bernilai 0 jika belum pernah direnovasi).
+    \item \texttt{zipcode}: Kode pos administratif lokasi geografis hunian.
+    \item \texttt{lat}: Koordinat garis lintang (\textit{latitude}) lokasi hunian.
+    \item \texttt{long}: Koordinat garis bujur (\textit{longitude}) lokasi hunian.
+    \item \texttt{sqft\_living15}: Rata-rata luas ruang hunian dari 15 rumah tetangga paling dekat.
+    \item \texttt{sqft\_lot15}: Rata-rata luas bidang tanah pekarangan dari 15 rumah tetangga paling dekat.
+\end{itemize}
+
+\subsection{Tugas 2: Implementasi Model MLP pada Dataset Mandiri}
+Pada Tugas 2, mahasiswa mencari dan menerapkan dua dataset baru yang berbeda untuk mengevaluasi kemampuan algoritma \textit{Multilayer Perceptron} (MLP) pada permasalahan klasifikasi dan regresi:
+\begin{enumerate}
+    \item \textbf{Dataset Klasifikasi}: \textit{Breast Cancer Wisconsin (Diagnostic) Dataset} yang bertujuan untuk mendiagnosis sifat tumor payudara (\textit{Malignant}/Ganas vs \textit{Benign}/Jinak) berdasarkan 30 fitur morfologi sel dari citra digital biopsi aspirasi jarum halus (\textit{Fine Needle Aspirate}/FNA).
+    \item \textbf{Dataset Regresi}: \textit{California Housing Dataset} yang menghimpun 20.640 data sensus perumahan di California untuk memprediksi nilai median harga rumah (\textit{MedHouseVal}) berdasarkan fitur demografis dan spasial lingkungan.
+\end{enumerate}
+
+\subsubsection{Implementasi MLP untuk Klasifikasi (Breast Cancer Dataset)}
+
+\paragraph{Langkah 1: Eksplorasi Data dan Distribusi Target}
+Mahasiswa memuat dataset yang terdiri atas 569 baris data dan 30 fitur numerik. Mahasiswa memverifikasi ketiadaan nilai hilang (\textit{missing value = 0}) serta menganalisis persebaran kelas target. Sebagaimana ditampilkan pada Gambar \ref{fig:tugas2_eda_c}, proporsi data terdiri atas 62,74\% kasus tumor jinak (\textit{Benign}) dan 37,26\% kasus tumor ganas (\textit{Malignant}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/tugas2-1-eda-klasifikasi.png}
+    \caption{Visualisasi Eksplorasi Proporsi dan Distribusi Kelas Target Klasifikasi}
+    \label{fig:tugas2_eda_c}
+\end{figure}
+
+\paragraph{Langkah 2: Pelatihan Model dan Evaluasi Metrik Klasifikasi}
+Mahasiswa membagi dataset menjadi data latih (80\%) dan data uji (20\%) dengan teknik stratifikasi, kemudian melakukan standardisasi fitur menggunakan \texttt{StandardScaler}. Mahasiswa menginisialisasi arsitektur \texttt{MLPClassifier} dengan dua lapisan tersembunyi (64 dan 32 neuron), aktivasi ReLU, optimizer Adam, dan batas iterasi maksimum 500. Berdasarkan luaran pada Gambar \ref{fig:tugas2_train_c}, model mencapai tingkat akurasi sebesar 97,37\%, presisi 97,26\%, \textit{recall} 98,61\%, dan F1-score 97,93\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/tugas2-2-training-klasifikasi.png}
+    \caption{Kode Pelatihan dan Luaran Metrik Evaluasi MLPClassifier}
+    \label{fig:tugas2_train_c}
+\end{figure}
+
+\paragraph{Langkah 3: Evaluasi Confusion Matrix dan Kurva Loss}
+Mahasiswa memvisualisasikan matriks konfusi (\textit{Confusion Matrix}) dan kurva penurunan \textit{loss} selama proses pelatihan. Gambar \ref{fig:tugas2_cm_loss} menunjukkan bahwa dari total data uji, hanya 3 sampel yang mengalami kesalahan klasifikasi. Kurva \textit{loss} yang menurun secara konvergen dan stabil mengonfirmasi bahwa proses propagasi balik berlangsung optimal tanpa terjadi divergensi gradien.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/tugas2-3-cm-loss-klasifikasi.png}
+    \caption{Visualisasi Confusion Matrix dan Kurva Loss Pelatihan MLP Classifier}
+    \label{fig:tugas2_cm_loss}
+\end{figure}
+
+\subsubsection{Implementasi MLP untuk Regresi (California Housing Dataset)}
+
+\paragraph{Langkah 4: Eksplorasi Data dan Distribusi Fitur Regresi}
+Mahasiswa memuat 20.640 data sensus perumahan dengan 8 fitur prediktor kontinu (\textit{MedInc}, \textit{HouseAge}, \textit{AveRooms}, \textit{AveBedrms}, \textit{Population}, \textit{AveOccup}, \textit{Latitude}, dan \textit{Longitude}). Mahasiswa memastikan data bebas dari \textit{missing value} dan menampilkan histogram sebaran harga rumah serta pendapatan warga pada Gambar \ref{fig:tugas2_eda_reg}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/tugas2-4-eda-regresi.png}
+    \caption{Visualisasi Histogram Distribusi Fitur MedHouseVal dan MedInc}
+    \label{fig:tugas2_eda_reg}
+\end{figure}
+
+\paragraph{Langkah 5: Pelatihan Model dan Evaluasi Metrik Regresi}
+Mahasiswa memisahkan data menjadi porsi latih (80\%) dan porsi uji (20\%), kemudian menerapkan \texttt{StandardScaler} pada variabel penjelas. Mahasiswa melatih model \texttt{MLPRegressor} dengan arsitektur dua lapisan tersembunyi (64, 32) dan fungsi aktivasi ReLU. Sebagaimana diperlihatkan pada Gambar \ref{fig:tugas2_train_reg}, model memperoleh skor koefisien determinasi $R^2$ sebesar 0,7656 (76,56\%), dengan nilai \textit{Root Mean Squared Error} (RMSE) sebesar 0,5548 dan \textit{Mean Absolute Error} (MAE) sebesar 0,3910.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/tugas2-5-training-regresi.png}
+    \caption{Kode Pelatihan dan Luaran Metrik Evaluasi MLPRegressor}
+    \label{fig:tugas2_train_reg}
+\end{figure}
+
+\paragraph{Langkah 6: Visualisasi Performa Prediksi Regresi}
+Mahasiswa menyajikan evaluasi grafis luaran model melalui diagram sebar (\textit{scatter plot}) perbandingan nilai aktual terhadap nilai prediksi pada garis ideal $y = x$, serta diagram batang komparasi pada 30 sampel data uji pertama sebagaimana tampak pada Gambar \ref{fig:tugas2_vis_reg}. Pola sebaran titik yang rapat di sekitar garis diagonal menegaskan bahwa model MLP mampu mengestimasi nilai harga rumah mendekati nilai aslinya secara akurat.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/tugas2-6-visualisasi-regresi.png}
+    \caption{Visualisasi Scatter Plot Aktual vs Prediksi dan Diagram Batang 30 Sampel Uji}
+    \label{fig:tugas2_vis_reg}
+\end{figure}
 
 \newpage
 \section{Kesimpulan}
+Berdasarkan serangkaian percobaan dan analisis yang telah dilakukan pada praktikum ini, mahasiswa menarik beberapa kesimpulan penting sebagai berikut:
+\begin{enumerate}
+    \item Algoritma \textit{Multilayer Perceptron} (MLP) terbukti sangat adaptif dan efektif untuk menyelesaikan dua paradigma utama dalam penambangan data terawasi, yaitu tugas klasifikasi diskret dan regresi numerik kontinu, berkat adanya representasi lapisan tersembunyi nonlinier dan algoritma pelatihan propagasi balik (\textit{backpropagation}).
+    \item Pada tugas klasifikasi nasabah kartu kredit (\textit{Bank Churners}), model MLPClassifier berhasil memprediksi status nasabah dengan akurasi 93,2\% dan presisi 95,1\%. Pada pengujian mandiri menggunakan \textit{Breast Cancer Wisconsin Dataset}, model MLP dengan arsitektur (64, 32) menghasilkan performa optimal dengan akurasi 97,37\% dan F1-score 97,93\%.
+    \item Pada tugas regresi estimasi harga rumah (\textit{King County} dan \textit{California Housing}), model \texttt{MLPRegressor} mampu menangkap relasi fitur nonlinier secara konsisten, mencapai nilai koefisien determinasi $R^2$ sebesar 0,7656 pada data California dengan galat RMSE sebesar 0,5548.
+    \item Tahapan pra-pemrosesan data, khususnya standardisasi fitur (\texttt{StandardScaler}) dan penanganan nilai kategorikal (\texttt{LabelEncoder}), memegang peranan sangat krusial dalam mempercepat konvergensi gradien numerik serta mencegah dominasi fitur berbobot skala besar pada jaringan saraf tiruan.
+\end{enumerate}
 \newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}
