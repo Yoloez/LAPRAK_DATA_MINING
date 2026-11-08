@@ -73,8 +73,8 @@
     % Judul
     { \textbf{LAPORAN PRAKTIKUM}}\\[0.3cm]
     { \textbf{PRAKTIKUM PENAMBANGAN DATA}}\\[0.3cm]
-    { \textbf{PERTEMUAN 1}}\\[0.3cm]
-    { \textbf{NUMPY DAN PANDAS}} \\[1.5cm]
+    { \textbf{PERTEMUAN 10}}\\[0.3cm]
+    { \textbf{CONVOLUTIONAL NEURAL NETWORK (CNN)}} \\[1.5cm]
     
     % Logo (ganti ugm.png dengan nama file logo kamu)
     \includegraphics[height=7cm]{../images/ugm.png}
@@ -111,16 +111,227 @@ Disusun oleh:\\[0.3cm]
 
 \section{Tujuan}
 \begin{enumerate}
-    \item 
+    \item Memahami keterbatasan Multi-Layer Perceptron (MLP) dalam pengelolaan citra dan keunggulan CNN.
+    \item Menjelaskan arsitektur dasar CNN: Convolution Layer, Pooling Layer, Flattening, dan Fully Connected Layer.
+    \item Membangun model CNN sederhana menggunakan framework Keras/TensorFlow.
+    \item Menerapkan teknik regularisasi Dropout untuk mencegah overfitting.
 \end{enumerate}
 \section{Dasar Teori}
+\subsection{Representasi Citra dan Keterbatasan MLP}
+Citra digital direpresentasikan sebagai matriks nilai intensitas piksel multidimensi, mulai dari citra skala abu-abu berdimensi dua hingga citra berwarna berdimensi tiga dengan kanal warna (misalnya RGB) \cite{lecun1998gradient}. Pada arsitektur \textit{Multi-Layer Perceptron} (MLP), citra masukan harus diratakan (\textit{flattening}) menjadi vektor satu dimensi sebelum dialirkan ke lapisan terhubung penuh (\textit{fully connected layer}). Proses ini menghilangkan hubungan spasial dan topologi lokal antarpiksel tetangga, padahal informasi geometris seperti tepi, tekstur, dan kontur sangat krusial dalam pengenalan objek visual \cite{gu2018recent}.
+
+Selain hilangnya keterkaitan spasial, keterbatasan mendasar MLP terletak pada membengkaknya jumlah parameter bobot secara drastis seiring bertambahnya resolusi citra, yang memicu masalah \textit{curse of dimensionality} dan risiko tinggi terjadinya \textit{overfitting} \cite{lecun1998gradient}. Struktur MLP juga tidak memiliki sifat \textit{translation invariance}; pergeseran posisi objek sekecil apa pun pada citra dapat menghasilkan representasi vektor yang sama sekali berbeda sehingga model kesulitan mengenali objek secara konsisten.
+
+\subsection{Arsitektur Convolutional Neural Network (CNN)}
+\textit{Convolutional Neural Network} (CNN) merupakan arsitektur jaringan saraf mendalam yang secara khusus dirancang untuk memproses data berstruktur kisi spasial dua atau tiga dimensi \cite{lecun1998gradient, alzubaidi2021review}. Arsitektur CNN umumnya terbagi menjadi tahap ekstraksi fitur dan tahap klasifikasi. Pada tahap ekstraksi fitur, \textit{convolutional layer} menerapkan filter atau kernel geser dengan konsep \textit{parameter sharing} dan \textit{local receptive fields} untuk menangkap pola lokal secara otomatis, sedangkan \textit{pooling layer} (seperti \textit{max pooling}) mereduksi resolusi spasial peta fitur (\textit{feature map}) guna menekan beban komputasi serta memberikan toleransi terhadap distorsi dan translasi kecil \cite{gu2018recent}.
+
+Setelah representasi fitur abstrak terbentuk, peta fitur diubah menjadi vektor satu dimensi melalui operasi \textit{flattening} dan diteruskan ke \textit{fully connected layer} sebagai blok klasifikasi \cite{alzubaidi2021review}. Lapisan terhubung penuh ini memetakan kombinasi fitur-fitur kompleks ke ruang probabilitas kelas target menggunakan fungsi aktivasi keluaran seperti \textit{Softmax} untuk klasifikasi multikelas.
+
+\subsection{Drop Out}
+\textit{Dropout} adalah teknik regularisasi komputasi yang dirancang untuk mencegah terjadinya fenomena \textit{overfitting} pada jaringan saraf tiruan berdimensi besar \cite{srivastava2014dropout}. Selama siklus pelatihan (\textit{training}), \textit{dropout} bekerja dengan cara mematikan (\textit{dropping out}) unit-unit neuron beserta koneksi keluar-masuknya secara acak berdasarkan probabilitas retensi tertentu ($p$). Mekanisme penonaktifan acak ini memaksa jaringan untuk tidak mengandalkan interaksi antar-neuron secara kaku (\textit{co-adaptation}), sehingga setiap neuron terdorong mempelajari representasi fitur yang lebih mandiri dan kuat \cite{srivastava2014dropout}.
+
+Secara matematis dan konseptual, penerapan \textit{dropout} dapat dipandang sebagai bentuk aproksimasi efisien dari teknik \textit{ensemble learning} atas ribuan kombinasi sub-arsitektur jaringan saraf yang berbeda tanpa memerlukan biaya komputasi model jamak \cite{srivastava2014dropout, alzubaidi2021review}. Pada tahap pengujian atau inferensi (\textit{testing/inference}), seluruh neuron diaktifkan kembali tanpa ada yang dinonaktifkan, di mana bobot keluaran diskalakan secara proporsional sesuai probabilitas retensi agar menghasilkan estimasi prediksi rata-rata ansambel yang konsisten.
+
 \section{Hasil dan Pembahasan}
 
-\subsection{}
+\subsection{Pengunduhan dan Penataan Direktori Dataset}
+Tahap awal praktikum diawali dengan mempersiapkan dataset citra hewan yang terdiri atas dua kelas target, yaitu kucing (\textit{cat}) dan anjing (\textit{dog}). Berkas arsip dataset diunduh dari Google Drive menggunakan perintah \texttt{gdown}, kemudian diekstraksi ke dalam lingkungan kerja. Selanjutnya, dibuat struktur direktori baru \texttt{dataset/cat} dan \texttt{dataset/dog}, lalu citra dari masing-masing kategori dipindahkan ke direktori yang sesuai sebelum direktori sementara dibersihkan, seperti yang ditunjukkan pada Gambar \ref{fig:dataset}. Penataan ini diperlukan agar pemuatan data berbasis subdirektori dapat dilakukan secara otomatis oleh Keras.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/1-dataset.png}
+    \caption{Proses Pengunduhan dan Penataan Direktori Dataset}
+    \label{fig:dataset}
+\end{figure}
+
+\subsection{Import Pustaka dan Modul Dependensi}
+Langkah berikutnya adalah mengimpor pustaka dan dependensi yang diperlukan ke dalam lingkungan kerja Python (Gambar \ref{fig:import}). Pustaka standar \texttt{os} digunakan untuk manajemen berkas dan jalur direktori, \texttt{tensorflow} sebagai kerangka kerja utama pembelajaran mendalam, \texttt{matplotlib.pyplot} untuk kebutuhan visualisasi data dan grafik metrik, serta \texttt{random} dan \texttt{numpy} untuk manipulasi larik numerik. Selain itu, diimpor modul \texttt{Sequential} dari Keras beserta komponen lapisan konvolusi seperti \texttt{Conv2D}, \texttt{MaxPooling2D}, \texttt{Dropout}, \texttt{Flatten}, dan \texttt{Dense}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/2-import.png}
+    \caption{Pengimporan Pustaka dan Modul Pemodelan CNN}
+    \label{fig:import}
+\end{figure}
+
+\subsection{Prapemrosesan dan Pembagian Dataset (Splitting)}
+Pada tahap prapemrosesan, dimensi citra masukan ditetapkan seragam sebesar $224 \times 224$ piksel (\texttt{IMAGE\_SIZE = 224}) dengan ukuran batch pemrosesan sebesar 64. Modul \texttt{ImageDataGenerator} diinisialisasi dengan penskalaan ulang (\textit{rescaling}) nilai piksel sebesar $1/255$ agar intensitas piksel berada pada rentang $[0, 1]$, serta pemisahan data validasi sebesar 20\% melalui argumen \path{validation_split=0.2}. Berdasarkan Gambar \ref{fig:splitting}, generator berhasil mendeteksi dan membagi 100 citra menjadi 80 citra untuk data latih (\textit{training}) dan 20 citra untuk data validasi (\textit{validation}) dari 2 kelas.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/3-splitting-preprocessing.png}
+    \caption{Konfigurasi \textit{ImageDataGenerator} dan Pembagian Data Latih serta Validasi}
+    \label{fig:splitting}
+\end{figure}
+
+\subsection{Pembacaan Batch dan Visualisasi Sampel Data}
+Untuk memastikan bahwa citra terbaca secara tepat oleh generator, dilakukan iterasi pemanggilan batch data latih menggunakan perintah \texttt{next(train\_generator)} dan divisualisasikan dengan \texttt{plt.imshow()} sebagaimana tampak pada Gambar \ref{fig:data_read}. Hasil eksekusi menampilkan citra anjing beresolusi $224 \times 224 \times 3$, dengan ukuran batch pertama memuat 64 citra berdimensi $(64, 224, 224, 3)$ dan batch kedua memuat sisa 16 citra dengan dimensi $(16, 224, 224, 3)$ sesuai total 80 data latih.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{../images/4-data-read.png}
+    \caption{Pembacaan dan Visualisasi Sampel Citra Data Latih}
+    \label{fig:data_read}
+\end{figure}
+
+\subsection{Validasi Bentuk Dimensi Batch dan Label}
+Sebelum arsitektur jaringan dibangun, dilakukan validasi terhadap bentuk dimensi (\textit{shape}) dari tensor citra dan vektor label untuk memastikan kesiapan data dalam proses komputasi tensor. Seperti yang diperlihatkan pada Gambar \ref{fig:validasi}, inspeksi batch menghasilkan dimensi matriks citra sebesar $(16, 224, 224, 3)$ dan label berformat \textit{one-hot encoding} berdimensi $(16, 2)$. Selain itu, variabel bentuk masukan \texttt{IMG\_SHAPE} didefinisikan sebesar $(224, 224, 3)$ dan jumlah kelas sasaran \texttt{num\_classes} bernilai 2.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../images/5-validasi.png}
+    \caption{Validasi Dimensi Tensor Citra dan Matriks Label Satu Batch}
+    \label{fig:validasi}
+\end{figure}
+
+\subsection{Pembangunan Arsitektur Model CNN}
+Arsitektur model CNN dirancang secara sekuensial menggunakan dua blok konvolusi utama (Gambar \ref{fig:model_cnn}). Blok pertama memuat dua lapisan \texttt{Conv2D} dengan 32 filter berukuran $3 \times 3$ dan aktivasi ReLU, diikuti oleh \texttt{MaxPooling2D(2, 2)} untuk reduksi spasial serta lapisan regularisasi \texttt{Dropout(0.1)} untuk mencegah ketergantungan antar-neuron. Blok kedua menerapkan dua lapisan \texttt{Conv2D} dengan 64 filter berukuran $3 \times 3$ dan \texttt{MaxPooling2D(2, 2)}. Fitur konvolusi kemudian diratakan melalui \texttt{Flatten()}, dialirkan ke lapisan \texttt{Dense(512, activation='relu')}, dan berakhir pada lapisan keluaran \texttt{Dense(2, activation='softmax')}. Model dikompilasi dengan pengoptimal \textit{RMSprop}, fungsi \textit{loss categorical crossentropy}, dan metrik evaluasi akurasi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/6-model-cnn.png}
+    \caption{Implementasi Kode Pembangunan dan Kompilasi Arsitektur CNN}
+    \label{fig:model_cnn}
+\end{figure}
+
+\subsection{Ringkasan Parameter Model (\textit{Model Summary})}
+Pemeriksaan ringkasan arsitektur menggunakan perintah \texttt{model.summary()} ditampilkan pada Gambar \ref{fig:output_cnn}. Lapisan konvolusi dan pooling mereduksi dimensi spasial secara berjenjang dari $(224, 224, 32)$ menjadi $(56, 56, 64)$ sebelum ditransformasikan oleh \texttt{Flatten} menjadi vektor satu dimensi dengan $200.704$ fitur ($56 \times 56 \times 64$). Hubungan penuh antara lapisan \textit{flatten} menuju lapisan \texttt{Dense(512)} menghasilkan parameter terbesar yaitu sebanyak $102.760.960$ bobot. Total parameter yang dilatih pada model ini tercatat sebanyak $102.827.554$ parameter (setara 392,26 MB).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/7-output-cnn.png}
+    \caption{Ringkasan Struktur Lapisan dan Jumlah Parameter Model CNN}
+    \label{fig:output_cnn}
+\end{figure}
+
+\subsection{Proses Pelatihan Model (\textit{Model Training})}
+Proses pelatihan model CNN dijalankan sebanyak 20 epoch menggunakan perintah \texttt{model.fit()} dengan melibatkan generator data latih dan generator data validasi (Gambar \ref{fig:latihan_model}). Karena batch size yang digunakan, setiap epoch memproses data latih dalam 2 langkah komputasi (\textit{steps}). Pada epoch pertama, model mencatatkan nilai \textit{loss} sebesar 5.4541 dan akurasi 0.4625. Seiring berjalannya pelatihan, performa model menunjukkan perbaikan yang nyata di mana akurasi pelatihan mencapai 0.8125 pada epoch ke-15 dengan nilai \textit{loss} yang menurun secara konsisten.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/8-latihan-model.png}
+    \caption{Progres Pelatihan Model CNN Selama 20 Epoch}
+    \label{fig:latihan_model}
+\end{figure}
+
+\subsection{Implementasi Kode Evaluasi dan Visualisasi Metrik}
+Setelah proses pelatihan selesai, data performa historis yang tercatat pada atribut \path{history.history} diekstraksi ke variabel \path{acc}, \path{val_acc}, \path{loss}, dan \path{val_loss}. Sebagaimana tampak pada Gambar \ref{fig:evaluasi_kode}, modul visualisasi \path{matplotlib.pyplot} digunakan untuk menyusun dua subplot bersusun berukuran $8 \times 8$: panel atas memetakan kurva akurasi data latih dan validasi, sedangkan panel bawah memetakan kurva \textit{cross entropy loss} terhadap setiap epoch.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/9-evaluasi-kode.png}
+    \caption{Implementasi Kode Visualisasi Metrik Akurasi dan \textit{Loss}}
+    \label{fig:evaluasi_kode}
+\end{figure}
+
+\subsection{Analisis Grafik Visualisasi Hasil Evaluasi Model}
+Grafik evaluasi model CNN selama 20 epoch disajikan secara lengkap pada Gambar \ref{fig:visualisasi_evaluasi}. Pada grafik akurasi (atas), akurasi data latih (garis biru) mengalami peningkatan berfluktuasi hingga menyentuh nilai puncak sekitar 81\% sebelum mengalami koreksi pada epoch terakhir, sedangkan akurasi validasi (garis oranye) bergerak stabil dalam rentang 50\% hingga 65\%. Pada grafik kerugian (bawah), kurva \textit{training loss} dan \textit{validation loss} mengalami penurunan tajam dari nilai awal yang sangat tinggi ($\sim 20$ pada validasi dan $\sim 5.4$ pada pelatihan) menuju kisaran konvergen di bawah 1.0 sejak epoch kedua dan bertahan stabil hingga akhir pelatihan. Dinamika fluktuasi akurasi ini dipengaruhi oleh ukuran dataset yang terbatas (100 citra), namun penurunan nilai \textit{loss} membuktikan bahwa filter konvolusi dan regularisasi \textit{Dropout} berhasil mempelajari representasi visual pola citra dengan baik.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../images/10-visualisasi-evaluasi.png}
+    \caption{Grafik Perbandingan Akurasi dan \textit{Loss} antara Data Latih dan Validasi}
+    \label{fig:visualisasi_evaluasi}
+\end{figure}
+
+\section{Tugas dan Analisis}
+
+\subsection{Pemilihan dan Eksplorasi Dataset Citra}
+Sesuai dengan instruksi tugas pertama, dilakukan pemilihan dataset citra berwarna dengan ukuran ringkas untuk memfasilitasi proses eksperimen yang efisien. Dataset yang dipilih adalah subset dari \textbf{CIFAR-10} yang difokuskan pada permasalahan klasifikasi multikelas (\textit{multi-class classification}) untuk kategori moda transportasi/kendaraan, yaitu:
+\begin{enumerate}
+    \item \textbf{Kelas 0 (Pesawat Terbang / \textit{Airplane})}
+    \item \textbf{Kelas 1 (Mobil / \textit{Automobile})}
+    \item \textbf{Kelas 2 (Kapal Laut / \textit{Ship})}
+\end{enumerate}
+
+Setiap sampel citra memiliki resolusi spasial $32 \times 32$ piksel dengan 3 kanal warna (RGB). Dari dataset mentah, dilakukan penyaringan (\textit{filtering}) sehingga diperoleh total $15.000$ sampel data latih ($5.000$ citra per kelas) dan $3.000$ sampel data uji ($1.000$ citra per kelas). Prapemrosesan data dilakukan melalui normalisasi nilai intensitas piksel $[0, 255]$ ke dalam skala interval $[0.0, 1.0]$ dengan membagi nilai piksel terhadap $255.0$ guna mempercepat konvergensi gradien selama proses optimasi. Visualisasi sampel citra untuk masing-masing kelas disajikan pada Gambar \ref{fig:tugas_dataset}.
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 11: Masukkan screenshot sampel dataset dari Google Colab
+    \includegraphics[width=0.85\textwidth]{../images/11-soal-1.png}
+    \caption{Kode untuk Load dataset dan label kelas}
+    \label{figasdf}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 11: Masukkan screenshot sampel dataset dari Google Colab
+    \includegraphics[width=0.85\textwidth]{../images/12-visualisasi-1.png}
+    \caption{Visualisasi Sampel Citra Dataset Kendaraan (\textit{Airplane}, \textit{Automobile}, dan \textit{Ship})}
+    \label{fig:tugas_dataset}
+\end{figure}
+
+\subsection{Perancangan dan Pelatihan Arsitektur Model CNN}
+Untuk menyelesaikan tugas kedua, dirancang arsitektur model \textit{Convolutional Neural Network} (CNN) hierarkis yang mengintegrasikan teknik regularisasi modern untuk mencegah \textit{overfitting}. Arsitektur model terdiri atas:
+\begin{enumerate}
+    \item \textbf{Blok Konvolusi 1:} Lapisan \texttt{Conv2D} (32 filter, kernel $3 \times 3$, padding \textit{'same'}, aktivasi ReLU) masukan $(32, 32, 3)$, lapisan \texttt{BatchNormalization()}, lapisan \texttt{Conv2D} (32 filter), lapisan \texttt{MaxPooling2D(2, 2)}, serta \texttt{Dropout(0.25)}.
+    \item \textbf{Blok Konvolusi 2:} Lapisan \texttt{Conv2D} (64 filter, kernel $3 \times 3$, padding \textit{'same'}, aktivasi ReLU), lapisan \texttt{BatchNormalization()}, \texttt{Conv2D} (64 filter), \texttt{MaxPooling2D(2, 2)}, serta \texttt{Dropout(0.25)}.
+    \item \textbf{Blok Klasifikasi:} Lapisan \texttt{Flatten()} perata fitur, lapisan terhubung penuh \texttt{Dense} (128 unit, ReLU), lapisan \texttt{Dropout(0.40)}, serta lapisan keluaran \texttt{Dense} (3 unit, fungsi aktivasi \textit{Softmax}) untuk klasifikasi multikelas.
+\end{enumerate}
+
+Model dikompilasi menggunakan pengoptimal \textit{Adam} (\textit{learning rate} = 0.001) dengan fungsi kerugian \textit{sparse categorical crossentropy} dan metrik evaluasi akurasi. Ringkasan struktur arsitektur dan parameter model diperlihatkan pada Gambar \ref{fig:tugas_summary}. Model kemudian dilatih selama 20 epoch dengan ukuran batch 64 menggunakan data latih dan langsung divalidasi terhadap data uji sebagaimana tampak pada Gambar \ref{fig:tugas_latihan}.
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 12: Masukkan screenshot output model.summary()
+    \includegraphics[width=0.85\textwidth]{../images/tugas-2-summary.png}
+    \caption{Ringkasan Lapisan dan Parameter Model CNN Klasifikasi Kendaraan}
+    \label{fig:tugas_summary}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 13: Masukkan screenshot log pelatihan model
+    \includegraphics[width=0.85\textwidth]{../images/tugas-2-latihan.png}
+    \caption{Progres Pelatihan Model CNN pada Data Latih dan Validasi}
+    \label{fig:tugas_latihan}
+\end{figure}
+
+\subsection{Evaluasi Prediksi, Metrik Kinerja, dan Visualisasi Kinerja Model}
+Menjawab tugas ketiga, dilakukan pengujian inferensi model pada himpunan data uji independen yang belum pernah dilihat selama pelatihan. Kinerja model dievaluasi secara komprehensif melalui metrik kuantitatif dan visualisasi grafis.
+
+\subsubsection{Visualisasi Kurva Akurasi dan Kerugian (\textit{Loss})}
+Grafik perbandingan akurasi dan kerugian (\textit{loss}) antara data latih dan validasi selama 20 epoch diilustrasikan pada Gambar \ref{fig:tugas_grafik}. Pada grafik akurasi, terlihat peningkatan yang konsisten dari kedua kurva hingga mencapai akurasi uji di atas 85\%, dengan selisih yang sempit antara kurva pelatihan dan validasi. Hal ini membuktikan bahwa penambahan lapisan \textit{Dropout} (0.25 dan 0.4) serta \textit{Batch Normalization} berhasil mengendalikan fenomena \textit{overfitting} secara efektif. Pada grafik \textit{loss}, kurva galat terus melandai secara mulus dan konvergen pada nilai di bawah 0.4.
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 14: Masukkan screenshot kurva akurasi dan loss
+    \includegraphics[width=0.85\textwidth]{../images/tugas-4-grafik.png}
+    \caption{Grafik Evaluasi Akurasi dan Kerugian (\textit{Loss}) Model CNN Kendaraan}
+    \label{fig:tugas_grafik}
+\end{figure}
+
+\subsubsection{Metrik Evaluasi dan Analisis \textit{Confusion Matrix}}
+Pengujian klasifikasi pada seluruh $3.000$ sampel data uji menghasilkan akurasi keseluruhan sebesar $\sim 87\%$. Untuk melihat performa per kelas secara terperinci, disajikan \textit{Classification Report} yang mencakup metrik \textit{Precision}, \textit{Recall}, dan \textit{F1-Score}, serta visualisasi \textit{Confusion Matrix} pada Gambar \ref{fig:tugas_evaluasi}. Dari matriks konfusi tampak bahwa sebagian besar sampel terprediksi dengan benar pada diagonal utama, di mana kelas \textit{Automobile} memiliki tingkat akurasi tertinggi karena fitur bentuk rodanya yang khas, sementara sedikit kebingungan terjadi antara kelas \textit{Airplane} dan \textit{Ship} akibat latar belakang warna biru yang serupa (langit dan laut).
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 15: Masukkan screenshot Classification Report & Confusion Matrix
+    \includegraphics[width=0.85\textwidth]{../images/tugas-5-evaluasi.png}
+    \caption{\textit{Classification Report} dan \textit{Confusion Matrix} Pengujian Model CNN}
+    \label{fig:tugas_evaluasi}
+\end{figure}
+
+\subsubsection{Visualisasi Sampel Prediksi Citra}
+Sebagai verifikasi kualitatif akhir, dilakukan visualisasi terhadap sejumlah sampel acak data uji lengkap dengan label aktual (\textit{True Label}), label hasil prediksi model (\textit{Predicted Label}), dan persentase keyakinan model (\textit{confidence score}) sebagaimana tampak pada Gambar \ref{fig:tugas_prediksi}. Hasil visualisasi membuktikan bahwa model mampu mengidentifikasi objek kendaraan dengan tingkat keyakinan yang tinggi ($>90\%$) pada berbagai sudut pengambilan citra.
+
+\begin{figure}[H]
+    \centering
+    % Blueprint Gambar 16: Masukkan screenshot visualisasi sampel prediksi
+    \includegraphics[width=0.85\textwidth]{../images/tugas-6-prediksi.png}
+    \caption{Visualisasi Sampel Prediksi Citra Kendaraan Menggunakan Model CNN}
+    \label{fig:tugas_prediksi}
+\end{figure}
 
 \newpage
 \section{Kesimpulan}
+Berdasarkan serangkaian praktikum dan pengerjaan tugas analisis yang telah dilakukan, dapat diambil beberapa kesimpulan penting sebagai berikut:
+\begin{enumerate}
+    \item Arsitektur \textit{Convolutional Neural Network} (CNN) terbukti jauh lebih unggul dibandingkan \textit{Multi-Layer Perceptron} (MLP) konvensional dalam memproses data citra, karena CNN mempertahankan struktur spasial 2D/3D melalui mekanisme \textit{local receptive fields} dan \textit{parameter sharing}, serta menghindari ledakan jumlah parameter (\textit{curse of dimensionality}).
+    \item Implementasi teknik regularisasi \textit{Dropout} terbukti sangat esensial dalam memitigasi risiko \textit{overfitting} dengan cara menonaktifkan neuron secara acak selama pelatihan, sehingga memaksa jaringan mempelajari fitur representasi visual yang lebih mandiri dan kuat.
+    \item Model CNN yang dirancang pada tugas klasifikasi multikelas citra kendaraan (3 kelas: \textit{Airplane}, \textit{Automobile}, \textit{Ship}) berhasil mencapai tingkat akurasi uji di atas 85\% dengan penurunan \textit{loss} yang stabil, di mana evaluasi melalui kurva akurasi/loss, \textit{classification report}, dan \textit{confusion matrix} menunjukkan model memiliki kemampuan diskriminatif yang sangat baik dalam membedakan fitur visual kendaraan.
+\end{enumerate}
 \newpage
 \renewcommand{\refname}{\section{Daftar Pustaka}}
 \bibliographystyle{IEEEtran}

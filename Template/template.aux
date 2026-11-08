@@ -2,12 +2,80 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{lecun1998gradient}
+\citation{gu2018recent}
+\citation{lecun1998gradient}
 \@writefile{toc}{\contentsline {section}{\numberline {A}Tujuan}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {B}Dasar Teori}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pembahasan}{1}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}}{1}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Kesimpulan}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Representasi Citra dan Keterbatasan MLP}{1}{subsection.2.1}\protected@file@percent }
+\citation{lecun1998gradient}
+\citation{alzubaidi2021review}
+\citation{gu2018recent}
+\citation{alzubaidi2021review}
+\citation{srivastava2014dropout}
+\citation{srivastava2014dropout}
+\citation{srivastava2014dropout}
+\citation{alzubaidi2021review}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Arsitektur Convolutional Neural Network (CNN)}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Drop Out}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Hasil dan Pembahasan}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.1}Pengunduhan dan Penataan Direktori Dataset}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proses Pengunduhan dan Penataan Direktori Dataset}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:dataset}{{1}{3}{Proses Pengunduhan dan Penataan Direktori Dataset}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.2}Import Pustaka dan Modul Dependensi}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Pengimporan Pustaka dan Modul Pemodelan CNN}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:import}{{2}{4}{Pengimporan Pustaka dan Modul Pemodelan CNN}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.3}Prapemrosesan dan Pembagian Dataset (Splitting)}{4}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Konfigurasi \textit  {ImageDataGenerator} dan Pembagian Data Latih serta Validasi}}{5}{figure.3}\protected@file@percent }
+\newlabel{fig:splitting}{{3}{5}{Konfigurasi \textit {ImageDataGenerator} dan Pembagian Data Latih serta Validasi}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.4}Pembacaan Batch dan Visualisasi Sampel Data}{5}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Pembacaan dan Visualisasi Sampel Citra Data Latih}}{6}{figure.4}\protected@file@percent }
+\newlabel{fig:data_read}{{4}{6}{Pembacaan dan Visualisasi Sampel Citra Data Latih}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.5}Validasi Bentuk Dimensi Batch dan Label}{6}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Validasi Dimensi Tensor Citra dan Matriks Label Satu Batch}}{7}{figure.5}\protected@file@percent }
+\newlabel{fig:validasi}{{5}{7}{Validasi Dimensi Tensor Citra dan Matriks Label Satu Batch}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.6}Pembangunan Arsitektur Model CNN}{7}{subsection.3.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Implementasi Kode Pembangunan dan Kompilasi Arsitektur CNN}}{8}{figure.6}\protected@file@percent }
+\newlabel{fig:model_cnn}{{6}{8}{Implementasi Kode Pembangunan dan Kompilasi Arsitektur CNN}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.7}Ringkasan Parameter Model (\textit  {Model Summary})}{8}{subsection.3.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Ringkasan Struktur Lapisan dan Jumlah Parameter Model CNN}}{9}{figure.7}\protected@file@percent }
+\newlabel{fig:output_cnn}{{7}{9}{Ringkasan Struktur Lapisan dan Jumlah Parameter Model CNN}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.8}Proses Pelatihan Model (\textit  {Model Training})}{9}{subsection.3.8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Progres Pelatihan Model CNN Selama 20 Epoch}}{10}{figure.8}\protected@file@percent }
+\newlabel{fig:latihan_model}{{8}{10}{Progres Pelatihan Model CNN Selama 20 Epoch}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.9}Implementasi Kode Evaluasi dan Visualisasi Metrik}{10}{subsection.3.9}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Implementasi Kode Visualisasi Metrik Akurasi dan \textit  {Loss}}}{11}{figure.9}\protected@file@percent }
+\newlabel{fig:evaluasi_kode}{{9}{11}{Implementasi Kode Visualisasi Metrik Akurasi dan \textit {Loss}}{figure.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {C.10}Analisis Grafik Visualisasi Hasil Evaluasi Model}{11}{subsection.3.10}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Grafik Perbandingan Akurasi dan \textit  {Loss} antara Data Latih dan Validasi}}{12}{figure.10}\protected@file@percent }
+\newlabel{fig:visualisasi_evaluasi}{{10}{12}{Grafik Perbandingan Akurasi dan \textit {Loss} antara Data Latih dan Validasi}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {D}Tugas dan Analisis}{12}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1}Pemilihan dan Eksplorasi Dataset Citra}{12}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Kode untuk Load dataset dan label kelas}}{13}{figure.11}\protected@file@percent }
+\newlabel{figasdf}{{11}{13}{Kode untuk Load dataset dan label kelas}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Visualisasi Sampel Citra Dataset Kendaraan (\textit  {Airplane}, \textit  {Automobile}, dan \textit  {Ship})}}{14}{figure.12}\protected@file@percent }
+\newlabel{fig:tugas_dataset}{{12}{14}{Visualisasi Sampel Citra Dataset Kendaraan (\textit {Airplane}, \textit {Automobile}, dan \textit {Ship})}{figure.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.2}Perancangan dan Pelatihan Arsitektur Model CNN}{14}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Ringkasan Lapisan dan Parameter Model CNN Klasifikasi Kendaraan}}{15}{figure.13}\protected@file@percent }
+\newlabel{fig:tugas_summary}{{13}{15}{Ringkasan Lapisan dan Parameter Model CNN Klasifikasi Kendaraan}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Progres Pelatihan Model CNN pada Data Latih dan Validasi}}{16}{figure.14}\protected@file@percent }
+\newlabel{fig:tugas_latihan}{{14}{16}{Progres Pelatihan Model CNN pada Data Latih dan Validasi}{figure.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3}Evaluasi Prediksi, Metrik Kinerja, dan Visualisasi Kinerja Model}{16}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.1}Visualisasi Kurva Akurasi dan Kerugian (\textit  {Loss})}{16}{subsubsection.4.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Grafik Evaluasi Akurasi dan Kerugian (\textit  {Loss}) Model CNN Kendaraan}}{17}{figure.15}\protected@file@percent }
+\newlabel{fig:tugas_grafik}{{15}{17}{Grafik Evaluasi Akurasi dan Kerugian (\textit {Loss}) Model CNN Kendaraan}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.2}Metrik Evaluasi dan Analisis \textit  {Confusion Matrix}}{17}{subsubsection.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces \textit  {Classification Report} dan \textit  {Confusion Matrix} Pengujian Model CNN}}{18}{figure.16}\protected@file@percent }
+\newlabel{fig:tugas_evaluasi}{{16}{18}{\textit {Classification Report} dan \textit {Confusion Matrix} Pengujian Model CNN}{figure.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {D.3.3}Visualisasi Sampel Prediksi Citra}{18}{subsubsection.4.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Visualisasi Sampel Prediksi Citra Kendaraan Menggunakan Model CNN}}{19}{figure.17}\protected@file@percent }
+\newlabel{fig:tugas_prediksi}{{17}{19}{Visualisasi Sampel Prediksi Citra Kendaraan Menggunakan Model CNN}{figure.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}Kesimpulan}{20}{section.5}\protected@file@percent }
 \bibstyle{IEEEtran}
 \bibdata{ref}
-\@writefile{toc}{\contentsline {section}{\numberline {E}Daftar Pustaka}{3}{section.5}\protected@file@percent }
-\gdef \@abspage@last{4}
+\bibcite{lecun1998gradient}{1}
+\bibcite{gu2018recent}{2}
+\bibcite{alzubaidi2021review}{3}
+\bibcite{srivastava2014dropout}{4}
+\@writefile{toc}{\contentsline {section}{\numberline {F}Daftar Pustaka}{21}{section.6}\protected@file@percent }
+\gdef \@abspage@last{22}

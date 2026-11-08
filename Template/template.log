@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  25 SEP 2026 14:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.1.9)  8 NOV 2026 10:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -396,7 +396,7 @@ Package hyperref Info: Link coloring OFF on input line 65.
 \@outlinefile=\write3
 \openout3 = `template.out'.
 
-<../images/ugm.png, id=27, 1606.0pt x 1606.0pt>
+<../images/ugm.png, id=103, 1606.0pt x 1606.0pt>
 File: ../images/ugm.png Graphic file (type png)
 <use ../images/ugm.png>
 Package pdftex.def Info: ../images/ugm.png  used on input line 80.
@@ -404,41 +404,162 @@ Package pdftex.def Info: ../images/ugm.png  used on input line 80.
  [1
 
 {C:/Users/ASUS/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <../images/ugm.png>]
+Overfull \hbox (1.45717pt too wide) in paragraph at lines 121--122
+\OT1/cmr/m/n/12 di-mensi se-belum di-alirkan ke lapisan ter-hubung penuh (\OT1/cmr/m/it/12 fully con-nected layer\OT1/cmr/m/n/12 ). Proses
+ []
+
+
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.122 \newpage
-               [1] [2] (template.bbl
+l.125 \subsection
+                 {Arsitektur Convolutional Neural Network (CNN)} [1]
+Overfull \hbox (1.55698pt too wide) in paragraph at lines 126--127
+\OT1/cmr/m/n/12 menekan be-ban kom-putasi serta mem-berikan tol-er-ansi ter-hadap dis-torsi dan translasi
+ []
 
-LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
-) [3] (template.aux)
+Overfull \hbox (2.90234pt too wide) in paragraph at lines 131--132
+\OT1/cmr/m/n/12 prob-a-bil-i-tas retensi ter-tentu ($\OML/cmm/m/it/12 p$\OT1/cmr/m/n/12 ). Mekanisme penon-ak-ti-fan acak ini memaksa jaringan
+ []
+
+[2]
+<../images/1-dataset.png, id=142, 641.39626pt x 124.0635pt>
+File: ../images/1-dataset.png Graphic file (type png)
+<use ../images/1-dataset.png>
+Package pdftex.def Info: ../images/1-dataset.png  used on input line 142.
+(pdftex.def)             Requested size: 362.77525pt x 70.17172pt.
+ [3 <../images/1-dataset.png>]
+<../images/2-import.png, id=152, 520.19344pt x 153.57375pt>
+File: ../images/2-import.png Graphic file (type png)
+<use ../images/2-import.png>
+Package pdftex.def Info: ../images/2-import.png  used on input line 152.
+(pdftex.def)             Requested size: 341.43437pt x 100.79892pt.
+<../images/3-splitting-preprocessing.png, id=154, 407.27156pt x 354.57469pt>
+File: ../images/3-splitting-preprocessing.png Graphic file (type png)
+<use ../images/3-splitting-preprocessing.png>
+Package pdftex.def Info: ../images/3-splitting-preprocessing.png  used on input line 162.
+(pdftex.def)             Requested size: 341.43437pt x 297.26721pt.
+ [4 <../images/2-import.png>]
+<../images/4-data-read.png, id=163, 535.2497pt x 484.05844pt>
+File: ../images/4-data-read.png Graphic file (type png)
+<use ../images/4-data-read.png>
+Package pdftex.def Info: ../images/4-data-read.png  used on input line 172.
+(pdftex.def)             Requested size: 298.75264pt x 270.19193pt.
+ [5 <../images/3-splitting-preprocessing.png>]
+<../images/5-validasi.png, id=171, 494.59781pt x 233.37187pt>
+File: ../images/5-validasi.png Graphic file (type png)
+<use ../images/5-validasi.png>
+Package pdftex.def Info: ../images/5-validasi.png  used on input line 182.
+(pdftex.def)             Requested size: 341.43437pt x 161.10153pt.
+ [6 <../images/4-data-read.png>]
+<../images/6-model-cnn.png, id=180, 658.71094pt x 396.7322pt>
+File: ../images/6-model-cnn.png Graphic file (type png)
+<use ../images/6-model-cnn.png>
+Package pdftex.def Info: ../images/6-model-cnn.png  used on input line 192.
+(pdftex.def)             Requested size: 362.77525pt x 218.5pt.
+ [7 <../images/5-validasi.png>]
+<../images/7-output-cnn.png, id=188, 827.34094pt x 389.95688pt>
+File: ../images/7-output-cnn.png Graphic file (type png)
+<use ../images/7-output-cnn.png>
+Package pdftex.def Info: ../images/7-output-cnn.png  used on input line 202.
+(pdftex.def)             Requested size: 362.77525pt x 170.99248pt.
+ [8 <../images/6-model-cnn.png>]
+<../images/8-latihan-model.png, id=197, 730.22812pt x 499.11469pt>
+File: ../images/8-latihan-model.png Graphic file (type png)
+<use ../images/8-latihan-model.png>
+Package pdftex.def Info: ../images/8-latihan-model.png  used on input line 212.
+(pdftex.def)             Requested size: 362.77525pt x 247.95738pt.
+ [9 <../images/7-output-cnn.png>]
+Overfull \hbox (1.10004pt too wide) in paragraph at lines 218--219
+[]\OT1/cmr/m/n/12 Setelah proses pelati-han se-le-sai, data per-forma his-toris yang ter-catat pada atribut
+ []
+
+<../images/9-evaluasi-kode.png, id=205, 383.18156pt x 333.49594pt>
+File: ../images/9-evaluasi-kode.png Graphic file (type png)
+<use ../images/9-evaluasi-kode.png>
+Package pdftex.def Info: ../images/9-evaluasi-kode.png  used on input line 222.
+(pdftex.def)             Requested size: 320.0935pt x 278.60297pt.
+[10 <../images/8-latihan-model.png>]
+<../images/10-visualisasi-evaluasi.png, id=213, 562.35094pt x 496.85625pt>
+File: ../images/10-visualisasi-evaluasi.png Graphic file (type png)
+<use ../images/10-visualisasi-evaluasi.png>
+Package pdftex.def Info: ../images/10-visualisasi-evaluasi.png  used on input line 232.
+(pdftex.def)             Requested size: 320.0935pt x 282.80919pt.
+ [11 <../images/9-evaluasi-kode.png>]
+Overfull \hbox (9.52078pt too wide) in paragraph at lines 240--241
+[]\OT1/cmr/m/n/12 Sesuai den-gan in-struksi tu-gas per-tama, di-lakukan pemil-i-han dataset citra berwarna
+ []
+
+[12 <../images/10-visualisasi-evaluasi.png>]
+<../images/11-soal-1.png, id=230, 527.72156pt x 493.0922pt>
+File: ../images/11-soal-1.png Graphic file (type png)
+<use ../images/11-soal-1.png>
+Package pdftex.def Info: ../images/11-soal-1.png  used on input line 252.
+(pdftex.def)             Requested size: 362.77525pt x 338.96996pt.
+<../images/12-visualisasi-1.png, id=231, 604.50844pt x 478.03593pt>
+File: ../images/12-visualisasi-1.png Graphic file (type png)
+<use ../images/12-visualisasi-1.png>
+Package pdftex.def Info: ../images/12-visualisasi-1.png  used on input line 260.
+(pdftex.def)             Requested size: 362.77525pt x 286.87483pt.
+ [13 <../images/11-soal-1.png>]
+Overfull \hbox (39.1775pt too wide) in paragraph at lines 269--270
+\OT1/cmr/m/n/12 ak-ti-vasi ReLU), lapisan \OT1/cmtt/m/n/12 BatchNormalization()\OT1/cmr/m/n/12 , \OT1/cmtt/m/n/12 Conv2D \OT1/cmr/m/n/12 (64 fil-ter), \OT1/cmtt/m/n/12 MaxPooling2D(2,
+ []
+
+[14 <../images/12-visualisasi-1.png>]
+<../images/tugas-2-summary.png, id=249, 494.59781pt x 430.60875pt>
+File: ../images/tugas-2-summary.png Graphic file (type png)
+<use ../images/tugas-2-summary.png>
+Package pdftex.def Info: ../images/tugas-2-summary.png  used on input line 278.
+(pdftex.def)             Requested size: 362.77525pt x 315.83984pt.
+<../images/tugas-2-latihan.png, id=250, 532.99126pt x 445.665pt>
+File: ../images/tugas-2-latihan.png Graphic file (type png)
+<use ../images/tugas-2-latihan.png>
+Package pdftex.def Info: ../images/tugas-2-latihan.png  used on input line 286.
+(pdftex.def)             Requested size: 362.77525pt x 303.3474pt.
+ [15 <../images/tugas-2-summary.png>] [16 <../images/tugas-2-latihan.png>]
+<../images/tugas-4-grafik.png, id=265, 689.57625pt x 262.73157pt>
+File: ../images/tugas-4-grafik.png Graphic file (type png)
+<use ../images/tugas-4-grafik.png>
+Package pdftex.def Info: ../images/tugas-4-grafik.png  used on input line 300.
+(pdftex.def)             Requested size: 362.77525pt x 138.22076pt.
+<../images/tugas-5-evaluasi.png, id=267, 344.78813pt x 353.06906pt>
+File: ../images/tugas-5-evaluasi.png Graphic file (type png)
+<use ../images/tugas-5-evaluasi.png>
+Package pdftex.def Info: ../images/tugas-5-evaluasi.png  used on input line 311.
+(pdftex.def)             Requested size: 362.77525pt x 371.49307pt.
+ [17 <../images/tugas-4-grafik.png>]
+<../images/tugas-6-prediksi.png, id=275, 713.66624pt x 307.90031pt>
+File: ../images/tugas-6-prediksi.png Graphic file (type png)
+<use ../images/tugas-6-prediksi.png>
+Package pdftex.def Info: ../images/tugas-6-prediksi.png  used on input line 322.
+(pdftex.def)             Requested size: 362.77525pt x 156.51497pt.
+ [18 <../images/tugas-5-evaluasi.png>] [19 <../images/tugas-6-prediksi.png>]
+Overfull \hbox (4.9272pt too wide) in paragraph at lines 332--333
+[]\OT1/cmr/m/n/12 Implementasi teknik reg-u-lar-isasi \OT1/cmr/m/it/12 Dropout \OT1/cmr/m/n/12 ter-bukti san-gat es-en-sial dalam memit-
+ []
+
+[20] (template.bbl) [21] (template.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-Package rerunfilecheck Warning: File `template.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `template.out':
-(rerunfilecheck)             Before: FB3A50C7A7AB37ABC1CFD13C0F93E702;586
-(rerunfilecheck)             After:  18F9317F97EA861E8ECC5103CA9C3600;581.
+Package rerunfilecheck Info: File `template.out' has not changed.
+(rerunfilecheck)             Checksum: 5362AC4DD1D63952DE895EDAD0851FCD;5964.
  ) 
 Here is how much of TeX's memory you used:
- 11755 strings out of 474486
- 180954 string characters out of 5744228
+ 11999 strings out of 474486
+ 186714 string characters out of 5744228
  1931542 words of memory out of 5000000
- 33882 multiletter control sequences out of 15000+600000
- 562997 words of font info for 53 fonts, out of 8000000 for 9000
+ 34053 multiletter control sequences out of 15000+600000
+ 564231 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,79p,307b,521s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on template.pdf (4 pages, 2899822 bytes).
+ 75i,6n,79p,1041b,533s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/ASUS/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on template.pdf (22 pages, 4209365 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 82 named destinations out of 1000 (max. 500000)
+ 291 words of extra memory for PDF output out of 10000 (max. 10000000)
 
